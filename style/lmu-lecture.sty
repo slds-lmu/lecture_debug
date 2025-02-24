@@ -440,23 +440,7 @@
  \vspace{-1em}
 }
 
-\newcommand{\splitVCompact}[4]{%
- % Both column widths are now required parameters
- % #1 = width of first column
- % #2 = width of second column
- % #3 = content for first column
- % #4 = content for second column
- 
- % Create two minipages side by side with the exact width specified
- \noindent% Start at left margin
- \begin{minipage}{#1\textwidth}
-   #3
- \end{minipage}%
- \begin{minipage}{#2\textwidth}
-   #4
- \end{minipage}
- \vspace{-1em}
-}
+
 
 \newcommand{\splitVCentered}[4][0.5]{%
  \begin{columns}[c,totalwidth=\textwidth]% Align columns with each other
@@ -482,7 +466,28 @@
  \vspace{-1em}
 }
 
+% Version with no margins that only takes up the width specified
+% \splitV{0.4}{0.4}{Left content}{Right content}
+\newcommand{\splitVCompact}[4]{%
+ % Both column widths are now required parameters
+ % #1 = width of first column
+ % #2 = width of second column
+ % #3 = content for first column
+ % #4 = content for second column
+ 
+ % Create two minipages side by side with the exact width specified
+ \noindent% Start at left margin
+ \begin{minipage}{#1\textwidth}
+   #3
+ \end{minipage}%
+ \begin{minipage}{#2\textwidth}
+   #4
+ \end{minipage}
+ \vspace{-1em}
+}
+
 % Full-size quadrant layout
+% Uses compact version of splitVCentered to align content correctly
 % Quadrant order is 
 % 1 2
 % 3 4
