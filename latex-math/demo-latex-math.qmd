@@ -1,0 +1,68 @@
+---
+title: "latex-math"
+format: 
+  html:
+    html-math-method: katex
+    table-of-contents: true
+    # include-in-header: "latex-math-combined.qmd"
+    # include-before-body: "latex-math-combined.tex"
+  pdf:
+    # Doesn't work with XeLaTeX for some unicode reason ("Improper alphabetic constant")
+    pdf-engine: pdflatex 
+    keep-tex: true
+    include-in-header:
+      - text: |
+          % See also latex-math/preamble.tex
+          \usepackage{bm}
+          \usepackage{siunitx}
+          \usepackage{dsfont}
+          \usepackage{xspace}
+          \usepackage{longtable}
+          \usepackage{xifthen}
+      - file: "latex-math-combined.tex"
+quarto-required: ">= 1.5"
+editor: source
+editor_options: 
+  chunk_output_type: console
+---
+
+<!-- Include prepared qmd only for HMTL format, invisibly--->
+::: {.content-visible when-format="html"}
+::: {.hidden}
+{{< include latex-math-combined.qmd >}}
+:::
+:::
+
+## `latex-math` Macros
+
+This is an example quarto document showing how to include `latex-math` for use with HTML or PDF output.
+
+Here's some macros defined in `latex-math` to illustrate they're working (in rendered output):
+
+$$\N \quad \Z \quad \Q \quad \R \quad \C$$
+
+$$
+\frac{1}{2} \|\thetav\|^2
+$$
+
+### Setup
+
+For HTML output, we use Quarto includes to include the `latex-math-combined.qmd` file.
+We apparently can't use the ("cleaner") `include-in-header` or `include-before-body` header options due to the `\\ifdefined` statements which MathJax doesn't understand.
+
+
+For PDF output, we include the `latex-math-combined.tex` file in the YAML header, which essentially just pastes the entirety of `latex-math` into the intermediate .tex files preamble. 
+It just works, kind of.
+
+
+### Lorem Ipsum
+
+This is some obligatory `mtcars` plotting for the sake of it:
+
+```{r}
+library(ggplot2)
+
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point()
+```
+
