@@ -10,6 +10,3 @@ README_*
 *.aux
 *.synctex.gz
 *.toc
-*_files
-*.html
-demo*.tex
