@@ -49,7 +49,7 @@ This uses the \code{splitV} macro to create to equally wide columns:
 
 \vfill
 
-And lastly a compact version \code{\textbackslash splitVCompact\{0.2\}\{0.2\}} to only take up the width specificed and minimal margins all around:
+And lastly a compact version \code{\textbackslash splitVCompact\{0.2\}\{0.2\}} to only take up the width specified and minimal margins all around:
 
 \vfill
 
@@ -134,7 +134,67 @@ Uses \code{\textbackslash twobytwo\{left\}\{right\}\{top\}\{bottom\}} for horizo
   }{%
   \includegraphics[width=\textwidth]{figure/boosting-cwb-blpool4.png}
   }
-  \end{vbframe}
+\end{vbframe}
+
+% ------------------------------------------------------------------------------
+% itemize wrapper
+% ------------------------------------------------------------------------------
+
+\begin{vbframe}{itemize environments}
+
+Testing different \code{itemize} situations. The default value for \code{itemsep} is apparently \code{2pt}?
+
+\vfill
+
+\splitV{
+  \begin{itemize} 
+    \item itemsep is unmodified (default: \the\itemsep)
+    \item text2
+    \item text3
+  \end{itemize}
+}{
+  \begin{itemize}\setlength{\itemsep}{1.5em} 
+    \item itemsep is: \the\itemsep
+    \item set to 1.5em
+    \item text3
+  \end{itemize}
+}
+
+\vfill
+
+\splitV{
+  \begin{itemizeS}
+    \item itemsep is: \the\itemsep
+    \item using \code{itemizeS} environment
+    \item text3
+  \end{itemizeS}
+}{
+  \begin{itemizeM}
+    \item itemsep is: \the\itemsep
+    \item using \code{itemizeM} environment
+    \item text3
+  \end{itemizeM}
+}
+
+
+\end{vbframe}
+
+\begin{vbframe}{itemizefill in splitV}
+  \splitV{
+    \begin{itemizeL}
+      \item itemsep is: \the\itemsep
+      \item using \code{itemizeL} environment
+      \item text3
+    \end{itemizeL}  }{
+    \begin{itemizefill} 
+      \item itemsep is: \the\itemsep
+      \item set to \code{\textbackslash fill}
+      \item text3
+    \end{itemizefill}
+  }
+  
+\end{vbframe}
+
 
 \endlecture
 \end{document}
