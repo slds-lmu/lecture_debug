@@ -2,330 +2,334 @@
 \input{../../style/preamble}
 \input{../../latex-math/basic-math}
 
+\usepackage{graphicx}
+\usepackage{calc}
 
 \title{Introduction to Debugging Lectures}
 
 \begin{document}
 
 \titlemeta{% Chunk title (example: CART, Forests, Boosting, ...), can be empty
-  Demo Lecture
+Demo Lecture
 }{% Lecture title  
-  Layout Macro Testing With Cannibalized Content
+Layout Macro Testing With Cannibalized Content
 }{% Relative path to title page image: Can be empty but must not start with slides/
-  figure/compboost-illustration-2.png
+figure/compboost-illustration-2.png
 }{
-  \item Test layout
-  \item Fix stuff
-  \item Go home
+\item Test layout
+\item Fix stuff
+\item Go home
 }
 % ------------------------------------------------------------------------------
 
 \begin{frame}{Demo Slides}
   This is a demo lecture chunk.
-
+  
   It is recommended to view these slides as PDF and LaTeX code side by side
-
+  
   Refer to the \code{slds-lmu/lecture\_debug} repository for the source and PDF:
   \begin{itemize}
     \item \href{https://slds-lmu.github.io/lecture_debug/lecture_debug/slides/demo/slides-demo-layout.pdf}{\beamergotobutton{Compiled PDF}}
     \item \href{https://github.com/slds-lmu/lecture_debug/blob/main/slides/demo/slides-demo-layout.tex}{\beamergotobutton{LaTeX source}}
   \end{itemize}
-
+  
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Whats inside the tin}
-
-  Column layout helpers:
-
-  \vfill
-
+\begin{frame}[allowframebreaks]{\textbackslash splitV(TCB)(TCB)}
+  
   \begin{itemize}
-    \item \code{\textbackslash splitV} for two columns of equal / custom widths
-    \item \code{\textbackslash splitVCompact}: Compact version of \code{\textbackslash splitV}
-    \item \code{\textbackslash splitVThree}: 3-column layout (equal widths)
-    \item \code{\textbackslash splitVThreeCustom}: Version of \code{\textbackslash splitVThree} with custom widths
-    \item \code{\textbackslash twobytwo}: 2$\times$2 layout for quadrants, vertically centered
+    \item \code{\textbackslash splitVCC} creates two centered columns
+    \item \code{\textbackslash splitVTT} creates two top-aligned columns 
+    \item \code{\textbackslash splitVBT} left is bottom-, right is top aligned
+
   \end{itemize}
-
-
-  \framebreak
-
-  Wrappers for \code{\textbackslash itemize} with different vertical spacing:
-
+  
   \vfill
-
+    
+  \splitVTT{
+  \textbf{Left column} Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  }{
+  \textbf{Right column} Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  }
+  
+  \vfill
+    
+  \splitVCC{
   \begin{itemize}
-    \item \code{\textbackslash itemizeS}: \code{itemsep} is 1pt (less than default)
-    \item \code{\textbackslash itemizeM}: \code{itemsep} is 5pt (slightly larger than default)
-    \item \code{\textbackslash itemizeL}: \code{itemsep} is 15pt (larger than default)
-    \item \code{\textbackslash itemizefill}: \code{itemsep} is \code{\\fill} to extend across the available vertical space
+    \item Example itemize content
+    \item Second itemize item
   \end{itemize}
+  }{
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  }
+  
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Two columns, equal sizes}
-
-  The \code{splitV} macro creates two equally wide columns:
-
+\begin{frame}[allowframebreaks]{\textbackslash splitV with unequal sizes}
+  
+  You only need to specify the width of the first column:
+  
   \vfill
-
-  \code{\textbackslash splitV\{left content\}\{right content\}}
-
-  \vfill
-
-  \splitV{
-    \textbf{Left column} Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  }{
-    \textbf{Right column} Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  }
-
-  \vfill
-
-  Example with itemize environment left and text right:
-
-  \splitV{
-    \begin{itemize}
-      \item Example itemize content
-      \item Second itemize item
-    \end{itemize}
-  }{
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  }
-
-  \vfill
-  Note: The macro name \code{\textbackslash twocolumn} was already taken!
-
-\end{frame}
-
-\begin{frame}[allowframebreaks]{Two columns, unequal sizes}
-
-  If you want to create columns with uneven widths, you only need to specify the width of the first column:
-
-  \vfill
-
-  \code{\textbackslash splitV[0.75]\{left content\}\{right content\}} creates a column with 75\% width and the
+  
+  \code{\textbackslash splitVTT[0.75]\{left content\}\{right content\}} creates a column with 75\% width and the
   second column will fill the remaining space:
-
+  
   \vfill
-
-  \splitV[0.75]{First column with 75\% of the text width on the slide}{Second column with rest}
-
+  
+  \splitVTT[0.75]{First column with 75\% of the text width on the slide}{Second column with rest}
+  
   \vfill
-
-  \splitV[0.2]{Tiny column}{Second column with a lot of room for activities}
-
-
+  
+  \splitVTT[0.2]{Tiny column}{Second column with a lot of room for activities}
+  
+  
 \end{frame}
-\begin{frame}[allowframebreaks]{Two columns, special cases}
+\begin{frame}[allowframebreaks]{Two columns, minimal adjustments}
 
-
-  To enforce vertical centering of the content, use \code{\textbackslash splitVCentered[0.6]\{left content\}\{right content\}} analogously to \code{\textbackslash splitV}:
-
-  \splitVCentered[0.6]{
-    \begin{itemize}
-      \item Example itemize content
-      \item Second itemize item
-      \item A third thing that is also important
-      \item Do you like dogs?
-      \item Hi mom
-    \end{itemize}
-  }{
-    This text should be vertically centered relative to the left itemize list which is probably good
-  }
-
-  \framebreak
-
-  For completeness, there is also a compact version if you do not want to use the full slide width:
-
+  Compact version if you do not want to use the full slide width:
+  
   \code{\textbackslash splitVCompact\{0.2\}\{0.2\}} only takes up 20\% of the slide width in each column for a total of 40\% with a minimal horizontal spacer:
-
+  
   \vfill
-
+  
   \splitVCompact{0.20}{0.20}{First column with 20\%}{Second column with 20\%}
-
-
+  
+  
 \end{frame}
 
 \begin{frame}{3 columns}
-
+  
   Using \code{\textbackslash splitVThree\{Left\}\{Middle\}\{Right\}} for 3 equally sized columns:
-
+  
   \vfill
-
+  
   \splitVThree{
-    First column content is here
+  First column content is here
   }{
-    Second column content is here as well
+  Second column content is here as well
   }{
-    And also a third column is here just in case
+  And also a third column is here just in case
   }
-
+  
   \vfill
-
+  
   Then there is \code{\textbackslash splitVThreeCustom} for three columns of
   arbitrary widths, where the width of the third column can also be inferred from the first two
   \vfill
-
+  
   \splitVThreeCustom[0.2]{0.2}{0}{
-    first column with 20\% width
+  first column with 20\% width
   }{
-    second column with 20\% width
+  second column with 20\% width
   }{
-    third column with remaining width
+  third column with remaining width
   }
-
+  
 \end{frame}
 
 % ------------------------------------------------------------------------------
 
-\begin{frame}{2$\times$2 layout / quadrants}
-
+\begin{frame}{twobytwo 2$\times$2 layout / quadrants}
+  
   Use \code{\textbackslash twobytwo\{top left\}\{top  right\}\{bottom left\}\{bottom right\}} for horizontally aligned quadrants
-
+  
   \vfill
-
+  
   \twobytwo{%
-    \begin{itemize}
-      \item Example top left...
-      \item ...quadrant content
-      \item Next to a figure
-    \end{itemize}
+  \begin{itemize}
+    \item Example top left...
+    \item ...quadrant content
+    \item Next to a figure
+  \end{itemize}
   }{%
-    \includegraphics[width=\textwidth]{figure/boosting-cwb-blpool1.png}
+  \includegraphics[width=\textwidth]{figure/boosting-cwb-blpool1.png}
   }{%
-    \begin{itemize}
-      \item Bottom left...
-      \item ...quadrant content
-    \end{itemize}
+  \begin{itemize}
+    \item Bottom left...
+    \item ...quadrant content
+  \end{itemize}
   }{%
-    \includegraphics[width=\textwidth]{figure/boosting-cwb-blpool2.png}
+  \includegraphics[width=\textwidth]{figure/boosting-cwb-blpool2.png}
   }
-
+  
 \end{frame}
 
 \begin{frame}{2$\times$2 layout: All images}
-
+  
   \vfill
-
+  
   \twobytwo{%
-    \includegraphics[width=\textwidth]{figure/boosting-cwb-blpool1.png}
+  \includegraphics[width=\textwidth]{figure/boosting-cwb-blpool1.png}
   }{%
-    \includegraphics[width=\textwidth]{figure/boosting-cwb-blpool2.png}
+  \includegraphics[width=\textwidth]{figure/boosting-cwb-blpool2.png}
   }{%
-    \includegraphics[width=\textwidth]{figure/boosting-cwb-blpool3.png}
+  \includegraphics[width=\textwidth]{figure/boosting-cwb-blpool3.png}
   }{%
-    \includegraphics[width=\textwidth]{figure/boosting-cwb-blpool4.png}
+  \includegraphics[width=\textwidth]{figure/boosting-cwb-blpool4.png}
   }
 \end{frame}
 
-\begin{frame}{Disclaimer}
-
-
-  \vfill
-
-  Please note that all of these spacing and layout wrappers are unfortunately somewhat unstable and may lead to unexpected / undesired behavior within other environments or in combination with each other.
-
-  \vfill
-
-  For example, \code{\textbackslash splitV} uses negative spacing below it to prevent wasting space and overflowing to the next frame, but that means that you \textbf{will often need} to use \code{\textbackslash vfill} after \code{\textbackslash splitV} to get the desired vertical spacing.
-
-  \vfill
-
-  (In fairness, \code{\textbackslash vfill} should probably be used very liberally for vertical spacing anyway)
-
-\end{frame}
 
 % ------------------------------------------------------------------------------
 % itemize wrapper
 % ------------------------------------------------------------------------------
 
 \begin{frame}[allowframebreaks]{itemize wrappers}
-
+  
   Presets fro \code{itemize} with different vertical spacings (\code{itemsep}). The default value for \code{itemsep} is apparently \code{2pt}. Use \code{\textbackslash the \textbackslash itemsep} to find out the current value.
-
-
+  
+  
   \vfill
-
-  \splitV{
-    \begin{itemize}
-      \item \textbf{Default itemize}
-      \item itemsep is unmodified
-      \item Another thing
-      \item Words
-      \item A fourth thing to show
-      \item Just filling space here
-      \item Hello there
-    \end{itemize}
+  
+  \splitVTT{
+  \begin{itemize}
+    \item \textbf{Default itemize}
+    \item itemsep is unmodified
+    \item Another thing
+    \item Words
+    \item A fourth thing to show
+    \item Just filling space here
+    \item Hello there
+  \end{itemize}
   }{
-    \begin{itemizeS}
-      \item \textbf{Uses environment} \code{itemizeS}
-      \item itemsep is: \the\itemsep
-      \item Another thing
-      \item Words
-      \item A fourth thing to show
-      \item Just filling space here
-      \item Hello there
-    \end{itemizeS}
+  \begin{itemizeS}
+    \item \textbf{Uses environment} \code{itemizeS}
+    \item itemsep is: \the\itemsep
+    \item Another thing
+    \item Words
+    \item A fourth thing to show
+    \item Just filling space here
+    \item Hello there
+  \end{itemizeS}
   }
-
+  
   \framebreak
-
-  \splitV{
-    \begin{itemize}
-      \item \textbf{Default itemize}
-      \item itemsep is unmodified
-      \item Another thing
-      \item Words
-      \item A fourth thing to show
-      \item Just filling space here
-      \item Hello there
-    \end{itemize}
+  
+  \splitVTT{
+  \begin{itemize}
+    \item \textbf{Default itemize}
+    \item itemsep is unmodified
+    \item Another thing
+    \item Words
+    \item A fourth thing to show
+    \item Just filling space here
+    \item Hello there
+  \end{itemize}
   }{
-    \begin{itemizeM}
-      \item \textbf{Uses environment} \code{itemizeM}
-      \item itemsep is: \the\itemsep
-      \item Another thing
-      \item Words
-      \item A fourth thing to show
-      \item Just filling space here
-      \item Hello there
-    \end{itemizeM}
+  \begin{itemizeM}
+    \item \textbf{Uses environment} \code{itemizeM}
+    \item itemsep is: \the\itemsep
+    \item Another thing
+    \item Words
+    \item A fourth thing to show
+    \item Just filling space here
+    \item Hello there
+  \end{itemizeM}
   }
-
+  
   \framebreak
-
-  \splitV{
-    \begin{itemize}
-      \item \textbf{Default itemize}
-      \item itemsep is unmodified
-      \item Another thing
-      \item Words
-      \item A fourth thing to show
-      \item Just filling space here
-      \item Hello there
-    \end{itemize}
+  
+  \splitVTT{
+  \begin{itemize}
+    \item \textbf{Default itemize}
+    \item itemsep is unmodified
+    \item Another thing
+    \item Words
+    \item A fourth thing to show
+    \item Just filling space here
+    \item Hello there
+  \end{itemize}
   }{
-    \begin{itemizeL}
-      \item \textbf{Uses environment} \code{itemizeL}
-      \item itemsep is: \the\itemsep
-      \item Another thing
-      \item Words
-      \item A fourth thing to show
-      \item Just filling space here
-      \item Hello there
-    \end{itemizeL}
+  \begin{itemizeL}
+    \item \textbf{Uses environment} \code{itemizeL}
+    \item itemsep is: \the\itemsep
+    \item Another thing
+    \item Words
+    \item A fourth thing to show
+    \item Just filling space here
+    \item Hello there
+  \end{itemizeL}
   }
-
+  
   \framebreak
-
-
+  
+  
   \begin{itemizefill}
     \item \textbf{Uses environment} \code{itemizefill}
     \item itemsep is: \the\itemsep
     \item Automatically uses all vertical space
-    \item \textbf{Warning:} This does not work in \code{\textbackslash splitV} (yet?)
   \end{itemizefill}
-
+  
 \end{frame}
+
+\begin{frame}{Image taking the full width by default}
+  \image{figure/gbm_sine.png}
+\end{frame}
+
+
+\begin{frame}{Full width image with attribution}
+  \imageC[1][CITEKEY]{figure/gbm_sine.png}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Images with alignment and optional attribution}
+
+  \imageL[0.4][CITEKEY]{figure/gbm_sine.png}
+  \imageC[0.4][CITEKEY]{figure/gbm_sine.png}
+  \imageR[0.4][CITEKEY]{figure/gbm_sine.png}
+
+  
+\end{frame}
+
+
+
+\begin{frame}[allowframebreaks]{Images within itemize}
+  
+  \begin{itemize}
+    \item Foo bar
+    \item Plubber
+    \imageC[0.5]{figure/boosting-cwb-blpool1.png}
+    \item jfowiehfgnsdlkjnfg
+  \end{itemize}
+  
+  
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Images within splitV}
+  
+  \splitVTT{
+  \image{figure/boosting-cwb-blpool1.png}
+  }{
+  \image{figure/boosting-cwb-blpool1.png}
+  }
+  
+  \vfill
+  
+  \splitVCC[0.4]{
+    \image{figure/boosting-cwb-blpool1.png}
+    }{
+    \image{figure/boosting-cwb-blpool1.png}
+  }
+  
+\end{frame}
+
+\begin{frame}[allowframebreaks]{Images within splitVCC}
+  
+  \splitVCC{
+  \image[0.5]{figure/boosting-cwb-blpool1.png}
+  }{
+  \image[0.7]{figure/boosting-cwb-blpool1.png}
+  }
+  
+  \vfill
+  
+  \splitVCC[0.4]{
+    \imageC[1][CITEKEY]{figure/boosting-cwb-blpool1.png}
+    }{
+    \image{figure/boosting-cwb-blpool1.png}
+  }
+  
+\end{frame}
+
 
 \endlecture
 \end{document}
