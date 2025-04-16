@@ -7,9 +7,9 @@
 \begin{document}
 
 \titlemeta{% Chunk title (example: CART, Forests, Boosting, ...), can be empty
-splitV regression tests
+splitV Regression Tests
 }{% Lecture title  
-Layout Macro Testing With Cannibalized Content
+Layout Macro Testing With Cats
 }{% Relative path to title page image: Can be empty but must not start with slides/
 figure_man/neo3_2.jpg
 }{
@@ -31,9 +31,19 @@ figure_man/neo3_2.jpg
 \begin{frame}{splitVCC}
 
   \splitVCC{
-    \image{figure_man/neo3_3.jpg}
+    \image{figure_man/neo3_2.jpg}
   }{
-    \image{figure_man/neo3_3.jpg}
+    \image{figure_man/neo3_2.jpg}
+  }
+
+\end{frame}
+
+\begin{frame}{splitVCC left 0.4}
+
+  \splitVCC[0.4]{
+    \image{figure_man/neo3_2.jpg}
+  }{
+    \image{figure_man/neo3_2.jpg}
   }
 
 \end{frame}
@@ -41,9 +51,19 @@ figure_man/neo3_2.jpg
 \begin{frame}{splitVTT}
 
   \splitVTT{
-    \image{figure_man/neo3_3.jpg}
+    \image{figure_man/neo3_2.jpg}
   }{
-    \image{figure_man/neo3_3.jpg}
+    \image{figure_man/neo3_2.jpg}
+  }
+  
+\end{frame}
+
+\begin{frame}{splitVTT left 0.4}
+
+  \splitVTT[0.4]{
+    \image{figure_man/neo3_2.jpg}
+  }{
+    \image{figure_man/neo3_2.jpg}
   }
   
 \end{frame}
@@ -51,6 +71,16 @@ figure_man/neo3_2.jpg
 \begin{frame}{splitVBB}
 
   \splitVBB{
+    \image{figure_man/neo3_3.jpg}
+  }{
+    \image{figure_man/neo3_3.jpg}
+  }
+  
+\end{frame}
+
+\begin{frame}{splitVBB left 0.4}
+
+  \splitVBB[0.4]{
     \image{figure_man/neo3_3.jpg}
   }{
     \image{figure_man/neo3_3.jpg}
