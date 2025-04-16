@@ -2,9 +2,6 @@
 \input{../../style/preamble}
 \input{../../latex-math/basic-math}
 
-\usepackage{graphicx}
-\usepackage{calc}
-
 \title{Introduction to Debugging Lectures}
 
 \begin{document}
@@ -28,24 +25,24 @@ figure/compboost-illustration-2.png
   It is recommended to view these slides as PDF and LaTeX code side by side
   
   Refer to the \code{slds-lmu/lecture\_debug} repository for the source and PDF:
-  \begin{itemize}
+  \begin{itemizeS}
     \item \href{https://slds-lmu.github.io/lecture_debug/lecture_debug/slides/demo/slides-demo-layout.pdf}{\beamergotobutton{Compiled PDF}}
     \item \href{https://github.com/slds-lmu/lecture_debug/blob/main/slides/demo/slides-demo-layout.tex}{\beamergotobutton{LaTeX source}}
-  \end{itemize}
+  \end{itemizeS}
   
 \end{frame}
 
-\begin{frame}[allowframebreaks]{\textbackslash splitV(TCB)(TCB)}
+\begin{frame}{\textbackslash splitV(TCB)(TCB)}
   
   \begin{itemize}
     \item \code{\textbackslash splitVCC} creates two centered columns
     \item \code{\textbackslash splitVTT} creates two top-aligned columns 
     \item \code{\textbackslash splitVBT} left is bottom-, right is top aligned
-
+    
   \end{itemize}
   
   \vfill
-    
+  
   \splitVTT{
   \textbf{Left column} Lorem ipsum dolor sit amet, consectetur adipiscing elit
   }{
@@ -53,7 +50,7 @@ figure/compboost-illustration-2.png
   }
   
   \vfill
-    
+  
   \splitVCC{
   \begin{itemize}
     \item Example itemize content
@@ -65,7 +62,7 @@ figure/compboost-illustration-2.png
   
 \end{frame}
 
-\begin{frame}[allowframebreaks]{\textbackslash splitV with unequal sizes}
+\begin{frame}{\textbackslash splitV with unequal sizes}
   
   You only need to specify the width of the first column:
   
@@ -82,10 +79,12 @@ figure/compboost-illustration-2.png
   
   \splitVTT[0.2]{Tiny column}{Second column with a lot of room for activities}
   
-  
 \end{frame}
-\begin{frame}[allowframebreaks]{Two columns, minimal adjustments}
 
+% ------------------------------------------------------------------------------
+
+\begin{frame}{Two columns, minimal adjustments}
+  
   Compact version if you do not want to use the full slide width:
   
   \code{\textbackslash splitVCompact\{0.2\}\{0.2\}} only takes up 20\% of the slide width in each column for a total of 40\% with a minimal horizontal spacer:
@@ -96,6 +95,8 @@ figure/compboost-illustration-2.png
   
   
 \end{frame}
+
+% ------------------------------------------------------------------------------
 
 \begin{frame}{3 columns}
   
@@ -153,6 +154,8 @@ figure/compboost-illustration-2.png
   }
   
 \end{frame}
+
+% ------------------------------------------------------------------------------
 
 \begin{frame}{2$\times$2 layout: All images}
   
@@ -254,35 +257,40 @@ figure/compboost-illustration-2.png
   \framebreak
   
   
-  \begin{itemizefill}
-    \item \textbf{Uses environment} \code{itemizefill}
+  \begin{itemizeF}
+    \item \textbf{Uses environment} \code{itemizeF}
     \item itemsep is: \the\itemsep
     \item Automatically uses all vertical space
-  \end{itemizefill}
+  \end{itemizeF}
   
 \end{frame}
 
-\begin{frame}{Image taking the full width by default}
+% ------------------------------------------------------------------------------
+
+\begin{frame}{Image taking the fullslide width}
   \image{figure/gbm_sine.png}
 \end{frame}
 
+% ------------------------------------------------------------------------------
 
 \begin{frame}{Full width image with attribution}
   \imageC[1][CITEKEY]{figure/gbm_sine.png}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Images with alignment and optional attribution}
+% ------------------------------------------------------------------------------
 
+\begin{frame}{Images with alignment and optional attribution}
+  
   \imageL[0.4][CITEKEY]{figure/gbm_sine.png}
   \imageC[0.4][CITEKEY]{figure/gbm_sine.png}
   \imageR[0.4][CITEKEY]{figure/gbm_sine.png}
-
+  
   
 \end{frame}
 
+% ------------------------------------------------------------------------------
 
-
-\begin{frame}[allowframebreaks]{Images within itemize}
+\begin{frame}{Images within itemize}
   
   \begin{itemize}
     \item Foo bar
@@ -293,6 +301,8 @@ figure/compboost-illustration-2.png
   
   
 \end{frame}
+
+% ------------------------------------------------------------------------------
 
 \begin{frame}[allowframebreaks]{Images within splitV}
   
@@ -305,31 +315,40 @@ figure/compboost-illustration-2.png
   \vfill
   
   \splitVCC[0.4]{
-    \image{figure/boosting-cwb-blpool1.png}
-    }{
-    \image{figure/boosting-cwb-blpool1.png}
+  \image{figure/boosting-cwb-blpool1.png}
+  }{
+  \image{figure/boosting-cwb-blpool1.png}
   }
   
 \end{frame}
 
+% ------------------------------------------------------------------------------
+
 \begin{frame}[allowframebreaks]{Images within splitVCC}
   
   \splitVCC{
-  \image[0.5]{figure/boosting-cwb-blpool1.png}
+  \image[0.5]{figure_man/neo3_2.jpg}
   }{
-  \image[0.7]{figure/boosting-cwb-blpool1.png}
+  \image[0.7]{figure_man/neo3_2.jpg}
   }
   
   \vfill
   
   \splitVCC[0.4]{
-    \imageC[1][CITEKEY]{figure/boosting-cwb-blpool1.png}
-    }{
-    \image{figure/boosting-cwb-blpool1.png}
+  \imageC[1][KITTEN]{figure_man/neo3_2.jpg}
+  }{
+  \image{figure_man/neo3_2.jpg}
   }
   
 \end{frame}
 
+% ------------------------------------------------------------------------------
+
+% Not working yet
+% \begin{framei}{Title}
+%   \item One
+%   \item Two
+% \end{framei}
 
 \endlecture
 \end{document}
