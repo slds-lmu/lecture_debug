@@ -24,32 +24,36 @@
 % Define environments with different spacings and optional font size
 \newenvironment{itemizeS}[1][normalsize]{%
   \itemspaceS%
-  {\csname#1\endcsname}%
+  \def\@fontsize{#1}%
   \begin{itemize}%
+  \csname\@fontsize\endcsname% Apply font size to the list content
 }{%
   \end{itemize}%
 }
 
 \newenvironment{itemizeM}[1][normalsize]{%
   \itemspaceM%
-  {\csname#1\endcsname}%
+  \def\@fontsize{#1}%
   \begin{itemize}%
+  \csname\@fontsize\endcsname% Apply font size to the list content
 }{%
   \end{itemize}%
 }
 
 \newenvironment{itemizeL}[1][normalsize]{%
   \itemspaceL%
-  {\csname#1\endcsname}%
+  \def\@fontsize{#1}%
   \begin{itemize}%
+  \csname\@fontsize\endcsname% Apply font size to the list content
 }{%
   \end{itemize}%
 }
 
 \newenvironment{itemizeF}[1][normalsize]{%
   \itemspaceF%
-  {\csname#1\endcsname}%
+  \def\@fontsize{#1}%
   \begin{itemize}%
+  \csname\@fontsize\endcsname% Apply font size to the list content
 }{%
   \end{itemize}%
 }
@@ -73,9 +77,10 @@
   \ifx\custom@itemize@sep M\itemspaceM\fi%
   \ifx\custom@itemize@sep L\itemspaceL\fi%
   \ifx\custom@itemize@sep F\itemspaceF\fi%
-  % Apply font size
-  {\csname\custom@itemize@fs\endcsname}%
+  % Start list
   \begin{itemize}%
+  % Apply font size
+  \csname\custom@itemize@fs\endcsname%
 }{%
   \end{itemize}%
 }
@@ -93,9 +98,10 @@
   \ifx#2M\itemspaceM\fi%
   \ifx#2L\itemspaceL\fi%
   \ifx#2F\itemspaceF\fi%
-  % Apply font size
-  {\csname\@temp\endcsname}%
+  % Start list
   \begin{itemize}%
+  % Apply font size
+  \csname\@temp\endcsname%
 }{%
   \end{itemize}%
 }

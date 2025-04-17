@@ -1,0 +1,257 @@
+\documentclass[11pt,compress,t,notes=noshow, xcolor=table]{beamer}
+\input{../../style/preamble}
+
+
+\title{Custom Itemize Environments Demo}
+
+\begin{document}
+
+\titlemeta{% Chunk title
+Custom Itemize Demo
+}{% Lecture title  
+Customizable Itemize Environments for Better Slides
+}{
+figure_man/neo3_2.jpg
+}{
+\item Compact spacing
+\item Standard spacing
+\item Large spacing
+\item Fill spacing
+\item Font size control
+}
+% ------------------------------------------------------------------------------
+
+\begin{frame}{Custom Itemize Environments}
+  \vfill
+  This slide deck demonstrates the various customized itemize environments.
+  \vfill
+\end{frame}
+
+% ------------------------------------------------------------------------------
+
+\begin{frame}{Standard Spacing Variants}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{itemizeS - Compact Spacing}
+      \begin{itemizeS}
+        \item Less vertical space
+        \item Good for dense content
+        \item When you need to fit more
+        \item Without changing font size
+        \item Maximizes information density
+      \end{itemizeS}
+      
+      \vspace{0.5cm}
+      \textbf{itemizeM - Default Spacing}
+      \begin{itemizeM}
+        \item Standard LaTeX spacing
+        \item For normal content
+        \item Good readability
+        \item Default choice
+      \end{itemizeM}
+    \end{column}
+    
+    \begin{column}{0.48\textwidth}
+      \textbf{itemizeL - Large Spacing}
+      \begin{itemizeL}
+        \item More breathing room
+        \item For important points
+        \item Enhanced readability
+        \item When content is sparse
+      \end{itemizeL}
+      
+      \vspace{0.5cm}
+      \textbf{itemizeF - Fill Spacing (in minipage)}
+      \begin{minipage}[t]{\textwidth}
+        \begin{itemizeF}
+          \item Distributes items
+          \item Across available
+          \item Vertical space
+          \item Using \texttt{\\fill}
+        \end{itemizeF}
+      \end{minipage}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ------------------------------------------------------------------------------
+
+\begin{frame}{Font Size Control}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Default (normalsize)}
+      \begin{itemizeM}
+        \item Regular font size
+        \item Used when no size specified
+        \item Default behavior
+      \end{itemizeM}
+      
+      \vspace{0.5cm}
+      \textbf{Small Font}
+      \begin{itemizeM}[small]
+        \item Smaller font size
+        \item Using \texttt{[small]} option
+        \item Good for fitting more content
+        \item Still quite readable
+      \end{itemizeM}
+    \end{column}
+    
+    \begin{column}{0.48\textwidth}
+      \textbf{Footnote Size}
+      \begin{itemizeS}[footnotesize]
+        \item Very small text
+        \item Combined with compact spacing
+        \item For maximum content density
+        \item Use sparingly for readability
+        \item Best for less important details
+      \end{itemizeS}
+      
+      \vspace{0.5cm}
+      \textbf{Large Font}
+      \begin{itemizeL}[large]
+        \item Larger text
+        \item With wide spacing
+        \item For emphasis
+        \item Highly visible
+      \end{itemizeL}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ------------------------------------------------------------------------------
+
+\begin{frame}{Combining Different Features}
+  \textbf{Strategic Combinations}
+  
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{For dense information:}
+      \begin{itemizeS}[small]
+        \item Small font + compact spacing
+        \item Use for detailed lists
+        \item References, technical details
+        \item When every line matters
+      \end{itemizeS}
+    \end{column}
+    
+    \begin{column}{0.48\textwidth}
+      \textbf{For key points:}
+      \begin{itemizeL}[large]
+        \item Large font + wide spacing
+        \item Makes content stand out
+        \item Ideal for takeaways
+        \item High visual impact
+      \end{itemizeL}
+    \end{column}
+  \end{columns}
+  
+  \vspace{0.5cm}
+  \textbf{For balanced content:}
+  \begin{itemizeM}
+    \item Default sizing and spacing works best for most content
+    \item Provides good readability and balanced slide appearance
+    \item The safest choice when you're not sure what to use
+  \end{itemizeM}
+\end{frame}
+
+% ------------------------------------------------------------------------------
+
+\begin{frame}{Key-Value Interface}
+  The \texttt{kitemize} environment offers a key-value interface:
+  
+  \vspace{0.3cm}
+  \texttt{\\begin\{kitemize\}[fs=small,sep=S]}
+  \begin{kitemize}[fs=small,sep=S]
+    \item Font size: \texttt{fs=small} (or footnotesize, large, etc.)
+    \item Separation: \texttt{sep=S} (or M, L, F)
+    \item Both parameters are optional with sensible defaults
+    \item Allows more flexibility in specifying options
+  \end{kitemize}
+  
+  \vspace{0.3cm}
+  \texttt{\\begin\{kitemize\}[fs=large,sep=L]}
+  \begin{kitemize}[fs=large,sep=L]
+    \item Large font
+    \item Wide spacing
+    \item More declarative syntax
+    \item Better code readability
+  \end{kitemize}
+\end{frame}
+
+% ------------------------------------------------------------------------------
+
+\begin{frame}{Fill Spacing Example}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Before:}
+      \begin{minipage}[t][0.6\textheight][t]{\textwidth}
+        \begin{itemizeM}
+          \item Default spacing
+          \item Doesn't fill the available space
+          \item Content clustered at top
+        \end{itemizeM}
+      \end{minipage}
+    \end{column}
+    
+    \begin{column}{0.48\textwidth}
+      \textbf{After:}
+      \begin{minipage}[t][0.6\textheight][t]{\textwidth}
+        \begin{itemizeF}
+          \item Fill spacing
+          \item Distributes items evenly
+          \item Across available height
+        \end{itemizeF}
+      \end{minipage}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ------------------------------------------------------------------------------
+
+\begin{frame}{Practical Use Cases}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{For main content:}
+      \begin{itemizeM}
+        \item Use standard spacing
+        \item With normal font size
+        \item For most slide content
+      \end{itemizeM}
+      
+      \vspace{0.3cm}
+      \textbf{For appendix slides:}
+      \begin{itemizeS}[small]
+        \item Use compact spacing
+        \item With smaller font
+        \item To fit reference material
+        \item Additional details
+        \item Supporting information
+      \end{itemizeS}
+    \end{column}
+    
+    \begin{column}{0.48\textwidth}
+      \textbf{For section intros:}
+      \begin{itemizeL}
+        \item Use larger spacing
+        \item For section introductions
+        \item When points need emphasis
+      \end{itemizeL}
+      
+      \vspace{0.3cm}
+      \textbf{For slide structure:}
+      \begin{kitemize}[fs=normalsize,sep=M]
+        \item Main points - normal size
+        \begin{kitemize}[fs=small,sep=S]
+          \item Supporting details - smaller
+          \item Additional information
+          \begin{kitemize}[fs=footnotesize,sep=S]
+            \item Fine print - very small
+          \end{kitemize}
+        \end{kitemize}
+      \end{kitemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\endlecture
+\end{document}
