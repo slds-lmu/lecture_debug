@@ -15,6 +15,33 @@
   \def\framei@sep{M}%
 }
 
+% Define a command to choose the right environment
+\newcommand{\framei@choose}{%
+  \def\framei@begin{}%
+  \def\framei@end{}%
+  \edef\@tempa{\framei@sep}%
+  \edef\@tempb{S}%
+  \ifx\@tempa\@tempb
+    \def\framei@begin{\begin{itemizeS}[\framei@fs]}%
+    \def\framei@end{\end{itemizeS}}%
+  \else
+    \edef\@tempb{L}%
+    \ifx\@tempa\@tempb
+      \def\framei@begin{\begin{itemizeL}[\framei@fs]}%
+      \def\framei@end{\end{itemizeL}}%
+    \else
+      \edef\@tempb{F}%
+      \ifx\@tempa\@tempb
+        \def\framei@begin{\begin{itemizeF}[\framei@fs]}%
+        \def\framei@end{\end{itemizeF}}%
+      \else
+        \def\framei@begin{\begin{itemizeM}[\framei@fs]}%
+        \def\framei@end{\end{itemizeM}}%
+      \fi
+    \fi
+  \fi
+}
+
 % The framei environment with key-value options
 \NewEnviron{framei}[2][]{%
   % Initialize defaults
@@ -25,11 +52,14 @@
     \setkeys{framei}{#1}%
   \fi%
   
+  % Choose the appropriate environment
+  \framei@choose%
+  
   % Begin frame with title
   \begin{frame}{#2}%
-    % Use kitemize with the processed options
-    \begin{kitemize}[fs=\framei@fs,sep=\framei@sep]%
+    % Use the chosen environment
+    \framei@begin%
       \BODY
-    \end{kitemize}%
+    \framei@end%
   \end{frame}%
 }
