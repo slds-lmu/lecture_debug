@@ -1,0 +1,101 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{customitemize}[2025/04/17 Custom Itemize Environments]
+
+% Load required packages
+\RequirePackage{enumitem}
+
+% Define commands for the different spacing configurations
+\newcommand{\itemspaceS}{%
+  \setlist[itemize]{itemsep=-2pt,parsep=0pt,topsep=0pt,partopsep=0pt}%
+}
+
+\newcommand{\itemspaceM}{%
+  \setlist[itemize]{} % Default spacing
+}
+
+\newcommand{\itemspaceL}{%
+  \setlist[itemize]{itemsep=8pt,parsep=2pt}%
+}
+
+\newcommand{\itemspaceF}{%
+  \setlist[itemize]{itemsep=\fill}%
+}
+
+% Define environments with different spacings and optional font size
+\newenvironment{itemizeS}[1][normalsize]{%
+  \itemspaceS%
+  {\csname#1\endcsname}%
+  \begin{itemize}%
+}{%
+  \end{itemize}%
+}
+
+\newenvironment{itemizeM}[1][normalsize]{%
+  \itemspaceM%
+  {\csname#1\endcsname}%
+  \begin{itemize}%
+}{%
+  \end{itemize}%
+}
+
+\newenvironment{itemizeL}[1][normalsize]{%
+  \itemspaceL%
+  {\csname#1\endcsname}%
+  \begin{itemize}%
+}{%
+  \end{itemize}%
+}
+
+\newenvironment{itemizeF}[1][normalsize]{%
+  \itemspaceF%
+  {\csname#1\endcsname}%
+  \begin{itemize}%
+}{%
+  \end{itemize}%
+}
+
+% A version with key-value options for more flexibility
+\RequirePackage{keyval}
+
+% Define keys
+\define@key{customitemize}{fs}{\def\custom@itemize@fs{#1}}
+\define@key{customitemize}{sep}{\def\custom@itemize@sep{#1}}
+
+% Define the environment with key-value options
+\newenvironment{kitemize}[1][]{%
+  % Set defaults
+  \def\custom@itemize@fs{normalsize}%
+  \def\custom@itemize@sep{M}%
+  % Process options
+  \setkeys{customitemize}{#1}%
+  % Apply spacing based on sep value
+  \ifx\custom@itemize@sep S\itemspaceS\fi%
+  \ifx\custom@itemize@sep M\itemspaceM\fi%
+  \ifx\custom@itemize@sep L\itemspaceL\fi%
+  \ifx\custom@itemize@sep F\itemspaceF\fi%
+  % Apply font size
+  {\csname\custom@itemize@fs\endcsname}%
+  \begin{itemize}%
+}{%
+  \end{itemize}%
+}
+
+% For backward compatibility (if needed)
+\newenvironment{customitemize}[2][\relax]{%
+  % Process optional argument for font size if provided
+  \ifx#1\relax
+    \def\@temp{normalsize}%
+  \else
+    \def\@temp{#1}%
+  \fi
+  % Set spacing based on #2
+  \ifx#2S\itemspaceS\fi%
+  \ifx#2M\itemspaceM\fi%
+  \ifx#2L\itemspaceL\fi%
+  \ifx#2F\itemspaceF\fi%
+  % Apply font size
+  {\csname\@temp\endcsname}%
+  \begin{itemize}%
+}{%
+  \end{itemize}%
+}
