@@ -4,11 +4,12 @@
 % Load required packages
 \RequirePackage{enumitem}
 
-% Store the original beamer item template
-\let\beameroriginalitem\item
-
 % Preserve beamer item template when using enumitem
-\setlist[itemize]{label=\usebeamertemplate{itemize item}}
+% Set for all levels of itemize
+\setlist[itemize,1]{label=\usebeamertemplate{itemize item}}
+\setlist[itemize,2]{label=\usebeamertemplate{itemize subitem}}
+\setlist[itemize,3]{label=\usebeamertemplate{itemize subsubitem}}
+\setlist[itemize,4]{label=\usebeamertemplate{itemize subsubitem}}
 
 % Define commands for the different spacing configurations
 \newcommand{\itemspaceS}{%
@@ -20,7 +21,8 @@
 }
 
 \newcommand{\itemspaceL}{%
-  \setlist[itemize]{itemsep=8pt,parsep=2pt}%
+  % Significantly increase the spacing for "Large" setting
+  \setlist[itemize]{itemsep=15pt,parsep=5pt,topsep=5pt,partopsep=2pt}%
 }
 
 \newcommand{\itemspaceF}{%

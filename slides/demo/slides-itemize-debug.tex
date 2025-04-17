@@ -1,6 +1,7 @@
 \documentclass[11pt,compress,t,notes=noshow, xcolor=table]{beamer}
 \input{../../style/preamble}
-
+\usepackage{../../style/customitemize}
+\usepackage{../../style/framei}
 
 \title{Custom Itemize Environments Demo}
 
@@ -37,8 +38,6 @@ figure_man/neo3_2.jpg
         \item Less vertical space
         \item Good for dense content
         \item When you need to fit more
-        \item Without changing font size
-        \item Maximizes information density
       \end{itemizeS}
       
       \vspace{0.5cm}
@@ -47,7 +46,6 @@ figure_man/neo3_2.jpg
         \item Standard LaTeX spacing
         \item For normal content
         \item Good readability
-        \item Default choice
       \end{itemizeM}
     \end{column}
     
@@ -57,17 +55,14 @@ figure_man/neo3_2.jpg
         \item More breathing room
         \item For important points
         \item Enhanced readability
-        \item When content is sparse
       \end{itemizeL}
       
       \vspace{0.5cm}
-      \textbf{itemizeF - Fill Spacing (in minipage)}
-      \begin{minipage}[t]{\textwidth}
+      \textbf{itemizeF - Fill Spacing}
+      \begin{minipage}[t][5em][t]{\textwidth}
         \begin{itemizeF}
           \item Distributes items
-          \item Across available
-          \item Vertical space
-          \item Using \texttt{\\fill}
+          \item Across available space
         \end{itemizeF}
       \end{minipage}
     \end{column}
@@ -82,7 +77,6 @@ figure_man/neo3_2.jpg
       \textbf{Default (normalsize)}
       \begin{itemizeM}
         \item Regular font size
-        \item Used when no size specified
         \item Default behavior
       \end{itemizeM}
       
@@ -91,8 +85,7 @@ figure_man/neo3_2.jpg
       \begin{itemizeM}[small]
         \item Smaller font size
         \item Using \texttt{[small]} option
-        \item Good for fitting more content
-        \item Still quite readable
+        \item Good for fitting more
       \end{itemizeM}
     \end{column}
     
@@ -102,8 +95,6 @@ figure_man/neo3_2.jpg
         \item Very small text
         \item Combined with compact spacing
         \item For maximum content density
-        \item Use sparingly for readability
-        \item Best for less important details
       \end{itemizeS}
       
       \vspace{0.5cm}
@@ -112,7 +103,6 @@ figure_man/neo3_2.jpg
         \item Larger text
         \item With wide spacing
         \item For emphasis
-        \item Highly visible
       \end{itemizeL}
     \end{column}
   \end{columns}
@@ -129,7 +119,6 @@ figure_man/neo3_2.jpg
       \begin{itemizeS}[small]
         \item Small font + compact spacing
         \item Use for detailed lists
-        \item References, technical details
         \item When every line matters
       \end{itemizeS}
     \end{column}
@@ -140,7 +129,6 @@ figure_man/neo3_2.jpg
         \item Large font + wide spacing
         \item Makes content stand out
         \item Ideal for takeaways
-        \item High visual impact
       \end{itemizeL}
     \end{column}
   \end{columns}
@@ -150,7 +138,6 @@ figure_man/neo3_2.jpg
   \begin{itemizeM}
     \item Default sizing and spacing works best for most content
     \item Provides good readability and balanced slide appearance
-    \item The safest choice when you're not sure what to use
   \end{itemizeM}
 \end{frame}
 
@@ -159,24 +146,42 @@ figure_man/neo3_2.jpg
 \begin{frame}{Key-Value Interface}
   The \texttt{kitemize} environment offers a key-value interface:
   
-  \vspace{0.3cm}
+  \vspace{1ex}
   \texttt{\\begin\{kitemize\}[fs=small,sep=S]}
   \begin{kitemize}[fs=small,sep=S]
-    \item Font size: \texttt{fs=small} (or footnotesize, large, etc.)
-    \item Separation: \texttt{sep=S} (or M, L, F)
-    \item Both parameters are optional with sensible defaults
-    \item Allows more flexibility in specifying options
+    \item Font size: \texttt{fs=small}
+    \item Separation: \texttt{sep=S}
+    \item Both parameters are optional
   \end{kitemize}
   
-  \vspace{0.3cm}
+  \vspace{1ex}
   \texttt{\\begin\{kitemize\}[fs=large,sep=L]}
   \begin{kitemize}[fs=large,sep=L]
     \item Large font
     \item Wide spacing
-    \item More declarative syntax
-    \item Better code readability
+    \item Better readability
   \end{kitemize}
 \end{frame}
+
+% ------------------------------------------------------------------------------
+
+\begin{framei}[fs=small,sep=S]{Enhanced framei Environment}
+  \item The \texttt{framei} environment supports key-value arguments
+  \item Font size: \texttt{fs=small} (or footnotesize, large, etc.)
+  \item Separation: \texttt{sep=S} (or M, L, F)
+  \item This example uses \texttt{framei[fs=small,sep=S]}
+  \item Perfect for overview slides or detailed lists
+  \item Makes it easy to fit more content on a single slide
+\end{framei}
+
+% ------------------------------------------------------------------------------
+
+\begin{framei}[fs=large,sep=L]{Another framei Example}
+  \item Larger text with wider spacing
+  \item Passed directly to the \texttt{framei} environment
+  \item Using \texttt{[fs=large,sep=L]}
+  \item For emphasis and impact
+\end{framei}
 
 % ------------------------------------------------------------------------------
 
@@ -184,22 +189,22 @@ figure_man/neo3_2.jpg
   \begin{columns}[T]
     \begin{column}{0.48\textwidth}
       \textbf{Before:}
-      \begin{minipage}[t][0.6\textheight][t]{\textwidth}
+      \begin{minipage}[t][0.4\textheight][t]{\textwidth}
         \begin{itemizeM}
           \item Default spacing
-          \item Doesn't fill the available space
-          \item Content clustered at top
+          \item Doesn't fill space
+          \item Content at top
         \end{itemizeM}
       \end{minipage}
     \end{column}
     
     \begin{column}{0.48\textwidth}
       \textbf{After:}
-      \begin{minipage}[t][0.6\textheight][t]{\textwidth}
+      \begin{minipage}[t][0.4\textheight][t]{\textwidth}
         \begin{itemizeF}
           \item Fill spacing
-          \item Distributes items evenly
-          \item Across available height
+          \item Distributes items
+          \item Across height
         \end{itemizeF}
       \end{minipage}
     \end{column}
@@ -213,39 +218,28 @@ figure_man/neo3_2.jpg
     \begin{column}{0.48\textwidth}
       \textbf{For main content:}
       \begin{itemizeM}
-        \item Use standard spacing
-        \item With normal font size
-        \item For most slide content
+        \item Standard spacing
+        \item With normal font
+        \item For most slides
       \end{itemizeM}
       
       \vspace{0.3cm}
       \textbf{For appendix slides:}
       \begin{itemizeS}[small]
-        \item Use compact spacing
+        \item Compact spacing
         \item With smaller font
-        \item To fit reference material
-        \item Additional details
-        \item Supporting information
+        \item For reference material
       \end{itemizeS}
     \end{column}
     
     \begin{column}{0.48\textwidth}
-      \textbf{For section intros:}
-      \begin{itemizeL}
-        \item Use larger spacing
-        \item For section introductions
-        \item When points need emphasis
-      \end{itemizeL}
-      
-      \vspace{0.3cm}
-      \textbf{For slide structure:}
+      \textbf{For nested structure:}
       \begin{kitemize}[fs=normalsize,sep=M]
-        \item Main points - normal size
+        \item Main points
         \begin{kitemize}[fs=small,sep=S]
-          \item Supporting details - smaller
-          \item Additional information
+          \item Supporting details
           \begin{kitemize}[fs=footnotesize,sep=S]
-            \item Fine print - very small
+            \item Fine print
           \end{kitemize}
         \end{kitemize}
       \end{kitemize}
