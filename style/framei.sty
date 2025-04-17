@@ -1,0 +1,35 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{framei}[2025/04/17 Beamer Frame with Itemize Environment]
+
+\RequirePackage{environ}
+\RequirePackage{keyval}
+\RequirePackage{customitemize}
+
+% Define keys for framei
+\define@key{framei}{fs}{\def\framei@fs{#1}}
+\define@key{framei}{sep}{\def\framei@sep{#1}}
+
+% Set default values
+\newcommand{\framei@setup}{%
+  \def\framei@fs{normalsize}%
+  \def\framei@sep{M}%
+}
+
+% The framei environment with key-value options
+\NewEnviron{framei}[2][]{%
+  % Initialize defaults
+  \framei@setup%
+  
+  % Process options if given
+  \ifx\relax#1\relax\else%
+    \setkeys{framei}{#1}%
+  \fi%
+  
+  % Begin frame with title
+  \begin{frame}{#2}%
+    % Use kitemize with the processed options
+    \begin{kitemize}[fs=\framei@fs,sep=\framei@sep]%
+      \BODY
+    \end{kitemize}%
+  \end{frame}%
+}

@@ -4,6 +4,12 @@
 % Load required packages
 \RequirePackage{enumitem}
 
+% Store the original beamer item template
+\let\beameroriginalitem\item
+
+% Preserve beamer item template when using enumitem
+\setlist[itemize]{label=\usebeamertemplate{itemize item}}
+
 % Define commands for the different spacing configurations
 \newcommand{\itemspaceS}{%
   \setlist[itemize]{itemsep=-2pt,parsep=0pt,topsep=0pt,partopsep=0pt}%
