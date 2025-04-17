@@ -380,17 +380,6 @@
   \end{frame}
 }
 
-
-% Experimental wrapper to create frame that also contains itemize and nothing else
-% \RequirePackage{environ}
-% \NewEnviron{framei}[1]{
-%   \begin{frame}{#1}
-%     \begin{itemize}
-%       \BODY
-%     \end{itemize}
-%   \end{frame}
-% }
-
 % Itemize block
 \newenvironment{blocki}[1]
 {
@@ -655,44 +644,6 @@
     \end{minipage}%
   \end{flushright}%
 }
-
-% ------------------------------------------------------------------------
-% List helpers for itemize
-% ------------------------------------------------------------------------
-
-% Stretching itemize wrapper that fills vertical space
-% Note that this might break if enumitem is used instead of enumerate
-% See also https://github.com/slds-lmu/teaching_devops_issues/issues/20
-% \newenvironment{itemizeF}{%
-%   \begin{itemize}%
-%     \vspace{0pt}%
-%     \setlength{\itemsep}{\fill}%
-%     \setlength{\parsep}{0pt}%
-%     }{%
-%     \vspace{0pt}%
-%   \end{itemize}%
-% }
-
-% \newenvironment{itemizeS}{%
-%   \begin{itemize}%
-%     \setlength{\itemsep}{1pt}%
-%     }{%
-%   \end{itemize}%
-% }
-
-% \newenvironment{itemizeM}{%
-%   \begin{itemize}%
-%     \setlength{\itemsep}{5pt}%
-%     }{%
-%   \end{itemize}%
-% }
-
-% \newenvironment{itemizeL}{%
-%   \begin{itemize}%
-%     \setlength{\itemsep}{15pt}%
-%     }{%
-%   \end{itemize}%
-% }
 
 % ------------------------------------------------------------------------
 \endinput
