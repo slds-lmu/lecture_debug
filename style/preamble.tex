@@ -192,13 +192,19 @@
     shorten >=2pt,}
 }
 
-% Defines most macros and environments
-% For long-term maintenance, this may me refatcored into a more modular set of .sty files
+%--------------------------------------------------------%
+%       Beamer setup and custom macros & environments
+%--------------------------------------------------------%
+
+% Main sty file for beamer setup (layout, style, lecture page numbering, etc.)
+% For long-term maintenance, this may me refactored into a more modular set of .sty files
 \usepackage{../../style/lmu-lecture}
 % Custom itemize wrappers, itemizeS, itemizeL, etc
 \usepackage{../../style/customitemize}
 % Custom framei environment, uses custom itemize!
 \usepackage{../../style/framei} 
+% Column layout macros
+\usepackage{../../style/splitV} 
 
 % Used regularly
 \let\code=\texttt
