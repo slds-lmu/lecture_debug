@@ -177,7 +177,7 @@ figure/compboost-illustration-2.png
 % itemize wrapper
 % ------------------------------------------------------------------------------
 
-\begin{frame}[allowframebreaks]{itemize wrappers}
+\begin{frame}{itemize wrappers}
   
   Presets fro \code{itemize} with different vertical spacings (\code{itemsep}). The default value for \code{itemsep} is apparently \code{2pt}. Use \code{\textbackslash the \textbackslash itemsep} to find out the current value.
   
@@ -206,42 +206,22 @@ figure/compboost-illustration-2.png
   \end{itemizeS}
   }
   
-  \framebreak
+\end{frame}
+
+% ------------------------------------------------------------------------------
+
+\begin{frame}{itemizeM and itemizeL}
   
   \splitVTT{
-  \begin{itemize}
-    \item \textbf{Default itemize}
-    \item itemsep is unmodified
-    \item Another thing
-    \item Words
-    \item A fourth thing to show
-    \item Just filling space here
-    \item Hello there
-  \end{itemize}
-  }{
   \begin{itemizeM}
-    \item \textbf{Uses environment} \code{itemizeM}
-    \item itemsep is: \the\itemsep
+    \item \textbf{Default itemize} with  \code{itemizeM}
+    \item itemsep is unmodified
     \item Another thing
     \item Words
     \item A fourth thing to show
     \item Just filling space here
     \item Hello there
   \end{itemizeM}
-  }
-  
-  \framebreak
-  
-  \splitVTT{
-  \begin{itemize}
-    \item \textbf{Default itemize}
-    \item itemsep is unmodified
-    \item Another thing
-    \item Words
-    \item A fourth thing to show
-    \item Just filling space here
-    \item Hello there
-  \end{itemize}
   }{
   \begin{itemizeL}
     \item \textbf{Uses environment} \code{itemizeL}
@@ -254,17 +234,76 @@ figure/compboost-illustration-2.png
   \end{itemizeL}
   }
   
-  \framebreak
-  
-  
+\end{frame}
+
+% ------------------------------------------------------------------------------
+
+\begin{frame}{itemizeF for vertical filling}
   \begin{itemizeF}
     \item \textbf{Uses environment} \code{itemizeF}
     \item itemsep is: \the\itemsep
     \item Automatically uses all vertical space
+    \item Depends on containing enviornment though!
   \end{itemizeF}
+\end{frame}
+
+% ------------------------------------------------------------------------------
+
+\begin{frame}{itemize Spacing and Font Size control}
+  
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{itemizeS with small text}
+      \begin{itemizeS}[small]
+        \item Small font + compact spacing
+        \item Use for detailed lists
+        \item When every line matters
+      \end{itemizeS}
+    \end{column}
+    
+    \begin{column}{0.48\textwidth}
+      \textbf{itemizeL with large text:}
+      \begin{itemizeL}[large]
+        \item Large font + wide spacing
+        \item Makes content stand out
+        \item Ideal for takeaways
+      \end{itemizeL}
+    \end{column}
+  \end{columns}
+  
+  \vspace{2ex}
+  
+  \textbf{itemizeM with default text:}
+  \begin{itemizeM}
+    \item Default sizing and spacing works best for most content
+    \item Provides good readability and balanced slide appearance
+  \end{itemizeM}
   
 \end{frame}
 
+
+\begin{frame}{itemize Key-Value Interface}
+  \code{itemizeL} etc. buitl on \code{kitemize} environment with key-value interface:
+  
+  \vspace{1ex}
+  \texttt{\\begin\{kitemize\}[fs=small,sep=S]}
+  \begin{kitemize}[fs=small,sep=S]
+    \item Font size: \texttt{fs=small}
+    \item Separation: \texttt{sep=S}
+    \item Both parameters are optional
+  \end{kitemize}
+  
+  \vspace{1ex}
+  \texttt{\\begin\{kitemize\}[fs=large,sep=L]}
+  \begin{kitemize}[fs=large,sep=L]
+    \item Large font
+    \item Wide spacing
+    \item Better readability
+  \end{kitemize}
+\end{frame}
+
+% ------------------------------------------------------------------------------
+% image helpers
 % ------------------------------------------------------------------------------
 
 \begin{frame}{Image taking the full slide width}
@@ -304,7 +343,7 @@ figure/compboost-illustration-2.png
 
 % ------------------------------------------------------------------------------
 
-\begin{frame}[allowframebreaks]{Images within splitV}
+\begin{frame}{Images within splitV}
   
   \splitVTT{
   \image{figure/boosting-cwb-blpool1.png}
@@ -324,7 +363,7 @@ figure/compboost-illustration-2.png
 
 % ------------------------------------------------------------------------------
 
-\begin{frame}[allowframebreaks]{Images within splitVCC}
+\begin{frame}{Images within splitVCC}
   
   \splitVCC{
   \image[0.5]{figure_man/neo3_2.jpg}
@@ -343,11 +382,42 @@ figure/compboost-illustration-2.png
 \end{frame}
 
 % ------------------------------------------------------------------------------
+% framei
+% ------------------------------------------------------------------------------
 
-\begin{framei}{frame environment}
+\begin{framei}{framei environment}
   \item This is a frame consisting only of an itemize environment
   \item Nothing else here, just itemize.
-  \item No extra options yet for alignment or sizing
+  \item No extra options yet for alignment or sizing in this case
+\end{framei}
+
+% ------------------------------------------------------------------------------
+
+\begin{framei}[fs=small,sep=S]{Enhanced framei Environment}
+  \item The \texttt{framei} environment supports key-value arguments
+  \item Font size: \texttt{fs=small} (or footnotesize, large, etc.)
+  \item Separation: \texttt{sep=S} (or M, L, F)
+  \item This example uses \texttt{framei[fs=small,sep=S]}
+  \item Perfect for overview slides or detailed lists
+  \item Makes it easy to fit more content on a single slide
+\end{framei}
+
+% ------------------------------------------------------------------------------
+
+\begin{framei}[fs=large,sep=L]{Another framei Example}
+  \item Larger text with wider spacing
+  \item Passed directly to the \texttt{framei} environment
+  \item Using \texttt{[fs=large,sep=L]}
+  \item For emphasis and impact
+\end{framei}
+
+% ------------------------------------------------------------------------------
+
+\begin{framei}[fs=large,sep=F]{A filling framei Example}
+  \item Larger text with widest spacing
+  \item Passed directly to the \texttt{framei} environment
+  \item Using \texttt{[fs=large,sep=F]}
+  \item For the glory of hypnotoad
 \end{framei}
 
 \endlecture

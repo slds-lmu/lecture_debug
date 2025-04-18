@@ -1,5 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{customitemize}[2025/04/17 Custom Itemize Environments]
+% \ProvidesPackage{customitemize}[2025/04/17 Custom Itemize Environments]
+% Would be proper to have that \ProvidePackage line but since we load this from a relative path in `preamble.tex',
+% latex complains that the filename.sty and the path in `\usepackage{../../filename.sty}' don't match
 
 % Load required packages
 \RequirePackage{enumitem}
@@ -22,7 +24,7 @@
 
 \newcommand{\itemspaceL}{%
   % Significantly increase the spacing for "Large" setting
-  \setlist[itemize]{itemsep=15pt,parsep=5pt,topsep=5pt,partopsep=2pt}%
+  \setlist[itemize]{itemsep=12pt,parsep=5pt,topsep=5pt,partopsep=2pt}%
 }
 
 \newcommand{\itemspaceF}{%

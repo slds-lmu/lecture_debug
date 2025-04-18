@@ -1,5 +1,9 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{framei}[2025/04/17 Beamer Frame with Itemize Environment]
+% !! This requires the customitemize.sty
+
+% \ProvidesPackage{framei}[2025/04/17 Beamer Frame with Itemize Environment]
+% Would be proper to have that \ProvidePackage line but since we load this from a relative path in `preamble.tex',
+% latex complains that the filename.sty and the path in `\usepackage{../../filename.sty}' don't match
 
 \RequirePackage{environ}
 \RequirePackage{keyval}
