@@ -10,7 +10,7 @@ Debug Lecture
 }{% Lecture title  
 Layout Macro Testing With Cannibalized Content
 }{
-figure_man/neo3_2.jpg
+figure_man/neo3_2.png
 }{
 \item Test layout
 \item Fix stuff
@@ -26,10 +26,21 @@ figure_man/neo3_2.jpg
 
 % ------------------------------------------------------------------------------
 
-\begin{framei}{Hello}
+\begin{frame}{splitv in itemize}
+  \begin{itemize}
   \item This is a frame consisting only of an itemize environment
-  \item Nothing else here, just itemize.
-\end{framei}
+  \item You can put splitV in here but it needs extra spacing
+  \vfill
+  \splitVCC{
+  This is in splitV
+  }{
+  This is as well
+  \imageC{figure_man/neo3_1.png}
+  }
+  \vfill
+  \item This is another itemize item
+  \end{itemize}
+\end{frame}
 
 \endlecture
 \end{document}
