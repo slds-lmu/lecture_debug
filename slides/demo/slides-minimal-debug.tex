@@ -28,26 +28,37 @@ figure_man/neo3_2.png
 
 \begin{frame}{splitv in itemize}
   \begin{itemize}
-  \item This is a frame consisting only of an itemize environment
-  \item You can put splitV in here but it needs extra spacing
-  \vfill
-  \splitVCC{
-  This is in splitV
-  }{
-  This is as well
-  \imageC{figure_man/neo3_1.png}
-  }
-  \vfill
-  \item This is another itemize item
+    \item This is a frame consisting only of an itemize environment
+    \item You can put splitV in here but it needs extra spacing
+    \vfill
+    \splitVCC{
+    This is in splitV
+    }{
+    This is as well
+    \imageC{figure_man/neo3_1.png}
+    }
+    \vfill
+    \item This is another itemize item
   \end{itemize}
 \end{frame}
 
 \begin{frame}{Enumerate debug}
-\begin{enumerate}
-  \item Test
-  \item Foo bar baz
-  \item Blubb
-\end{enumerate}
+  \begin{enumerate}
+    \item Test
+    \item Foo bar baz
+    \item Blubb
+  \end{enumerate}
+\end{frame}
+
+
+\begin{frame}{Citation debug}
+  \citelink{CITEKEY}
+  \vfill
+  \image[0.5][KITTEN]{figure_man/neo3_3.png}
+\end{frame}
+
+\begin{frame}{Citation debug}
+  \imageC[0.5][KITTEN]{figure_man/neo3_3.png}
 \end{frame}
 
 \endlecture
