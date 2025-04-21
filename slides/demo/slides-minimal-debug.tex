@@ -61,5 +61,61 @@ figure_man/neo3_2.png
   \imageC[0.5][KITTEN]{figure_man/neo3_3.png}
 \end{frame}
 
+
+
+\begin{framei}[fs=footnotesize,sep=M]{framei with footnotesize text}
+  \item Larger text with tiny text
+  \item For the glory of hypnotoad
+  \splitV{
+    % \begin{itemize}
+      \item within splitV standard itemize
+      \item second item
+    % \end{itemize}
+  }{
+    \imageC[0.5][KITTEN]{figure_man/neo3_3.png}
+  }
+
+  \vfill
+
+  \item Last sentence
+
+\end{framei}
+
+\begin{frame}{test}
+  \begin{itemize}
+    \item foo bar
+  \end{itemize}
+  \begin{itemizeM}[Large]
+    \item What (but larger)
+  \end{itemizeM}
+\end{frame}
+
+% Example 1: Using frame2 with small font size
+\begin{frame2}[small]{Example with Small Font Size}
+  This entire frame uses the small font size.
+  
+  \begin{itemize}
+    \item All items in this list will also use the small font size
+    \item Even nested environments inherit the font size
+    \item This makes it easy to adjust content density on slides
+  \end{itemize}
+\end{frame2}
+
+% Example 2: Using frame2 with large font size
+\begin{frame2}[LARGE]{Example with Large Font Size}
+  This entire frame uses the large font size.
+  
+  \begin{center}
+    This is important content that should be emphasized
+    with a larger font size for better readability.
+  \end{center}
+  
+  \begin{equation}
+    E = mc^2
+  \end{equation}
+  
+  The equation above and all text on this slide use the large font size.
+\end{frame2}
+
 \endlecture
 \end{document}
