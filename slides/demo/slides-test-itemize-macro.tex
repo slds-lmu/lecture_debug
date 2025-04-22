@@ -1,0 +1,171 @@
+\documentclass[11pt,compress,t,notes=noshow, xcolor=table]{beamer}
+\input{../../style/preamble}
+
+\title{Custom Itemize Macros Demo}
+
+\begin{document}
+
+\titlemeta{% Chunk title
+Custom Itemize Macros Demo
+}{% Lecture title  
+Testing the New Macro Versions of Itemize Environments
+}{
+figure_man/neo3_2.png
+}{
+\item Environment versions
+\item New macro versions
+\item Different spacing options
+\item Font size control
+}
+% ------------------------------------------------------------------------------
+
+\begin{frame}{Custom Itemize Macros Demo}
+  \vfill
+  This slide deck demonstrates the new macro versions of itemize environments.
+  \vfill
+\end{frame}
+
+% ------------------------------------------------------------------------------
+
+\begin{frame}{Comparing Environments vs Macros}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Environment Version:}
+      \begin{itemizeM}
+        \item This uses the environment
+        \item Normal medium spacing
+        \item Multiple items
+      \end{itemizeM}
+      
+      \vspace{0.5cm}
+      \textbf{Environment with font size:}
+      \begin{itemizeL}[large]
+        \item Large environment
+        \item With large spacing
+        \item And large font
+      \end{itemizeL}
+    \end{column}
+    
+    \begin{column}{0.48\textwidth}
+      \textbf{Macro Version:}
+      \doitemizeM{
+        \item This uses the macro
+        \item Same medium spacing
+        \item Multiple items
+      }
+      
+      \vspace{0.5cm}
+      \textbf{Macro with font size:}
+      \doitemizeL[large]{
+        \item Large macro version
+        \item Same wide spacing
+        \item Same large font
+      }
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ------------------------------------------------------------------------------
+
+\begin{frame}{Different Spacing Options}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Small Spacing (Compact):}
+      \doitemizeS{
+        \item Compact spacing macro
+        \item Less vertical space
+        \item Good for dense content
+        \item Fits more items
+      }
+      
+      \vspace{0.5cm}
+      \textbf{Medium Spacing (Default):}
+      \doitemizeM{
+        \item Medium spacing macro
+        \item Standard spacing
+        \item Good balance
+      }
+    \end{column}
+    
+    \begin{column}{0.48\textwidth}
+      \textbf{Large Spacing:}
+      \doitemizeL{
+        \item Large spacing macro
+        \item More vertical space
+        \item For emphasis
+      }
+      
+      \vspace{0.5cm}
+      \textbf{Fill Spacing:}
+      \begin{minipage}[t][5em][t]{\textwidth}
+        \doitemizeF{
+          \item Fill spacing macro
+          \item Distributes vertically
+        }
+      \end{minipage}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ------------------------------------------------------------------------------
+
+\begin{frame}{Font Size Control}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Small Font:}
+      \doitemizeM[small]{
+        \item Small font size
+        \item Medium spacing
+        \item For fitting more content
+      }
+      
+      \vspace{0.5cm}
+      \textbf{Footnote Size:}
+      \doitemizeS[footnotesize]{
+        \item Very small text
+        \item Combined with compact spacing
+        \item Maximum content density
+      }
+    \end{column}
+    
+    \begin{column}{0.48\textwidth}
+      \textbf{Normal Font:}
+      \doitemizeM{
+        \item Default font size
+        \item Medium spacing
+        \item Standard option
+      }
+      
+      \vspace{0.5cm}
+      \textbf{Large Font:}
+      \doitemizeL[large]{
+        \item Large text
+        \item Wide spacing
+        \item For emphasis
+      }
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ------------------------------------------------------------------------------
+
+\begin{frame}{Inline Usage in Text}
+  You can use the macros inline within paragraphs or other elements:
+  
+  \vspace{0.5cm}
+  Here is a paragraph followed by a list: \doitemizeM{
+    \item This list is created using a macro
+    \item It can be placed anywhere
+    \item Unlike environments that require their own block
+  }
+  
+  \vspace{0.5cm}
+  With emphasized content: \doitemizeL[large]{
+    \item These important points
+    \item Stand out more
+    \item Due to larger font and spacing
+  }
+\end{frame}
+
+\endlecture
+\end{document}

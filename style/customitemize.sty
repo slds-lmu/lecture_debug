@@ -168,4 +168,61 @@
 }
 \def\endkitemize{\kitemize@end}
 
+% Macro versions of the itemize environments
+% Usage: \doitemizeS[fontsize]{item1 \item item2 ...}
+\newcommand{\doitemizeS}[2][normalsize]{%
+  \begingroup
+  \@setSpacingSmall
+  \csname#1\endcsname
+  \begin{itemize}%
+  \setlength{\itemsep}{\custitemizeitems}%
+  \setlength{\parsep}{\custitemizeparss}%
+  \setlength{\topsep}{\custitemizetopp}%
+  \setlength{\partopsep}{\custitemizepartp}%
+  #2
+  \end{itemize}%
+  \endgroup
+}
+
+% Medium spacing macro
+\newcommand{\doitemizeM}[2][normalsize]{%
+  \begingroup
+  \@setSpacingMedium
+  \csname#1\endcsname
+  \begin{itemize}%
+  \setlength{\itemsep}{\custitemizeitems}%
+  \setlength{\parsep}{\custitemizeparss}%
+  \setlength{\topsep}{\custitemizetopp}%
+  \setlength{\partopsep}{\custitemizepartp}%
+  #2
+  \end{itemize}%
+  \endgroup
+}
+
+% Large spacing macro
+\newcommand{\doitemizeL}[2][normalsize]{%
+  \begingroup
+  \@setSpacingLarge
+  \csname#1\endcsname
+  \begin{itemize}%
+  \setlength{\itemsep}{\custitemizeitems}%
+  \setlength{\parsep}{\custitemizeparss}%
+  \setlength{\topsep}{\custitemizetopp}%
+  \setlength{\partopsep}{\custitemizepartp}%
+  #2
+  \end{itemize}%
+  \endgroup
+}
+
+% Fill spacing macro
+\newcommand{\doitemizeF}[2][normalsize]{%
+  \begingroup
+  \csname#1\endcsname
+  \begin{itemize}%
+  \setlength{\itemsep}{1em plus 1fill}%
+  #2
+  \end{itemize}%
+  \endgroup
+}
+
 \endinput
