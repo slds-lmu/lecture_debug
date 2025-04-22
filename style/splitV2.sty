@@ -18,6 +18,19 @@
 }
 
 %--------------------------------------------------------%
+%       Column Width Calculation Helper                   %
+%--------------------------------------------------------%
+
+% Calculate column widths accounting for separation
+\newcommand{\splitVCalcWidths}[1]{%
+  % #1 = left column width ratio (0-1)
+  % Calculate left column width
+  \pgfmathsetmacro{\leftcolwidth}{#1-0.5*\splitVsep/\textwidth}%
+  % Calculate right column width
+  \pgfmathsetmacro{\rightcolwidth}{1-#1-0.5*\splitVsep/\textwidth}%
+}
+
+%--------------------------------------------------------%
 %       Core Two-Column Layout Implementation             %
 %--------------------------------------------------------%
 
@@ -30,14 +43,17 @@
 % [5] = right column vertical alignment (t, c, b)
 % [6] = right column content
 \newcommand{\splitVBase}[6][0.5]{%
+  % Calculate column widths accounting for separation
+  \splitVCalcWidths{#1}%
+  
   % Create a complete box that contains both columns
   \begin{lrbox}{0}%
     \begin{minipage}{\textwidth}%
-      \begin{minipage}[#2]{#1\textwidth}%
+      \begin{minipage}[#2]{\leftcolwidth\textwidth}%
         #4%
       \end{minipage}%
       \hfill%
-      \begin{minipage}[#5]{\dimexpr\textwidth-#1\textwidth-\splitVsep\relax}%
+      \begin{minipage}[#5]{\rightcolwidth\textwidth}%
         #6%
       \end{minipage}%
     \end{minipage}%
@@ -101,24 +117,36 @@
 %       Three-Column Layout Implementation                %
 %--------------------------------------------------------%
 
+% Helper to calculate three column widths accounting for separations
+\newcommand{\splitVCalcThreeWidths}[3]{%
+  % #1, #2, #3 = column width ratios
+  % Calculate actual column widths
+  \pgfmathsetmacro{\colonewidth}{#1-0.67*\splitVsep/\textwidth}%
+  \pgfmathsetmacro{\coltwowidth}{#2-0.67*\splitVsep/\textwidth}%
+  \pgfmathsetmacro{\colthreewidth}{#3-0.67*\splitVsep/\textwidth}%
+}
+
 % Base three-column layout (used by other three-column commands)
 % Parameters:
-% [1], [2], [3] = column width ratios (optional)
+% [1], [2], [3] = column width ratios
 % [4], [5], [6] = column alignments (t, c, b)
 % [7], [8], [9] = column contents
 \newcommand{\splitVThreeBase}[9]{%
+  % Calculate column widths accounting for separation
+  \splitVCalcThreeWidths{#1}{#2}{#3}%
+  
   % Create a complete box that contains all three columns
   \begin{lrbox}{0}%
     \begin{minipage}{\textwidth}%
-      \begin{minipage}[#4]{#1\textwidth}%
+      \begin{minipage}[#4]{\colonewidth\textwidth}%
         #7%
       \end{minipage}%
       \hfill%
-      \begin{minipage}[#5]{#2\textwidth}%
+      \begin{minipage}[#5]{\coltwowidth\textwidth}%
         #8%
       \end{minipage}%
       \hfill%
-      \begin{minipage}[#6]{#3\textwidth}%
+      \begin{minipage}[#6]{\colthreewidth\textwidth}%
         #9%
       \end{minipage}%
     \end{minipage}%
@@ -128,7 +156,7 @@
 
 % Simple three-column layout with equal width columns
 \newcommand{\splitVThree}[3]{%
-  \splitVThreeBase{0.31}{0.31}{0.31}{c}{c}{c}{#1}{#2}{#3}%
+  \splitVThreeBase{0.33}{0.33}{0.33}{c}{c}{c}{#1}{#2}{#3}%
 }
 
 % Three-column layout with custom width columns and center alignment
@@ -168,28 +196,39 @@
 %       Grid Layouts                                      %
 %--------------------------------------------------------%
 
+% Helper to calculate grid cell widths
+\newcommand{\splitVCalcGridWidths}[1]{%
+  % #1 = left column width ratio
+  % Calculate cell widths
+  \pgfmathsetmacro{\leftcellwidth}{#1-0.5*\splitVsep/\textwidth}%
+  \pgfmathsetmacro{\rightcellwidth}{1-#1-0.5*\splitVsep/\textwidth}%
+}
+
 % Simple 2×2 grid layout
 \newcommand{\twobytwo}[4]{%
+  % Calculate equal cell widths
+  \splitVCalcGridWidths{0.5}%
+  
   % Create top row
   \begin{lrbox}{0}%
     \begin{minipage}{\textwidth}%
       % Top row
-      \begin{minipage}[c]{0.48\textwidth}%
+      \begin{minipage}[c]{\leftcellwidth\textwidth}%
         \centering #1%
       \end{minipage}%
       \hfill%
-      \begin{minipage}[c]{0.48\textwidth}%
+      \begin{minipage}[c]{\rightcellwidth\textwidth}%
         \centering #2%
       \end{minipage}%
       
       \vspace{1ex}% Space between rows
       
       % Bottom row
-      \begin{minipage}[c]{0.48\textwidth}%
+      \begin{minipage}[c]{\leftcellwidth\textwidth}%
         \centering #3%
       \end{minipage}%
       \hfill%
-      \begin{minipage}[c]{0.48\textwidth}%
+      \begin{minipage}[c]{\rightcellwidth\textwidth}%
         \centering #4%
       \end{minipage}%
     \end{minipage}%
@@ -198,29 +237,33 @@
 }
 
 % More general grid layout with custom sizes
-\newcommand{\gridLayout}[5][0.48]{%
-  % #1 = column width (optional, default 0.48)
+\newcommand{\gridLayout}[5][0.5]{%
+  % #1 = column width (optional, default 0.5)
   % #2-#5 = the four contents
+  
+  % Calculate cell widths
+  \splitVCalcGridWidths{#1}%
+  
   % Create the entire grid
   \begin{lrbox}{0}%
     \begin{minipage}{\textwidth}%
       % Top row
-      \begin{minipage}[c]{#1\textwidth}%
+      \begin{minipage}[c]{\leftcellwidth\textwidth}%
         \centering #2%
       \end{minipage}%
       \hfill%
-      \begin{minipage}[c]{\dimexpr\textwidth-#1\textwidth-\splitVsep\relax}%
+      \begin{minipage}[c]{\rightcellwidth\textwidth}%
         \centering #3%
       \end{minipage}%
       
       \vspace{1ex}% Space between rows
       
       % Bottom row
-      \begin{minipage}[c]{#1\textwidth}%
+      \begin{minipage}[c]{\leftcellwidth\textwidth}%
         \centering #4%
       \end{minipage}%
       \hfill%
-      \begin{minipage}[c]{\dimexpr\textwidth-#1\textwidth-\splitVsep\relax}%
+      \begin{minipage}[c]{\rightcellwidth\textwidth}%
         \centering #5%
       \end{minipage}%
     \end{minipage}%
