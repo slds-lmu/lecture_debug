@@ -37,14 +37,13 @@ figure/compboost-illustration-2.png
   \begin{itemize}
     \item \code{\textbackslash splitVCC} creates two centered columns
     \item \code{\textbackslash splitVTT} creates two top-aligned columns 
-    \item \code{\textbackslash splitVBT} left is bottom-, right is top aligned
-    
+    \item \code{\textbackslash splitVBB} for bottom-aligned columns
   \end{itemize}
   
   \vfill
   
   \splitVTT{
-  \textbf{Left column} Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  \textbf{Left column} these two columns should both be top-aligned with their unequal content lengths
   }{
   \textbf{Right column} Lorem ipsum dolor sit amet, consectetur adipiscing elit
   }
@@ -53,7 +52,7 @@ figure/compboost-illustration-2.png
   
   \splitVCC{
   \begin{itemize}
-    \item Example itemize content
+    \item Example itemize content for centered columns
     \item Second itemize item
   \end{itemize}
   }{
@@ -61,6 +60,8 @@ figure/compboost-illustration-2.png
   }
   
 \end{frame}
+
+% ------------------------------------------------------------------------------
 
 \begin{frame}{\textbackslash splitV with unequal sizes}
   
@@ -307,6 +308,7 @@ figure/compboost-illustration-2.png
 % ------------------------------------------------------------------------------
 
 \begin{frame}{Image taking the full slide width}
+  \texttt{\textbackslash image}
   \image{figure_man/neo3_2.png}
 \end{frame}
 
@@ -323,7 +325,6 @@ figure/compboost-illustration-2.png
   \imageL[0.4][CITEKEY]{figure/gbm_sine.png}
   \imageC[0.4][CITEKEY]{figure/gbm_sine.png}
   \imageR[0.4][CITEKEY]{figure/gbm_sine.png}
-  
   
 \end{frame}
 
@@ -389,17 +390,19 @@ figure/compboost-illustration-2.png
   \item This is a frame consisting only of an itemize environment
   \item Nothing else here, just itemize.
   \item No extra options yet for alignment or sizing in this case
+  \imageC{figure_man/neo3_2.png}
 \end{framei}
 
 % ------------------------------------------------------------------------------
 
-\begin{framei}[fs=small,sep=S]{Enhanced framei Environment}
+\begin{framei}[fs=small,sep=S]{Customized framei Environment}
   \item The \texttt{framei} environment supports key-value arguments
   \item Font size: \texttt{fs=small} (or footnotesize, large, etc.)
   \item Separation: \texttt{sep=S} (or M, L, F)
   \item This example uses \texttt{framei[fs=small,sep=S]}
   \item Perfect for overview slides or detailed lists
   \item Makes it easy to fit more content on a single slide
+  \item Please don't overdo it
 \end{framei}
 
 % ------------------------------------------------------------------------------

@@ -1,18 +1,18 @@
 \documentclass[11pt,compress,t,notes=noshow, xcolor=table]{beamer}
 \input{../../style/preamble}
 
-\title{SplitV2 Demo and Test Cases}
+\title{SplitV Demo and Test Cases}
 
 \begin{document}
 
 \titlemeta{% Chunk title 
-SplitV2 Demo
+SplitV Demo
 }{% Lecture title  
 Advanced Layout Macros for Beamer
 }{
 figure_man/neo3_2.png
 }{
-\item Demonstrate splitV2 layout capabilities
+\item Demonstrate splitV layout capabilities
 \item Test integration with other environments
 \item Showcase alignment and spacing features
 }
@@ -80,7 +80,6 @@ figure_man/neo3_2.png
 
 \begin{frame}{Standard Two-Column Layouts 2}
   
-  
   \textbf{Top-Top Alignment (TT)}
   
   \splitVTT[0.6]{
@@ -99,60 +98,39 @@ figure_man/neo3_2.png
   }
 \end{frame}
 
-% ------------------------------------------------------------------------------
+% % ------------------------------------------------------------------------------
 
-\begin{frame}{Mixed Alignment Options}
-  \textbf{Top-Center Alignment (TC)}
+% \begin{frame}{Mixed Alignment Options}
+%   \textbf{Top-Center Alignment (TC)}
   
-  \splitVTC{
-  \textbf{Left Column (Top)}
-  \begin{itemize}
-    \item This content aligns to the top
-    \item With multiple items
-    \item Creating a taller column
-  \end{itemize}
-  }{
-  \textbf{Right Column (Center)}
+%   \splitVTC{
+%   \textbf{Left Column (Top)}
+%   \begin{itemize}
+%     \item This content aligns to the top
+%     \item With multiple items
+%     \item Creating a taller column
+%   \end{itemize}
+%   }{
+%   \textbf{Right Column (Center)}
   
-  This content is vertically centered relative to the left column.
+%   This content is vertically centered relative to the left column.
   
-  \image[0.9]{figure_man/neo3_3.png}
-  }
+%   \image[0.9]{figure_man/neo3_3.png}
+%   }
   
-\end{frame}
+% \end{frame}
 
-% ------------------------------------------------------------------------------
-
-\begin{frame}{Mixed Alignment Options 2}
-  
-  \textbf{Bottom-Top Alignment (BT)}
-  
-  \splitVBT[0.4]{
-  \textbf{Left Column (Bottom)}
-  
-  This content aligns to the bottom of the column.
-  }{
-  \textbf{Right Column (Top)}
-  \begin{itemize}
-    \item This content aligns to the top
-    \item While the left column content
-    \item Is aligned to the bottom
-    \item Creating an interesting visual pattern
-  \end{itemize}
-  }
-\end{frame}
-
-% ------------------------------------------------------------------------------
+% % ------------------------------------------------------------------------------
 
 \begin{frame2}[footnotesize]{Integration with Frame2 Environment}
-  Using splitV2 inside the frame2 environment with small font.
+  Using splitV inside the frame2 environment with small font.
   
   \splitVCC{
   \textbf{Left Column}
   \begin{itemize}
     \item The entire content has smaller font
     \item Due to the frame2 environment
-    \item SplitV2 adapts correctly
+    \item SplitV adapts correctly
   \end{itemize}
   }{
   \textbf{Right Column}
@@ -167,7 +145,7 @@ figure_man/neo3_2.png
   Notice that the spacing and alignment remain consistent despite the font size change.
 \end{frame2}
 
-% ------------------------------------------------------------------------------
+% % ------------------------------------------------------------------------------
 
 \begin{framei}[fs=footnotesize,sep=M]{Integration with framei Environment}
   \item The framei environment creates an itemize list
@@ -185,7 +163,7 @@ figure_man/neo3_2.png
   \item With proper spacing between elements
 \end{framei}
 
-% ------------------------------------------------------------------------------
+% % ------------------------------------------------------------------------------
 
 \begin{frame}{SplitV Inside Regular Itemize}
   \begin{itemize}
@@ -211,12 +189,12 @@ figure_man/neo3_2.png
   \end{itemize}
 \end{frame}
 
-% ------------------------------------------------------------------------------
+% % ------------------------------------------------------------------------------
 
 \begin{frame}{Three-Column Layouts}
   \textbf{Equal Width Columns}
   
-  \splitVThreeC[0.4][0.3][0.3]{
+  \splitVThree{
   \textbf{Column 1}
   \begin{itemize}
     \item First item
@@ -236,7 +214,7 @@ figure_man/neo3_2.png
   
 \end{frame}
 
-% ------------------------------------------------------------------------------
+% % ------------------------------------------------------------------------------
 
 \begin{frame}{Three-Column Layouts 2}
   
@@ -249,8 +227,7 @@ figure_man/neo3_2.png
   }{
   \textbf{50\%}
   
-  \centering
-  \image[0.9]{figure_man/neo3_2.png}
+  \image[1]{figure_man/neo3_2.png}
   
   Wider middle column
   }{
@@ -260,7 +237,7 @@ figure_man/neo3_2.png
   }
 \end{frame}
 
-% ------------------------------------------------------------------------------
+% % ------------------------------------------------------------------------------
 
 \begin{frame}{Grid Layouts}
   \textbf{Standard 2×2 Grid}
@@ -278,7 +255,7 @@ figure_man/neo3_2.png
   }
 \end{frame}
 
-% ------------------------------------------------------------------------------
+% % ------------------------------------------------------------------------------
 
 \begin{frame}{Grid Layouts}
   
@@ -293,7 +270,7 @@ figure_man/neo3_2.png
   }{
   \image[0.9]{figure_man/neo3_1.png}
   }{
-  \image[0.9]{figure_man/neo3_2.png}
+  \image[0.9]{figure_man/neo3_1.png}
   }{
   \textbf{Bottom Right}
   
@@ -301,39 +278,7 @@ figure_man/neo3_2.png
   }
 \end{frame}
 
-% ------------------------------------------------------------------------------
-
-\begin{frame}{Specialized Commands}
-  \textbf{Image on the Right (splitVImage)}
-  
-  \splitVImage{
-  \textbf{Text with Image on Right}
-  \begin{itemize}
-    \item A common pattern in presentations
-    \item Text on the left, image on the right
-    \item Default 60/40 split
-  \end{itemize}
-  }{
-  \image[0.9]{figure_man/neo3_1.png}
-  }
-  
-  \vfill
-  
-  \textbf{Image on the Left (splitVImageLeft)}
-  
-  \splitVImageLeft[0.3]{
-  \image[0.9]{figure_man/neo3_3.png}
-  }{
-  \textbf{Text with Image on Left}
-  \begin{itemize}
-    \item Reversed layout with image on left
-    \item Text flows on the right side
-    \item Custom width can be specified
-  \end{itemize}
-  }
-\end{frame}
-
-% ------------------------------------------------------------------------------
+% % ------------------------------------------------------------------------------
 
 \begin{frame}{Compact Layout}
   \textbf{splitVCompact Example}
@@ -355,26 +300,26 @@ figure_man/neo3_2.png
   
 \end{frame}
 
-% ------------------------------------------------------------------------------
+% % ------------------------------------------------------------------------------
 
-\begin{frame}{Compact Layout 2}
+% \begin{frame}{Compact Layout 2}
   
-  Compact layout with explicit widths:
-  \splitVCompact{0.38}{0.58}{
-  \textbf{Left Column (38\%)}
-  \begin{itemize}
-    \item Explicitly specified width
-    \item For both columns
-  \end{itemize}
-  }{
-  \textbf{Right Column (58\%)}
-  \begin{itemize}
-    \item Second width also specified
-    \item Columns don't need to use full width
-    \item Good for precise control
-  \end{itemize}
-  }
-\end{frame}
+%   Compact layout with explicit widths:
+%   \splitVCompact{0.38}{0.58}{
+%   \textbf{Left Column (38\%)}
+%   \begin{itemize}
+%     \item Explicitly specified width
+%     \item For both columns
+%   \end{itemize}
+%   }{
+%   \textbf{Right Column (58\%)}
+%   \begin{itemize}
+%     \item Second width also specified
+%     \item Columns don't need to use full width
+%     \item Good for precise control
+%   \end{itemize}
+%   }
+% \end{frame}
 
 % ------------------------------------------------------------------------------
 

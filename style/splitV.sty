@@ -80,35 +80,35 @@
   \splitVBase[#1]{b}{b}{#2}{b}{#3}%
 }
 
-% TC: Left column top-aligned, Right column centered
-\newcommand{\splitVTC}[3][0.5]{%
-  \splitVBase[#1]{t}{T}{#2}{c}{#3}%
-}
+% % TC: Left column top-aligned, Right column centered
+% \newcommand{\splitVTC}[3][0.5]{%
+%   \splitVBase[#1]{t}{T}{#2}{c}{#3}%
+% }
 
-% CT: Left column centered, Right column top-aligned
-\newcommand{\splitVCT}[3][0.5]{%
-  \splitVBase[#1]{c}{c}{#2}{t}{#3}%
-}
+% % CT: Left column centered, Right column top-aligned
+% \newcommand{\splitVCT}[3][0.5]{%
+%   \splitVBase[#1]{c}{c}{#2}{t}{#3}%
+% }
 
-% TB: Left column top-aligned, Right column bottom-aligned
-\newcommand{\splitVTB}[3][0.5]{%
-  \splitVBase[#1]{t}{T}{#2}{b}{#3}%
-}
+% % TB: Left column top-aligned, Right column bottom-aligned
+% \newcommand{\splitVTB}[3][0.5]{%
+%   \splitVBase[#1]{t}{T}{#2}{b}{#3}%
+% }
 
-% BT: Left column bottom-aligned, Right column top-aligned
-\newcommand{\splitVBT}[3][0.5]{%
-  \splitVBase[#1]{b}{b}{#2}{t}{#3}%
-}
+% % BT: Left column bottom-aligned, Right column top-aligned
+% \newcommand{\splitVBT}[3][0.5]{%
+%   \splitVBase[#1]{b}{b}{#2}{t}{#3}%
+% }
 
-% CB: Left column centered, Right column bottom-aligned
-\newcommand{\splitVCB}[3][0.5]{%
-  \splitVBase[#1]{c}{c}{#2}{b}{#3}%
-}
+% % CB: Left column centered, Right column bottom-aligned
+% \newcommand{\splitVCB}[3][0.5]{%
+%   \splitVBase[#1]{c}{c}{#2}{b}{#3}%
+% }
 
-% BC: Left column bottom-aligned, Right column centered
-\newcommand{\splitVBC}[3][0.5]{%
-  \splitVBase[#1]{b}{b}{#2}{c}{#3}%
-}
+% % BC: Left column bottom-aligned, Right column centered
+% \newcommand{\splitVBC}[3][0.5]{%
+%   \splitVBase[#1]{b}{b}{#2}{c}{#3}%
+% }
 
 % The original splitV command as an alias to splitVCC
 \let\splitV\splitVCC
@@ -269,27 +269,6 @@
     \end{minipage}%
   \end{lrbox}%
   \usebox{0}%
-}
-
-%--------------------------------------------------------%
-%       Special Commands for Common Cases                 %
-%--------------------------------------------------------%
-
-% Image and text side by side with the image on the right
-% A common pattern in presentations
-\newcommand{\splitVImage}[3][0.6]{%
-  % #1 = text width ratio (optional, default 0.6)
-  % #2 = text content
-  % #3 = image command
-  \splitVCC[#1]{#2}{#3}%
-}
-
-% Image and text side by side with the image on the left
-\newcommand{\splitVImageLeft}[3][0.4]{%
-  % #1 = image width ratio (optional, default 0.4)
-  % #2 = image command
-  % #3 = text content
-  \splitVCC[#1]{#2}{#3}%
 }
 
 %--------------------------------------------------------%
