@@ -272,10 +272,18 @@ figure/compboost-illustration-2.png
     \end{column}
   \end{columns}
   
-  \vspace{2ex}
+  \vfill
   
   \textbf{itemizeM with default text:}
   \begin{itemizeM}
+    \item Default sizing and spacing works best for most content
+    \item Provides good readability and balanced slide appearance
+  \end{itemizeM}
+
+  \vfill
+
+  \textbf{itemizeM with footnotesize text:}
+  \begin{itemizeM}[footnotesize]
     \item Default sizing and spacing works best for most content
     \item Provides good readability and balanced slide appearance
   \end{itemizeM}
@@ -308,19 +316,27 @@ figure/compboost-illustration-2.png
 % ------------------------------------------------------------------------------
 
 \begin{frame}{Image taking the full slide width}
-  \texttt{\textbackslash image}
   \image{figure_man/neo3_2.png}
 \end{frame}
 
+\begin{frame}{Image using half the available width}
+  \image[0.5]{figure_man/neo3_2.png}
+\end{frame}
+
+\begin{frame}{Centered image using half the available width}
+  \imageC[0.5]{figure_man/neo3_2.png}
+\end{frame}
+
+
 % ------------------------------------------------------------------------------
 
-\begin{frame}{Full width image with attribution}
+\begin{frame}{Full width centered image with attribution}
   \imageC[1][KITTEN]{figure_man/neo3_2.png}
 \end{frame}
 
 % ------------------------------------------------------------------------------
 
-\begin{frame}{Images with alignment and optional attribution}
+\begin{frame}{Images with alignment and attribution}
   
   \imageL[0.4][CITEKEY]{figure/gbm_sine.png}
   \imageC[0.4][CITEKEY]{figure/gbm_sine.png}
@@ -339,14 +355,13 @@ figure/compboost-illustration-2.png
     \item jfowiehfgnsdlkjnfg
   \end{itemize}
   
-  
 \end{frame}
 
 % ------------------------------------------------------------------------------
 
 \begin{frame}{Images within splitV}
   
-  \splitVTT{
+  \splitVTT[0.4]{
   \image{figure/boosting-cwb-blpool1.png}
   }{
   \image{figure/boosting-cwb-blpool1.png}
@@ -390,7 +405,8 @@ figure/compboost-illustration-2.png
   \item This is a frame consisting only of an itemize environment
   \item Nothing else here, just itemize.
   \item No extra options yet for alignment or sizing in this case
-  \imageC{figure_man/neo3_2.png}
+  \imageC[0.6]{figure_man/neo3_2.png}
+  \item Look, an image
 \end{framei}
 
 % ------------------------------------------------------------------------------
@@ -450,11 +466,10 @@ figure/compboost-illustration-2.png
     
     \item In case of \textbf{complete separation}, optimization might fail
     \splitVCC[0.6]{
-      \item Loss strictly decreasing in margin
       \item This appears beside the image
       \item No need for a nested itemize environment
     }{
-      \image[0.9]{figure_man/neo3_3.png}
+      \image[0.6]{figure_man/neo3_3.png}
     }
     
     \item Assume data is separable
@@ -463,7 +478,6 @@ figure/compboost-illustration-2.png
     \item Another example with top alignment:
     \splitVTT[0.7]{
       \item Top-aligned content
-      \item Multiple items
       \item In a normal itemize environment
     }{
       \image[0.8]{figure_man/neo3_1.png}
