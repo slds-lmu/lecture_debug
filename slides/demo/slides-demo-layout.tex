@@ -307,13 +307,13 @@ figure/compboost-illustration-2.png
 % ------------------------------------------------------------------------------
 
 \begin{frame}{Image taking the full slide width}
-  \image{figure/gbm_sine.png}
+  \image{figure_man/neo3_2.png}
 \end{frame}
 
 % ------------------------------------------------------------------------------
 
 \begin{frame}{Full width image with attribution}
-  \imageC[1][CITEKEY]{figure/gbm_sine.png}
+  \imageC[1][KITTEN]{figure_man/neo3_2.png}
 \end{frame}
 
 % ------------------------------------------------------------------------------
@@ -420,7 +420,57 @@ figure/compboost-illustration-2.png
   \item For the glory of hypnotoad
 \end{framei}
 
-% --
+% ------------------------------------------------------------------------------
+
+\begin{framei}[fs=footnotesize,sep=M]{Integration with framei Environment}
+  \item The framei environment creates an itemize list
+  \item We can nest splitV inside list items
+  
+  \item Using splitVTT within a list item:
+  \splitVCC{
+    \item This continues the itemize list
+    \item No need for a nested itemize
+    \item The items appear properly beside the image
+  }{
+    \imageC[1][KITTEN]{figure_man/neo3_3.png}
+  }
+  
+  \item Back to the main list
+  \item With proper spacing between elements
+\end{framei}
+
+% ------------------------------------------------------------------------------
+
+\begin{frame}{SplitV Inside Regular Itemize}
+  \begin{itemize}
+    \item First regular bullet point
+    
+    \item In case of \textbf{complete separation}, optimization might fail
+    \splitVCC[0.6]{
+      \item Loss strictly decreasing in margin
+      \item This appears beside the image
+      \item No need for a nested itemize environment
+    }{
+      \image[0.9]{figure_man/neo3_3.png}
+    }
+    
+    \item Assume data is separable
+    \item We can continue the list afterward
+    
+    \item Another example with top alignment:
+    \splitVTT[0.7]{
+      \item Top-aligned content
+      \item Multiple items
+      \item In a normal itemize environment
+    }{
+      \image[0.8]{figure_man/neo3_1.png}
+    }
+    
+    \item Final regular bullet point
+  \end{itemize}
+\end{frame}
+
+% ------------------------------------------------------------------------------
 
 \begin{frame2}[small]{frame2 like frame but with font size parameter}
   This entire frame uses the small font size.
@@ -430,6 +480,8 @@ figure/compboost-illustration-2.png
 =    \item you can nest things in here as needed
   \end{itemize}
 \end{frame2}
+
+% ------------------------------------------------------------------------------
 
 \endlecture
 \end{document}

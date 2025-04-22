@@ -292,4 +292,29 @@
   \splitVCC[#1]{#2}{#3}%
 }
 
+%--------------------------------------------------------%
+%       Compact Layout (for backward compatibility)        %
+%--------------------------------------------------------%
+
+% Version with no margins that only takes up the width specified
+% \splitVCompact{0.4}{0.4}{Left content}{Right content}
+\newcommand{\splitVCompact}[4]{%
+  % #1, #2: column widths as ratios of textwidth
+  % #3, #4: column contents
+  
+  % Create a complete box to ensure compatibility in all contexts
+  \begin{lrbox}{0}%
+    \begin{minipage}{\textwidth}%
+      \begin{minipage}[c]{#1\textwidth}%
+        #3%
+      \end{minipage}%
+      \hspace{\splitVsep}%
+      \begin{minipage}[c]{#2\textwidth}%
+        #4%
+      \end{minipage}%
+    \end{minipage}%
+  \end{lrbox}%
+  \usebox{0}%
+}
+
 \endinput

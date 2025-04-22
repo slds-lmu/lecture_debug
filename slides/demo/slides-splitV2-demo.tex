@@ -1,9 +1,6 @@
 \documentclass[11pt,compress,t,notes=noshow, xcolor=table]{beamer}
 \input{../../style/preamble}
 
-% Load the improved splitV2 package
-\usepackage{../../style/splitV2}
-
 \title{SplitV2 Demo and Test Cases}
 
 \begin{document}
@@ -326,6 +323,45 @@ figure_man/neo3_2.png
       \item Reversed layout with image on left
       \item Text flows on the right side
       \item Custom width can be specified
+    \end{itemize}
+  }
+\end{frame}
+
+% ------------------------------------------------------------------------------
+
+\begin{frame}{Compact Layout}
+  \textbf{splitVCompact Example}
+  
+  Standard layout for reference:
+  \splitVCC[0.4]{
+    \textbf{Left Column (40\%)}
+    \begin{itemize}
+      \item Regular splitVCC with 40\% width
+      \item Uses full textwidth for layout
+    \end{itemize}
+  }{
+    \textbf{Right Column (60\%)}
+    \begin{itemize}
+      \item Takes remaining width
+      \item With proper spacing
+    \end{itemize}
+  }
+  
+  \vfill
+  
+  Compact layout with explicit widths:
+  \splitVCompact{0.38}{0.58}{
+    \textbf{Left Column (38\%)}
+    \begin{itemize}
+      \item Explicitly specified width
+      \item For both columns
+    \end{itemize}
+  }{
+    \textbf{Right Column (58\%)}
+    \begin{itemize}
+      \item Second width also specified
+      \item Columns don't need to use full width
+      \item Good for precise control
     \end{itemize}
   }
 \end{frame}
