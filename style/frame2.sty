@@ -2,8 +2,8 @@
 % frame2.sty - A LaTeX beamer environment that wraps content with a specified font size
 
 \RequirePackage{environ}
-
 % Define the frame2 environment with a font size argument
+% Wrapping beamer's frame env is very tricky but the environ package and \NewEnviron works
 \NewEnviron{frame2}[2][]{%
   \begin{frame}{#2}%
     % Apply the specified font size command if provided

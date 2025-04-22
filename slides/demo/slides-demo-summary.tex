@@ -37,14 +37,13 @@ figure/compboost-illustration-2.png
   \begin{itemize}
     \item \code{\textbackslash splitVCC} creates two centered columns
     \item \code{\textbackslash splitVTT} creates two top-aligned columns 
-    \item \code{\textbackslash splitVBT} left is bottom-, right is top aligned
-    
+    \item \code{\textbackslash splitVBB} for bottom-aligned columns
   \end{itemize}
   
   \vfill
   
   \splitVTT{
-  \textbf{Left column} Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  \textbf{Left column} these two columns should both be top-aligned with their unequal content lengths
   }{
   \textbf{Right column} Lorem ipsum dolor sit amet, consectetur adipiscing elit
   }
@@ -53,7 +52,7 @@ figure/compboost-illustration-2.png
   
   \splitVCC{
   \begin{itemize}
-    \item Example itemize content
+    \item Example itemize content for centered columns
     \item Second itemize item
   \end{itemize}
   }{
@@ -61,6 +60,8 @@ figure/compboost-illustration-2.png
   }
   
 \end{frame}
+
+% ------------------------------------------------------------------------------
 
 \begin{frame}{\textbackslash splitV with unequal sizes}
   
@@ -271,10 +272,18 @@ figure/compboost-illustration-2.png
     \end{column}
   \end{columns}
   
-  \vspace{2ex}
+  \vfill
   
   \textbf{itemizeM with default text:}
   \begin{itemizeM}
+    \item Default sizing and spacing works best for most content
+    \item Provides good readability and balanced slide appearance
+  \end{itemizeM}
+
+  \vfill
+
+  \textbf{itemizeM with footnotesize text:}
+  \begin{itemizeM}[footnotesize]
     \item Default sizing and spacing works best for most content
     \item Provides good readability and balanced slide appearance
   \end{itemizeM}
@@ -307,23 +316,31 @@ figure/compboost-illustration-2.png
 % ------------------------------------------------------------------------------
 
 \begin{frame}{Image taking the full slide width}
-  \image{figure/gbm_sine.png}
+  \image{figure_man/neo3_2.png}
+\end{frame}
+
+\begin{frame}{Image using half the available width}
+  \image[0.5]{figure_man/neo3_2.png}
+\end{frame}
+
+\begin{frame}{Centered image using half the available width}
+  \imageC[0.5]{figure_man/neo3_2.png}
+\end{frame}
+
+
+% ------------------------------------------------------------------------------
+
+\begin{frame}{Full width centered image with attribution}
+  \imageC[1][KITTEN]{figure_man/neo3_2.png}
 \end{frame}
 
 % ------------------------------------------------------------------------------
 
-\begin{frame}{Full width image with attribution}
-  \imageC[1][CITEKEY]{figure/gbm_sine.png}
-\end{frame}
-
-% ------------------------------------------------------------------------------
-
-\begin{frame}{Images with alignment and optional attribution}
+\begin{frame}{Images with alignment and attribution}
   
   \imageL[0.4][CITEKEY]{figure/gbm_sine.png}
   \imageC[0.4][CITEKEY]{figure/gbm_sine.png}
   \imageR[0.4][CITEKEY]{figure/gbm_sine.png}
-  
   
 \end{frame}
 
@@ -338,14 +355,13 @@ figure/compboost-illustration-2.png
     \item jfowiehfgnsdlkjnfg
   \end{itemize}
   
-  
 \end{frame}
 
 % ------------------------------------------------------------------------------
 
 \begin{frame}{Images within splitV}
   
-  \splitVTT{
+  \splitVTT[0.4]{
   \image{figure/boosting-cwb-blpool1.png}
   }{
   \image{figure/boosting-cwb-blpool1.png}
@@ -389,17 +405,20 @@ figure/compboost-illustration-2.png
   \item This is a frame consisting only of an itemize environment
   \item Nothing else here, just itemize.
   \item No extra options yet for alignment or sizing in this case
+  \imageC[0.6]{figure_man/neo3_2.png}
+  \item Look, an image
 \end{framei}
 
 % ------------------------------------------------------------------------------
 
-\begin{framei}[fs=small,sep=S]{Enhanced framei Environment}
+\begin{framei}[fs=small,sep=S]{Customized framei Environment}
   \item The \texttt{framei} environment supports key-value arguments
   \item Font size: \texttt{fs=small} (or footnotesize, large, etc.)
   \item Separation: \texttt{sep=S} (or M, L, F)
   \item This example uses \texttt{framei[fs=small,sep=S]}
   \item Perfect for overview slides or detailed lists
   \item Makes it easy to fit more content on a single slide
+  \item Please don't overdo it
 \end{framei}
 
 % ------------------------------------------------------------------------------
@@ -420,7 +439,55 @@ figure/compboost-illustration-2.png
   \item For the glory of hypnotoad
 \end{framei}
 
-% --
+% ------------------------------------------------------------------------------
+
+\begin{framei}[fs=footnotesize,sep=M]{Integration with framei Environment}
+  \item The framei environment creates an itemize list
+  \item We can nest splitV inside list items
+  
+  \item Using splitVTT within a list item:
+  \splitVCC{
+    \item This continues the itemize list
+    \item No need for a nested itemize
+    \item The items appear properly beside the image
+  }{
+    \imageC[1][KITTEN]{figure_man/neo3_3.png}
+  }
+  
+  \item Back to the main list
+  \item With proper spacing between elements
+\end{framei}
+
+% ------------------------------------------------------------------------------
+
+\begin{frame}{SplitV Inside Regular Itemize}
+  \begin{itemize}
+    \item First regular bullet point
+    
+    \item In case of \textbf{complete separation}, optimization might fail
+    \splitVCC[0.6]{
+      \item This appears beside the image
+      \item No need for a nested itemize environment
+    }{
+      \image[0.6]{figure_man/neo3_3.png}
+    }
+    
+    \item Assume data is separable
+    \item We can continue the list afterward
+    
+    \item Another example with top alignment:
+    \splitVTT[0.7]{
+      \item Top-aligned content
+      \item In a normal itemize environment
+    }{
+      \image[0.8]{figure_man/neo3_1.png}
+    }
+    
+    \item Final regular bullet point
+  \end{itemize}
+\end{frame}
+
+% ------------------------------------------------------------------------------
 
 \begin{frame2}[small]{frame2 like frame but with font size parameter}
   This entire frame uses the small font size.
@@ -430,6 +497,8 @@ figure/compboost-illustration-2.png
 =    \item you can nest things in here as needed
   \end{itemize}
 \end{frame2}
+
+% ------------------------------------------------------------------------------
 
 \endlecture
 \end{document}

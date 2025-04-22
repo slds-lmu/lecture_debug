@@ -1,0 +1,353 @@
+\documentclass[11pt,compress,t,notes=noshow, xcolor=table]{beamer}
+\input{../../style/preamble}
+
+\title{SplitV Demo and Test Cases}
+
+\begin{document}
+
+\titlemeta{% Chunk title 
+SplitV Demo
+}{% Lecture title  
+Advanced Layout Macros for Beamer
+}{
+figure_man/neo3_2.png
+}{
+\item Demonstrate splitV layout capabilities
+\item Test integration with other environments
+\item Showcase alignment and spacing features
+}
+
+% ------------------------------------------------------------------------------
+
+\begin{frame}{SplitV Overview}
+  \splitVTT{
+  \textbf{Key Features}
+  \begin{itemize}
+    \item Works in all contexts including within lists
+    \item Handles alignment consistently
+    \item Improved spacing and layout
+  \end{itemize}
+  }{
+  \textbf{Available Layouts}
+  \begin{itemize}
+    \item Two-column layouts with various alignments
+    \item Three-column layouts with equal or custom widths
+    \item Grid layouts for organizing content
+  \end{itemize}
+  }
+  
+  \vfill
+  
+  \splitVCC{
+  \textbf{Implementation}
+  \begin{itemize}
+    \item Uses \code{lrbox} for maximum compatibility
+    \item Simplified codebase for better reliability
+    \item Optimized for beamer slides
+  \end{itemize}
+  }{
+  \textbf{Benefits}
+  \begin{itemize}
+    \item Consistent visual appearance
+    \item Easier to create complex layouts
+    \item Works with all beamer features
+  \end{itemize}
+  }
+\end{frame}
+
+% ------------------------------------------------------------------------------
+
+\begin{frame}{Standard Two-Column Layouts}
+  \textbf{Center-Center Alignment (CC)}
+  
+  \splitVCC{
+  \textbf{Left Column}
+  \begin{itemize}
+    \item This content is centered vertically
+    \item Relative to the right column
+    \item With equal distribution of space
+  \end{itemize}
+  }{
+  \textbf{Right Column}
+  
+  This content is also centered vertically.
+  
+  \image[0.9]{figure_man/neo3_1.png}
+  }
+\end{frame}
+
+% ------------------------------------------------------------------------------
+
+\begin{frame}{Standard Two-Column Layouts 2}
+  
+  \textbf{Top-Top Alignment (TT)}
+  
+  \splitVTT[0.6]{
+  \textbf{Left Column (60\% width)}
+  \begin{itemize}
+    \item This content aligns to the top
+    \item Creating a different visual balance
+    \item Width can be adjusted as needed
+  \end{itemize}
+  }{
+  \textbf{Right Column (40\% width)}
+  
+  This content also aligns to the top.
+  
+  The vertical alignment is consistent regardless of content height.
+  }
+\end{frame}
+
+% % ------------------------------------------------------------------------------
+
+% \begin{frame}{Mixed Alignment Options}
+%   \textbf{Top-Center Alignment (TC)}
+  
+%   \splitVTC{
+%   \textbf{Left Column (Top)}
+%   \begin{itemize}
+%     \item This content aligns to the top
+%     \item With multiple items
+%     \item Creating a taller column
+%   \end{itemize}
+%   }{
+%   \textbf{Right Column (Center)}
+  
+%   This content is vertically centered relative to the left column.
+  
+%   \image[0.9]{figure_man/neo3_3.png}
+%   }
+  
+% \end{frame}
+
+% % ------------------------------------------------------------------------------
+
+\begin{frame2}[footnotesize]{Integration with Frame2 Environment}
+  Using splitV inside the frame2 environment with small font.
+  
+  \splitVCC{
+  \textbf{Left Column}
+  \begin{itemize}
+    \item The entire content has smaller font
+    \item Due to the frame2 environment
+    \item SplitV adapts correctly
+  \end{itemize}
+  }{
+  \textbf{Right Column}
+  
+  \image[0.9]{figure_man/neo3_1.png}
+  
+  Image scaling works properly with the column width.
+  }
+  
+  \vfill
+  
+  Notice that the spacing and alignment remain consistent despite the font size change.
+\end{frame2}
+
+% % ------------------------------------------------------------------------------
+
+\begin{framei}[fs=footnotesize,sep=M]{Integration with framei Environment}
+  \item The framei environment creates an itemize list
+  \item We can nest splitV inside list items
+  \item Using splitVCC within a list item:
+  \splitVCC[0.7]{
+  \item This continues the itemize list
+  \item No need for a nested itemize
+  \item The items appear properly beside the image
+  }{
+  \imageC[1][KITTEN]{figure_man/neo3_3.png}
+  }
+  
+  \item Back to the main list
+  \item With proper spacing between elements
+\end{framei}
+
+% % ------------------------------------------------------------------------------
+
+\begin{frame}{SplitV Inside Regular Itemize}
+  \begin{itemize}
+    \item First regular bullet point
+    \splitVCC[0.6]{
+    \item This appears beside the image
+    \item No need for a nested itemize environment
+    }{
+    \image[0.9]{figure_man/neo3_3.png}
+    }
+    
+    \item We can continue the list afterward
+    
+    \item Another example with top alignment:
+    \splitVTT[0.7]{
+    \item Top-aligned content
+    \item In a normal itemize environment
+    }{
+    \image[0.8]{figure_man/neo3_1.png}
+    }
+    
+    \item Final regular bullet point
+  \end{itemize}
+\end{frame}
+
+% % ------------------------------------------------------------------------------
+
+\begin{frame}{Three-Column Layouts}
+  \textbf{Equal Width Columns}
+  
+  \splitVThree{
+  \textbf{Column 1}
+  \begin{itemize}
+    \item First item
+    \item Second item
+  \end{itemize}
+  }{
+  \textbf{Column 2}
+  
+  \image[0.95]{figure_man/neo3_1.png}
+  }{
+  \textbf{Column 3}
+  \begin{itemize}
+    \item Third column
+    \item Last column
+  \end{itemize}
+  }
+  
+\end{frame}
+
+% % ------------------------------------------------------------------------------
+
+\begin{frame}{Three-Column Layouts 2}
+  
+  \textbf{Custom Width Columns}
+  
+  \splitVThreeC[0.25]{0.5}{0.25}{
+  \textbf{25\%}
+  
+  Narrower column
+  }{
+  \textbf{50\%}
+  
+  \image[1]{figure_man/neo3_2.png}
+  
+  Wider middle column
+  }{
+  \textbf{25\%}
+  
+  Narrower column
+  }
+\end{frame}
+
+% % ------------------------------------------------------------------------------
+
+\begin{frame}{Grid Layouts}
+  \textbf{Standard 2×2 Grid}
+  
+  \twobytwo{
+  \image[0.9]{figure_man/neo3_1.png}
+  }{
+  \image[0.9]{figure_man/neo3_2.png}
+  }{
+  \image[0.9]{figure_man/neo3_3.png}
+  }{
+  \textbf{Text Cell}
+  
+  This cell contains text instead of an image
+  }
+\end{frame}
+
+% % ------------------------------------------------------------------------------
+
+\begin{frame}{Grid Layouts}
+  
+  \textbf{Custom Grid}
+  
+  \gridLayout[0.6]{
+  \textbf{Wider Left Column}
+  \begin{itemize}
+    \item This column takes 60\% width
+    \item Good for text-heavy content
+  \end{itemize}
+  }{
+  \image[0.9]{figure_man/neo3_1.png}
+  }{
+  \image[0.9]{figure_man/neo3_1.png}
+  }{
+  \textbf{Bottom Right}
+  
+  Text in the bottom right cell
+  }
+\end{frame}
+
+% % ------------------------------------------------------------------------------
+
+\begin{frame}{Compact Layout}
+  \textbf{splitVCompact Example}
+  
+  Standard layout for reference:
+  \splitVCC[0.4]{
+  \textbf{Left Column (40\%)}
+  \begin{itemize}
+    \item Regular splitVCC with 40\% width
+    \item Uses full textwidth for layout
+  \end{itemize}
+  }{
+  \textbf{Right Column (60\%)}
+  \begin{itemize}
+    \item Takes remaining width
+    \item With proper spacing
+  \end{itemize}
+  }
+  
+\end{frame}
+
+% % ------------------------------------------------------------------------------
+
+% \begin{frame}{Compact Layout 2}
+  
+%   Compact layout with explicit widths:
+%   \splitVCompact{0.38}{0.58}{
+%   \textbf{Left Column (38\%)}
+%   \begin{itemize}
+%     \item Explicitly specified width
+%     \item For both columns
+%   \end{itemize}
+%   }{
+%   \textbf{Right Column (58\%)}
+%   \begin{itemize}
+%     \item Second width also specified
+%     \item Columns don't need to use full width
+%     \item Good for precise control
+%   \end{itemize}
+%   }
+% \end{frame}
+
+% ------------------------------------------------------------------------------
+
+% \begin{frame}{Complex Nesting Example}
+%   \begin{itemize}
+%     \item This demonstrates a more complex nesting scenario
+
+%     \item First level splitV:
+%     \splitVCC[0.65]{
+%       \item Left column with a nested splitV:
+%       \splitVTT{
+%         \item Inner left column
+%         \item With multiple items
+%       }{
+%         \image[0.9]{figure_man/neo3_3.png}
+%       }
+
+%       \item Continuing the outer left column
+%     }{
+%       \textbf{Outer Right Column}
+
+%       \image[0.9]{figure_man/neo3_1.png}
+%     }
+
+%     \item Back to the main list
+%     \item Everything maintains proper spacing and alignment
+%   \end{itemize}
+% \end{frame}
+
+\endlecture
+\end{document}
