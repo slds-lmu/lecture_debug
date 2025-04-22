@@ -1,0 +1,122 @@
+\documentclass[11pt,compress,t,notes=noshow, xcolor=table]{beamer}
+\input{../../style/preamble}
+
+% Load the simplified version of splitV2
+\usepackage{../../style/splitV2-minimal}
+
+\begin{document}
+
+\begin{frame}{SplitV2 Basic Usage}
+  \textbf{Center-aligned columns (CC):}
+  
+  \splitVCC{
+    \textbf{Left Column}
+    \begin{itemize}
+      \item First item on the left
+      \item Second item on the left
+      \item Adequate spacing above and below
+    \end{itemize}
+  }{
+    \textbf{Right Column}
+    
+    Some text in the right column.
+    
+    \image[0.9]{figure_man/neo3_1.png}
+  }
+  
+  \vfill
+  
+  \textbf{Top-aligned columns (TT):}
+  
+  \splitVTT[0.6]{
+    \textbf{Left Column (60\% width)}
+    \begin{itemize}
+      \item Top-aligned left column
+      \item Creates proper spacing
+      \item Without "bleeding" into adjacent content
+    \end{itemize}
+  }{
+    \textbf{Right Column (40\% width)}
+    
+    This content aligns to the top of the right column.
+    
+    Space between headings and content is now consistent.
+  }
+\end{frame}
+
+\begin{framei}[fs=footnotesize,sep=M]{SplitV Inside FrameI}
+  \item The framei environment creates an itemize list
+  \item We can nest splitV inside list items
+  
+  \item Using splitVCC inside a list item:
+  \splitVCC{
+    % \begin{itemize}
+      \item This continues the itemize list
+      \item Inside a splitV environment 
+      \item Should appear side-by-side with image
+    % \end{itemize}
+  }{
+    \image[0.7][KITTEN]{figure_man/neo3_2.png}
+  }
+  
+  \item Back to the main list
+  \item With proper spacing between elements
+\end{framei}
+
+\begin{frame}{Three-Column Layout}
+  \textbf{Three Equal Columns:}
+  
+  \splitVThree{
+    \textbf{Column 1}
+    \begin{itemize}
+      \item First item
+      \item Second item
+    \end{itemize}
+  }{
+    \textbf{Column 2}
+    
+    \centering
+    \image[0.95]{figure_man/neo3_1.png}
+  }{
+    \textbf{Column 3}
+    \begin{itemize}
+      \item Third column content
+      \item With proper spacing
+    \end{itemize}
+  }
+\end{frame}
+
+\begin{frame}{SplitV Inside Regular Itemize}
+  \begin{itemize}
+    \item First regular bullet point
+    
+    \item In case of \textbf{complete separation}, optimization might fail
+    \splitVCC[0.6]{
+      % \begin{itemize}
+        \item Loss strictly decreasing in margin
+        \item This should appear beside the image
+        \item With proper layout
+      % \end{itemize}
+    }{
+      \image[0.9]{figure_man/neo3_3.png}
+    }
+    
+    \item Assume data is separable
+    \item We can continue the list afterward
+    
+    \item Another example with top alignment:
+    \splitVTT[0.7]{
+      % \begin{itemize}
+        \item Top-aligned content
+        \item Multiple items
+        \item In a normal itemize environment
+      % \end{itemize}
+    }{
+      \image[0.8]{figure_man/neo3_1.png}
+    }
+    
+    \item Final regular bullet point
+  \end{itemize}
+\end{frame}
+
+\end{document}

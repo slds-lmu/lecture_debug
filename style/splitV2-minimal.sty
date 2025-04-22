@@ -1,0 +1,74 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{splitV2-minimal}[2025/04/22 Simplified version of splitV2]
+
+% Define spacing parameters
+\newlength{\splitVadjust}
+\setlength{\splitVadjust}{-0.5\baselineskip}
+
+\newlength{\splitVpreadj}
+\setlength{\splitVpreadj}{0.5ex}
+
+% Core implementation for center-aligned columns that works in all contexts
+\newcommand{\splitVCC}[3][0.5]{%
+  % Create a complete box that contains both columns
+  \begin{lrbox}{0}%
+    \begin{minipage}{\textwidth}%
+      \begin{minipage}[c]{#1\textwidth}%
+        #2%
+      \end{minipage}%
+      \hfill%
+      \begin{minipage}[c]{\dimexpr\textwidth-#1\textwidth-1em\relax}%
+        #3%
+      \end{minipage}%
+    \end{minipage}%
+  \end{lrbox}%
+  \usebox{0}%
+}
+
+% Core implementation for top-aligned columns that works in all contexts
+\newcommand{\splitVTT}[3][0.5]{%
+  % Create a complete box that contains both columns
+  \begin{lrbox}{0}%
+    \begin{minipage}{\textwidth}%
+      \begin{minipage}[t]{#1\textwidth}%
+        #2%
+      \end{minipage}%
+      \hfill%
+      \begin{minipage}[t]{\dimexpr\textwidth-#1\textwidth-1em\relax}%
+        #3%
+      \end{minipage}%
+    \end{minipage}%
+  \end{lrbox}%
+  \usebox{0}%
+}
+
+% The original splitV command as an alias to splitVCC
+\let\splitV\splitVCC
+
+% Simple three-column layout with equal width columns
+\newcommand{\splitVThree}[3]{%
+  % Create a complete box that contains all three columns
+  \begin{lrbox}{0}%
+    \begin{minipage}{\textwidth}%
+      \begin{minipage}[c]{0.31\textwidth}%
+        #1%
+      \end{minipage}%
+      \hfill%
+      \begin{minipage}[c]{0.31\textwidth}%
+        #2%
+      \end{minipage}%
+      \hfill%
+      \begin{minipage}[c]{0.31\textwidth}%
+        #3%
+      \end{minipage}%
+    \end{minipage}%
+  \end{lrbox}%
+  \usebox{0}%
+}
+
+% For compatibility with other common variants
+\let\splitVBB\splitVCC  % Bottom-aligned is treated the same as center for simplicity
+\let\splitVTC\splitVTT  % Top-Center is treated the same as Top-Top for simplicity
+\let\splitVCT\splitVTT  % Center-Top is treated the same as Top-Top for simplicity
+
+\endinput
