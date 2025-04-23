@@ -54,7 +54,6 @@
       };
     \end{tikzpicture}%
   }
-  \setbeamersize{text margin left=0.8cm,text margin right=0.8cm,sidebar width right=\speakerwidth}
 \else
   % If the file does exist -> old 4:3 layout, no margin
   \geometry{paperwidth=128mm,paperheight=96mm}
@@ -283,6 +282,12 @@
 
 \setbeamertemplate{frametitle}{\expandafter\uppercase\expandafter\insertframetitle}
 
+% ------------------------------------------------------------------------
+% Geometry
+%\setbeamersize{text margin left=0.8cm,text margin right=0.8cm}
+%\setbeamersize{text margin left=0.8cm,text margin right=\dimexpr0.8cm+\speakerwidth\relax}
+\setbeamersize{text margin left=0.8cm,text margin right=0.8cm,sidebar width right=\speakerwidth}
+
 %-------------------------------------------------------------------%
 %   Slide footer                                                    %
 %-------------------------------------------------------------------%
@@ -439,15 +444,6 @@
     \end{minipage}%
   \end{flushright}%
 }
-
-% ------------------------------------------------------------------------
-% Minor utility and convenience macros
-% ------------------------------------------------------------------------
-
-% spacer to insert empty lines
-% \spacer inserts one line
-% \spacer[2] inserts two lines, etc
-\newcommand{\spacer}[1][1]{\vspace{#1\baselineskip}}
 
 % ------------------------------------------------------------------------
 \endinput

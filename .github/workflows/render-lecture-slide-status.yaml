@@ -29,6 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      CTAN_REPO: "https://ftp.tu-chemnitz.de/pub/tug/historic/systems/texlive/2023/tlnet-final/"
     permissions:
       contents: write # Required to be able to write to GitHub Pages branch
     steps:
