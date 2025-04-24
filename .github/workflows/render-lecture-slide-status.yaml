@@ -83,7 +83,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ steps.r-cache.outputs.dir }}
-          key: ${{ runner.os }}-r-${{ inputs.cache-version || '1' }}-${{ hashFiles('../scripts/install_r_deps.R') }}
+          key: ${{ runner.os }}-r-${{ inputs.cache-version || '1' }}-${{ hashFiles('DESCRIPTION') }}
           restore-keys: |
             ${{ runner.os }}-r-${{ inputs.cache-version || '1' }}-
             ${{ runner.os }}-r-
