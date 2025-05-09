@@ -16,13 +16,6 @@ figure_man/neo3_2.png
 \item Fix stuff
 \item Go home
 }
-% ------------------------------------------------------------------------------
-
-\begin{frame}{Demo Slides}
-  \vfill
-  This is a debug lecture chunk.
-  \vfill
-\end{frame}
 
 % ------------------------------------------------------------------------------
 
@@ -50,25 +43,42 @@ figure_man/neo3_2.png
   \end{enumerate}
 \end{frame}
 
+\begin{frame}{image with citations}
+  \splitVCC{
+  \image[0.9][KITTEN]{figure_man/neo3_3.png}
+  }{
+  \image[0.9][https://placecats.com/neo_2/600/300]{figure_man/neo3_3.png}
+  }
+\end{frame}
 
-\begin{frame}{Citation debug}
-  \citelink{CITEKEY}
-  \vfill
+\begin{frame}{image with citekey citations}
+  \twobytwo{
   \image[0.5][KITTEN]{figure_man/neo3_3.png}
-\end{frame}
-
-\begin{frame}{Citation debug}
+  }{
+  \imageL[0.5][KITTEN]{figure_man/neo3_3.png}
+  }{
+  \imageR[0.5][KITTEN]{figure_man/neo3_3.png}
+  }{
   \imageC[0.5][KITTEN]{figure_man/neo3_3.png}
+  }
 \end{frame}
 
-\begin{frame}{Citation debug}
+\begin{frame}{image with URL citations}
+  \twobytwo{
+  \image[0.5][https://placecats.com/neo_2/600/300]{figure_man/neo3_3.png}
+  }{
+  \imageL[0.5][https://placecats.com/neo_2/600/300]{figure_man/neo3_3.png}
+  }{
+  \imageR[0.5][https://placecats.com/neo_2/600/300]{figure_man/neo3_3.png}
+  }{
   \imageC[0.5][https://placecats.com/neo_2/600/300]{figure_man/neo3_3.png}
+  }
 \end{frame}
-
 
 \begin{frame}{Spacer in itemize}
   
-  \splitV{  \begin{itemize}
+  \splitV{  
+  \begin{itemize}
     \item Test
     \item 2 empty lines after this
     \vspace{2\baselineskip}
@@ -92,7 +102,7 @@ figure_man/neo3_2.png
     \item Look, a squirrel
   \end{itemize}
   }
-  
+
 \end{frame}
 
 

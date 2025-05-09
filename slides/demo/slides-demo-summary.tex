@@ -19,15 +19,15 @@ figure/compboost-illustration-2.png
 }
 % ------------------------------------------------------------------------------
 
-\begin{frame}{Demo Slides}
+\begin{frame}[c]{Demo Slides}
   This is a demo lecture chunk.
   
   It is recommended to view these slides as PDF and LaTeX code side by side
   
   Refer to the \code{slds-lmu/lecture\_debug} repository for the source and PDF:
   \begin{itemizeS}
-    \item \href{https://slds-lmu.github.io/lecture_debug/lecture_debug/slides/demo/slides-demo-layout.pdf}{\beamergotobutton{Compiled PDF}}
-    \item \href{https://github.com/slds-lmu/lecture_debug/blob/main/slides/demo/slides-demo-layout.tex}{\beamergotobutton{LaTeX source}}
+    \item \href{https://slds-lmu.github.io/lecture_debug/lecture_debug/slides/demo/slides-demo-summary.pdf}{\beamergotobutton{Compiled PDF}}
+    \item \href{https://github.com/slds-lmu/lecture_debug/blob/main/slides/demo/slides-demo-summary.tex}{\beamergotobutton{LaTeX source}}
   \end{itemizeS}
   
 \end{frame}
@@ -144,14 +144,14 @@ figure/compboost-illustration-2.png
     \item Next to a figure
   \end{itemize}
   }{%
-  \includegraphics[width=\textwidth]{figure/boosting-cwb-blpool1.png}
+  \includegraphics[width=0.8\textwidth]{figure/boosting-cwb-blpool1.png}
   }{%
   \begin{itemize}
     \item Bottom left...
     \item ...quadrant content
   \end{itemize}
   }{%
-  \includegraphics[width=\textwidth]{figure/boosting-cwb-blpool2.png}
+  \includegraphics[width=0.8\textwidth]{figure/boosting-cwb-blpool2.png}
   }
   
 \end{frame}
@@ -279,9 +279,9 @@ figure/compboost-illustration-2.png
     \item Default sizing and spacing works best for most content
     \item Provides good readability and balanced slide appearance
   \end{itemizeM}
-
+  
   \vfill
-
+  
   \textbf{itemizeM with footnotesize text:}
   \begin{itemizeM}[footnotesize]
     \item Default sizing and spacing works best for most content
@@ -289,27 +289,6 @@ figure/compboost-illustration-2.png
   \end{itemizeM}
   
 \end{frame}
-
-
-% \begin{frame}{itemize Key-Value Interface}
-%   \code{itemizeL} etc. buitl on \code{kitemize} environment with key-value interface:
-  
-%   \vspace{1ex}
-%   \texttt{\\begin\{kitemize\}[fs=small,sep=S]}
-%   \begin{kitemize}[fs=small,sep=S]
-%     \item Font size: \texttt{fs=small}
-%     \item Separation: \texttt{sep=S}
-%     \item Both parameters are optional
-%   \end{kitemize}
-  
-%   \vspace{1ex}
-%   \texttt{\\begin\{kitemize\}[fs=large,sep=L]}
-%   \begin{kitemize}[fs=large,sep=L]
-%     \item Large font
-%     \item Wide spacing
-%     \item Better readability
-%   \end{kitemize}
-% \end{frame}
 
 % ------------------------------------------------------------------------------
 % image helpers
@@ -330,11 +309,21 @@ figure/compboost-illustration-2.png
 
 % ------------------------------------------------------------------------------
 
-\begin{frame}{Full width centered image with attribution}
+\begin{frame}{Full width centered image with citekey attribution}
   \imageC[1][KITTEN]{figure_man/neo3_2.png}
 \end{frame}
 
 % ------------------------------------------------------------------------------
+
+\begin{frame}[c]{Images attribution can be URL or citekey}
+  
+  \splitVCC{
+  \imageC[0.5][KITTEN]{figure_man/neo3_3.png}
+  }{
+  \imageC[0.5][https://placecats.com/neo_2/600/300]{figure_man/neo3_3.png}
+  }
+  
+\end{frame}
 
 \begin{frame}{Images with alignment and attribution}
   
@@ -343,6 +332,8 @@ figure/compboost-illustration-2.png
   \imageR[0.4][CITEKEY]{figure/gbm_sine.png}
   
 \end{frame}
+
+
 
 % ------------------------------------------------------------------------------
 
@@ -447,11 +438,11 @@ figure/compboost-illustration-2.png
   
   \item Using splitVTT within a list item:
   \splitVCC{
-    \item This continues the itemize list
-    \item No need for a nested itemize
-    \item The items appear properly beside the image
+  \item This continues the itemize list
+  \item No need for a nested itemize
+  \item The items appear properly beside the image
   }{
-    \imageC[1][KITTEN]{figure_man/neo3_3.png}
+  \imageC[1][KITTEN]{figure_man/neo3_3.png}
   }
   
   \item Back to the main list
@@ -464,12 +455,12 @@ figure/compboost-illustration-2.png
   \begin{itemize}
     \item First regular bullet point
     
-    \item In case of \textbf{complete separation}, optimization might fail
+    \item Some more text in an item
     \splitVCC[0.6]{
-      \item This appears beside the image
-      \item No need for a nested itemize environment
+    \item This appears beside the image
+    \item No need for a nested itemize environment
     }{
-      \image[0.6]{figure_man/neo3_3.png}
+    \image[0.6]{figure_man/neo3_3.png}
     }
     
     \item Assume data is separable
@@ -477,10 +468,10 @@ figure/compboost-illustration-2.png
     
     \item Another example with top alignment:
     \splitVTT[0.7]{
-      \item Top-aligned content
-      \item In a normal itemize environment
+    \item Top-aligned content
+    \item In a normal itemize environment
     }{
-      \image[0.8]{figure_man/neo3_1.png}
+    \image[0.8]{figure_man/neo3_1.png}
     }
     
     \item Final regular bullet point
