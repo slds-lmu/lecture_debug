@@ -66,10 +66,11 @@
   
   \begin{frame}[c]{#2}%
     % Set font size based on fs option
-    \def\@tempnormal{normal}\def\@tempsmall{small}%
+    \def\@tempnormal{normal}\def\@tempsmall{small}\def\@temptiny{tiny}%%
     \def\@tempfootnotesize{footnotesize}\def\@templarge{large}%
     \ifx\framei@fs\@tempnormal\normalsize\fi%
     \ifx\framei@fs\@tempsmall\small\fi%
+    \ifx\framei@fs\@temptiny\tiny\fi%
     \ifx\framei@fs\@tempfootnotesize\footnotesize\fi%
     \ifx\framei@fs\@templarge\large\fi%
     
