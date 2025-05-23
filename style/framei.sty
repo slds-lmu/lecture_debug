@@ -74,6 +74,15 @@
     \ifx\framei@fs\@tempfootnotesize\footnotesize\fi%
     \ifx\framei@fs\@templarge\large\fi%
     
+    % Override beamer's itemize font settings to inherit current font size
+    \def\@tempnormal{normal}%
+    \ifx\framei@fs\@tempnormal\else%
+      \ifx\framei@fs\@tempsmall\setbeamerfont{itemize/enumerate subbody}{size=\small}\setbeamerfont{itemize/enumerate subsubbody}{size=\small}\fi%
+      \ifx\framei@fs\@temptiny\setbeamerfont{itemize/enumerate subbody}{size=\tiny}\setbeamerfont{itemize/enumerate subsubbody}{size=\tiny}\fi%
+      \ifx\framei@fs\@tempfootnotesize\setbeamerfont{itemize/enumerate subbody}{size=\footnotesize}\setbeamerfont{itemize/enumerate subsubbody}{size=\footnotesize}\fi%
+      \ifx\framei@fs\@templarge\setbeamerfont{itemize/enumerate subbody}{size=\large}\setbeamerfont{itemize/enumerate subsubbody}{size=\large}\fi%
+    \fi%
+    
     \begin{itemize}%
       \setlength{\itemsep}{\framei@itemsep}%
       \setlength{\parsep}{\framei@parsep}%
