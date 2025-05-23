@@ -105,43 +105,43 @@ figure_man/neo3_2.png
   
 \end{frame}
 
-\begin{framei}[fs=footnotesize]{framei footnotesize}
-  \item Item A
-  \begin{itemize}
-    \item Subitem 1
-  \end{itemize}
-  \item Item B
-\end{framei}
-
 \begin{frame}{frame footnotesize itemize}
   \begin{itemizeM}[footnotesize]
     \item Subitem in itemizeM footnotesize
   \end{itemizeM}
 \end{frame}
 
-\begin{framei}[fs=tiny]{tiny framei with nested itemize}
-  \item Item A
-  \begin{itemizeM}[tiny]
-    \item Subitem in itemizeM tiny
-  \end{itemizeM}
-  \item Item B
-\end{framei}
 
 \begin{framei}[fs=tiny]{tiny framei with nested itemize}
   \item Item A
   \begin{itemize}
-    \item Subitem in itemize
+    \item itemize inherits tiny
   \end{itemize}
   \item Separator
-  \begin{itemizeM}[tiny]
-    \item Subitem in itemizeM tiny
+  \begin{itemizeM}[large]
+    \item itemizeM overrides with large
   \end{itemizeM}
   \item Separator
-  \begin{itemizeM}[footnotesize]
-    \item Subitem in itemizeM footnotesize
+  \begin{itemizeM}
+    \item itemizeM inherits tiny
   \end{itemizeM}
   \item Item B
 \end{framei}
+
+\begin{frame}{normal frame nest itemize}
+  \begin{itemize}
+    \item Subitem in itemize
+    \item Separator
+    \begin{itemize}
+        \item Subitem 
+      \begin{itemize}
+            \item Subitem 
+      \end{itemize}
+    \end{itemize}
+    \item Separator
+    \item Subitem 
+  \end{itemize}
+\end{frame}
 
 \endlecture
 \end{document}
