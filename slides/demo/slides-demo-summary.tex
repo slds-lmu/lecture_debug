@@ -475,6 +475,24 @@ figure/compboost-illustration-2.png
 
 % ------------------------------------------------------------------------------
 
+\begin{framei}[fs=footnotesize]{framei with nested itemize and font size control}
+  \item Item A
+  \begin{itemize}
+    \item itemize inherits footnotesize
+  \end{itemize}
+  \item Global item
+  \begin{itemizeM}[tiny]
+    \item itemizeM overrides with tiny fontsize
+  \end{itemizeM}
+  \item Another global item
+  \begin{itemizeM}
+    \item itemizeM inherits footnotesize
+  \end{itemizeM}
+  \item Item B
+\end{framei}
+
+% ------------------------------------------------------------------------------
+
 \begin{frame}{SplitV Inside Regular Itemize}
   \begin{itemize}
     \item First regular bullet point
@@ -510,6 +528,22 @@ figure/compboost-illustration-2.png
   \begin{itemize}
     \item this regular itemize list uses the small font size
     \item you can nest things in here as needed
+  \end{itemize}
+    \begin{itemizeM}[large]
+    \item this itemizeM list overrides the font size
+    \item if you use itemizeM etc. they just inehrit the font size as well
+  \end{itemizeM}
+\end{frame2}
+
+% ------------------------------------------------------------------------------
+
+\begin{frame2}[tiny]{frame2 with nested regular itemizes}
+  \begin{itemize}
+    \item Item A
+      \begin{itemize}
+        \item Subitem 1
+      \end{itemize}
+    \item Item B
   \end{itemize}
 \end{frame2}
 
