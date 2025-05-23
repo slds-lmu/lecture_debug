@@ -102,9 +102,46 @@ figure_man/neo3_2.png
     \item Look, a squirrel
   \end{itemize}
   }
-
+  
 \end{frame}
 
+\begin{framei}[fs=footnotesize]{framei footnotesize}
+  \item Item A
+  \begin{itemize}
+    \item Subitem 1
+  \end{itemize}
+  \item Item B
+\end{framei}
+
+\begin{frame}{frame footnotesize itemize}
+  \begin{itemizeM}[footnotesize]
+    \item Subitem in itemizeM footnotesize
+  \end{itemizeM}
+\end{frame}
+
+\begin{framei}[fs=tiny]{tiny framei with nested itemize}
+  \item Item A
+  \begin{itemizeM}[tiny]
+    \item Subitem in itemizeM tiny
+  \end{itemizeM}
+  \item Item B
+\end{framei}
+
+\begin{framei}[fs=tiny]{tiny framei with nested itemize}
+  \item Item A
+  \begin{itemize}
+    \item Subitem in itemize
+  \end{itemize}
+  \item Separator
+  \begin{itemizeM}[tiny]
+    \item Subitem in itemizeM tiny
+  \end{itemizeM}
+  \item Separator
+  \begin{itemizeM}[footnotesize]
+    \item Subitem in itemizeM footnotesize
+  \end{itemizeM}
+  \item Item B
+\end{framei}
 
 \endlecture
 \end{document}
