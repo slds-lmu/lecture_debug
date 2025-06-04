@@ -1,10 +1,21 @@
 \documentclass[11pt,compress,t,notes=noshow, xcolor=table]{beamer}
 \input{../../style/preamble}
-% \usepackage{../../style/lmu-lecture}
-\usepackage{../../style/ref-buttons}
 
+\title{Introduction to Debugging Lectures}
 
 \begin{document}
+
+\titlemeta{% Chunk title (example: CART, Forests, Boosting, ...), can be empty
+Demo Lecture
+}{% Lecture title  
+References are hard
+}{% Relative path to title page image: Can be empty but must not start with slides/
+figure/compboost-illustration-2.png
+}{
+\item Test layout
+\item Fix stuff
+\item Go home
+}
 
 \begin{frame}{Testing Reference Buttons}
 
@@ -29,7 +40,7 @@
   
 \item Testing error handling (comment out to avoid compilation errors):
   \begin{itemize}
-  \item Non-existent citation: % \furtherreading{nonexistent}
+  \item Non-existent citation: %\furtherreading{nonexistent}
   \item Non-existent source: % \sourceref{doesnotexist}
   \end{itemize}
 
@@ -45,4 +56,5 @@ Note: The buttons should appear with different background colors:
 
 \end{frame}
 
+\endlecture
 \end{document}
