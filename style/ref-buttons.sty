@@ -29,7 +29,9 @@
   \usebibpackagestrue
   \RequirePackage{usebib}
   \RequirePackage[backend=biber, style=authoryear]{biblatex}
+  % Needed ro find the references file for display text
   \addbibresource{./references.bib}
+  % Needed to extract content from references file for URL extraction
   \bibinput{references}
 }{
   \usebibpackagesfalse
