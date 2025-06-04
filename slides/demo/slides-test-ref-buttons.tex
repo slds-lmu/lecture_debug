@@ -6,9 +6,6 @@
 
 \begin{document}
 
-% Hidden citations to make biber process them
-% \nocite{CITEKEY,KITTEN}
-
 \begin{frame}{Testing Reference Buttons}
 
 \begin{itemize}
@@ -27,6 +24,13 @@
 \item Testing \texttt{\textbackslash sourceref} with citation key:
   \begin{itemize}
   \item Example: \sourceref{CITEKEY}
+  \item Another example: \sourceref{KITTEN}
+  \end{itemize}
+  
+\item Testing error handling (comment out to avoid compilation errors):
+  \begin{itemize}
+  \item Non-existent citation: % \furtherreading{nonexistent}
+  \item Non-existent source: % \sourceref{doesnotexist}
   \end{itemize}
 
 % Removed non-existent citation test to avoid errors

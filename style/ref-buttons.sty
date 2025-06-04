@@ -7,7 +7,6 @@
 % in buttons that appeared correct but were not clickable.
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{ref-buttons}[2025/01/03 Reference buttons for beamer presentations]
 
 % Required packages
 \RequirePackage{textcase}  % For \NoCaseChange
@@ -33,31 +32,7 @@
 \definecolor{furtherreadingcolor}{RGB}{173, 216, 230}    % Light blue background for further reading
 \definecolor{sourcerefcolor}{RGB}{255, 218, 185}         % Light orange/peach background for source references
 
-% Helper macro to create a colored beamer button
-% #1: color, #2: url, #3: text
-\newcommand{\refbutton}[3]{%
-  \resizebox{!}{9pt}{%
-    \protect\hyperlink{#2}{%
-      {%
-        \setbeamercolor{button}{bg=#1,fg=black}%
-        \beamerbutton{#3}%
-      }%
-    }%
-  }%
-}
-
-% Helper macro to create a colored beamer goto button with URL
-% #1: color, #2: url, #3: text
-\newcommand{\refgotobutton}[3]{%
-  \resizebox{!}{9pt}{%
-    {%
-      \setbeamercolor{button}{bg=#1,fg=black}%
-      \protect\beamergotobutton{%
-        \href{#2}{#3}%
-      }%
-    }%
-  }%
-}
+% NOTE: Helper macros removed - using direct implementations to ensure clickability
 
 % Further reading macro - creates a blue button with citation
 % Usage: \furtherreading{citekey}
@@ -77,12 +52,20 @@
   % 5. \begin{NoHyper}...\end{NoHyper} - prevents nested hyperlinks in citation text
   % 6. \cite{#1} - displays the citation (e.g., "Author 2025")
   %
-  % The color setting is wrapped in a group {...} to localize the change
-  {%
-    \setbeamercolor{button}{bg=furtherreadingcolor,fg=black}%
-    % This line MUST match \citelink exactly - DO NOT add conditionals or reorganize
-    \NoCaseChange{\resizebox{!}{9pt}{\protect\beamergotobutton{\href{\usebibentry{\NoCaseChange{#1}}{url}}{\begin{NoHyper}\cite{#1}\end{NoHyper}}}}}%
-  }%
+  \ifusebibpackages
+    % Create the button - let \cite and \usebibentry handle errors for missing citations
+    % The color setting is wrapped in a group {...} to localize the change
+    {%
+      \setbeamercolor{button}{bg=furtherreadingcolor,fg=black}%
+      % This line MUST match \citelink exactly - DO NOT add conditionals or reorganize
+      \NoCaseChange{\resizebox{!}{9pt}{\protect\beamergotobutton{\href{\usebibentry{\NoCaseChange{#1}}{url}}{\begin{NoHyper}\cite{#1}\end{NoHyper}}}}}%
+    }%
+  \else
+    % No bibliography packages loaded - cannot use citation keys
+    \PackageError{ref-buttons}{Cannot use \string\furtherreading without bibliography}%
+      {You tried to use \string\furtherreading with '#1', but no bibliography^^J%
+       packages are loaded. Ensure references.bib exists.}%
+  \fi
 }
 
 % Source reference macro - creates an orange button
@@ -90,26 +73,40 @@
 \newcommand{\sourceref}[1]{%
   % Check if the argument looks like a URL (contains :// or starts with www.)
   \IfSubStr{#1}{://}{%
-    % It's a URL
-    \refgotobutton{sourcerefcolor}{#1}{Click for source}%
+    % It's a URL with protocol
+    {%
+      \setbeamercolor{button}{bg=sourcerefcolor,fg=black}%
+      \resizebox{!}{9pt}{%
+        \protect\beamergotobutton{%
+          \href{#1}{Click for source}%
+        }%
+      }%
+    }%
   }{%
     \IfSubStr{#1}{www.}{%
       % It's a URL starting with www.
-      \refgotobutton{sourcerefcolor}{http://#1}{Click for source}%
+      {%
+        \setbeamercolor{button}{bg=sourcerefcolor,fg=black}%
+        \resizebox{!}{9pt}{%
+          \protect\beamergotobutton{%
+            \href{http://#1}{Click for source}%
+          }%
+        }%
+      }%
     }{%
-      % Assume it's a citation key
+      % Assume it's a citation key - use the same structure as \furtherreading
+      % but with orange color and "Click for source" text
       \ifusebibpackages
-        % Try to get URL from bibliography entry
-        \@ifundefined{usebibentry@url@#1}{%
-          % No URL found, maybe it's a URL without protocol
-          \refgotobutton{sourcerefcolor}{http://#1}{Click for source}%
-        }{%
-          % URL exists in bibliography
-          \refgotobutton{sourcerefcolor}{\usebibentry{\NoCaseChange{#1}}{url}}{Click for source}%
+        % Create button with URL from bibliography - let \usebibentry handle errors
+        {%
+          \setbeamercolor{button}{bg=sourcerefcolor,fg=black}%
+          \NoCaseChange{\resizebox{!}{9pt}{\protect\beamergotobutton{\href{\usebibentry{\NoCaseChange{#1}}{url}}{Click for source}}}}%
         }%
       \else
-        % No bibliography packages, treat as URL
-        \refgotobutton{sourcerefcolor}{http://#1}{Click for source}%
+        % No bibliography packages loaded - cannot use citation keys
+        \PackageError{ref-buttons}{Cannot use citation keys without bibliography}%
+          {You tried to use '#1' as a citation key, but no bibliography^^J%
+           packages are loaded. Either provide a URL or ensure references.bib exists.}%
       \fi
     }%
   }%
