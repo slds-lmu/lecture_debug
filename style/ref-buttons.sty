@@ -8,6 +8,14 @@
 
 \NeedsTeXFormat{LaTeX2e}
 
+% Fix for undefined \GenericError in usebib package
+% The usebib package uses \GenericError but it's not always available in all contexts
+% We provide a minimal implementation that shows informative error messages
+\providecommand{\@err@}{}
+\providecommand{\GenericError}[4]{%
+  \PackageError{usebib}{#3}{#4}%
+}
+
 % Required packages
 \RequirePackage{textcase}  % For \NoCaseChange
 \RequirePackage{hyperref}  % For hyperlinking
@@ -43,6 +51,7 @@
     \resizebox{!}{9pt}{\protect\beamergotobutton{#2}}%
   }%
 }
+
 
 % Creates a citation button with proper case handling and NoHyper environment
 % Usage: \@refbuttons@citationbutton{color}{citekey}{display-text}
