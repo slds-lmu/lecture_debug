@@ -75,9 +75,8 @@
 %   BeginLecture // Title slide                                     %
 %-------------------------------------------------------------------%
 
-% Wrapper to insert title figure within a column env
-% Only needed because column is placed in an if/else arm
-% which is not allowed otherwise (I might be wrong)
+% Helper macros for \titlemeta - needed because environments
+% cannot be placed directly inside \if...\fi constructs
 \newcommand{\includeGraphicsColumn}[1]{%
   \begin{column}{.45\textwidth}
     \begin{figure}[!b]
@@ -89,12 +88,8 @@
   \end{column}%
 }
 
-% Similar wrapper to insert learning goals
 \newcommand{\includeLearningGoalsColumn}[1]{%
   \begin{column}{.55\textwidth}
-    % Uncomment for visual debugging of columns with red line
-    % \color{blue}\rule{\linewidth}{4pt}
-    % \vfill % No vfill needed if columns are vertically centered
     {\normalsize\bfseries Learning goals}
     \normalfont
     \begin{itemize}
@@ -154,14 +149,10 @@
     \begin{columns}[c] % align columns (c)enter or (T)op
       % if checks if argument (detokenized?) is empty, i.e. equal to \relax
       \if\relax\detokenize{#3}\relax\else%
-        % column env is wrapped in separate command because
-        % envs aren't allowed directly within if-else arms apparently
-        % Idea is to have learning goals horizontally centered if no figure is used
         \includeGraphicsColumn{#3}
       \fi
 
       \if\relax\detokenize{#4}\relax\else%
-        % Same idea with learning goals column
         \includeLearningGoalsColumn{#4}
       \fi
     \end{columns}%
