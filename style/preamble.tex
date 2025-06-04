@@ -112,9 +112,9 @@
   \bibinput{references}
 }
 
-\newcommand{\citelink}[1]{%
-\NoCaseChange{\resizebox{!}{9pt}{\protect\beamergotobutton{\href{\usebibentry{\NoCaseChange{#1}}{url}}{\begin{NoHyper}\cite{#1}\end{NoHyper}}}}}%
-}
+% \newcommand{\citelink}[1]{%
+% \NoCaseChange{\resizebox{!}{9pt}{\protect\beamergotobutton{\href{\usebibentry{\NoCaseChange{#1}}{url}}{\begin{NoHyper}\cite{#1}\end{NoHyper}}}}}%
+% }
 
 %--------------------------------------------------------%
 %       Displaying code and algorithms
@@ -212,6 +212,8 @@
 \usepackage{../../style/splitV}
 % \image and derivatives
 \usepackage{../../style/image}
+% New generation of reference button macros
+\usepackage{../../style/ref-buttons}
 
 % Used regularly
 \let\code=\texttt

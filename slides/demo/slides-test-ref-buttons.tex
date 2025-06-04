@@ -1,0 +1,44 @@
+\documentclass[11pt,compress,t,notes=noshow, xcolor=table]{beamer}
+\input{../../style/preamble}
+% \usepackage{../../style/lmu-lecture}
+\usepackage{../../style/ref-buttons}
+
+
+\begin{document}
+
+% Hidden citations to make biber process them
+% \nocite{CITEKEY,KITTEN}
+
+\begin{frame}{Testing Reference Buttons}
+
+\begin{itemize}
+\item Testing \texttt{\textbackslash furtherreading} with citation key:
+  \begin{itemize}
+  \item Example: \furtherreading{CITEKEY}
+  % \item citelink for reference \citelink{CITEKEY}
+  \end{itemize}
+
+\item Testing \texttt{\textbackslash sourceref} with URL:
+  \begin{itemize}
+  \item Direct URL: \sourceref{https://www.slds.stat.uni-muenchen.de/}
+  \item URL with www: \sourceref{www.slds.stat.uni-muenchen.de/}
+  \end{itemize}
+
+\item Testing \texttt{\textbackslash sourceref} with citation key:
+  \begin{itemize}
+  \item Example: \sourceref{CITEKEY}
+  \end{itemize}
+
+% Removed non-existent citation test to avoid errors
+\end{itemize}
+
+\vspace{1em}
+Note: The buttons should appear with different background colors:
+\begin{itemize}
+\item Light blue background for further reading
+\item Light orange/peach background for source references
+\end{itemize}
+
+\end{frame}
+
+\end{document}
