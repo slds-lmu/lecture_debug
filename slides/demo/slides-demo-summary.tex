@@ -291,6 +291,43 @@ figure/compboost-illustration-2.png
 \end{frame}
 
 % ------------------------------------------------------------------------------
+% Citation helpers for further reading / source reference
+% ------------------------------------------------------------------------------
+
+\begin{frame}{Reference Buttons \furtherreading{CITEKEY}}
+  
+  \begin{itemize}
+    \item Use \texttt{\textbackslash furtherreading} with citation key:
+    \begin{itemize}
+      \item Example: \furtherreading{CITEKEY}
+      \item Basically same as old citelink / citebutton
+    \end{itemize}
+    
+    \item Use \texttt{\textbackslash sourceref} with URL:
+    \begin{itemize}
+      \item Direct URL: \sourceref{https://www.slds.stat.uni-muenchen.de/}
+      \item URL with www: \sourceref{www.slds.stat.uni-muenchen.de/}
+    \end{itemize}
+    
+    \item Or use \texttt{\textbackslash sourceref} with citation key:
+    \begin{itemize}
+      \item Example: \sourceref{CITEKEY}
+      \item Another example: \sourceref{KITTEN}
+      \item Uses the url field in bib file for link:
+    \end{itemize}
+  \end{itemize}
+  
+  \vspace{1em}
+  The buttons have different background colors:
+  \begin{itemize}
+    \item Light blue background for further reading
+    \item Light orange/peach background for source references
+  \end{itemize}
+  
+\end{frame}
+
+
+% ------------------------------------------------------------------------------
 % image helpers
 % ------------------------------------------------------------------------------
 
@@ -529,7 +566,7 @@ figure/compboost-illustration-2.png
     \item this regular itemize list uses the small font size
     \item you can nest things in here as needed
   \end{itemize}
-    \begin{itemizeM}[large]
+  \begin{itemizeM}[large]
     \item this itemizeM list overrides the font size
     \item if you use itemizeM etc. they just inehrit the font size as well
   \end{itemizeM}
@@ -540,9 +577,9 @@ figure/compboost-illustration-2.png
 \begin{frame2}[tiny]{frame2 with nested regular itemizes}
   \begin{itemize}
     \item Item A
-      \begin{itemize}
-        \item Subitem 1
-      \end{itemize}
+    \begin{itemize}
+      \item Subitem 1
+    \end{itemize}
     \item Item B
   \end{itemize}
 \end{frame2}
