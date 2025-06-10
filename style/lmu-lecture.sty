@@ -1,6 +1,9 @@
 \RequirePackage{graphicx}
+\RequirePackage{color}
 \RequirePackage{amsmath,amssymb,amsfonts}
 \RequirePackage{array}
+
+% Some bespoke right arrow>
 \DeclareSymbolFont{mysymbols}{OMS}{cmsy}{m}{n}
 \SetSymbolFont{mysymbols}{bold}{OMS}{cmsy}{b}{n}
 \DeclareMathSymbol{\myRightarrow}{\mathrel}{symbols}{"29}
@@ -38,8 +41,6 @@
 
   % "i2ml" text color (taken from dark logo color)
   \definecolor{logoblue}{HTML}{4D88FF}
-  %\definecolor{marginbg}{HTML}{FFFAF8}  % slightly tinted margin
-  %\definecolor{marginbg}{HTML}{F8F8F8}  % grey margin
   \definecolor{marginbg}{HTML}{FFFFFF}  % white margin
 
   \setbeamertemplate{background}{%
@@ -61,15 +62,6 @@
   \setbeamersize{text margin left=0.8cm,text margin right=0.8cm}
 \fi
 
-\newenvironment{rightbox}[1]
-{\itemize[
-    nosep,
-    leftmargin=\dimexpr\textwidth-#1\relax,
-    rightmargin=0pt,
-    itemindent=\parindent,
-    listparindent=\parindent,
-  ]\item[]\relax}
-{\enditemize}
 
 %-------------------------------------------------------------------%
 %   BeginLecture // Title slide                                     %
