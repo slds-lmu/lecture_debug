@@ -69,7 +69,7 @@ jobs:
 
       # Caching Strategy:
       # 1. R packages: Cached based on DESCRIPTION + scripts/install_r_deps.R hash for R dependency changes
-      # 2. LaTeX packages: Cached based on scripts/install_tex_deps.R hash for LaTeX dependency changes
+      # 2. TinyTeX: Cache entire installation (base + packages) to ensure version compatibility
       # 3. Both include cache-version input for manual cache invalidation
       # 4. Restore keys provide fallback to previous cache versions
       
@@ -96,66 +96,87 @@ jobs:
             ${{ runner.os }}-r-${{ inputs.cache-version || '1' }}-
             ${{ runner.os }}-r-
       
-      # Setup TinyTeX base installation (fast)
-      - uses: r-lib/actions/setup-tinytex@v2
-      - run: tlmgr --version
+      # Check if we have a cached TinyTeX installation
+      - name: Check for cached TinyTeX
+        id: tinytex-cache-check
+        run: |
+          if [ -d "$HOME/.TinyTeX" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "📦 Found cached TinyTeX installation"
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "📦 No cached TinyTeX found, will install fresh"
+          fi
       
-      # Cache LaTeX packages directory (after base TinyTeX is installed)
-      - name: Cache LaTeX packages
-        id: latex-cache
+      # Setup TinyTeX only if not cached
+      # Use a fixed version (2025.05) instead of daily build for stability
+      - uses: r-lib/actions/setup-tinytex@v2
+        if: steps.tinytex-cache-check.outputs.exists == 'false'
+        env:
+          TINYTEX_VERSION: 2025.05
+      
+      # Cache the entire TinyTeX installation (base + packages)
+      - name: Cache TinyTeX installation
+        id: tinytex-cache
         uses: actions/cache@v4
         with:
           path: |
-            ~/.TinyTeX/texmf-dist
-            ~/.TinyTeX/tlpkg
-          key: ${{ runner.os }}-latex-packages-${{ inputs.cache-version || '1' }}-${{ hashFiles('scripts/install_tex_deps.R') }}
+            ~/.TinyTeX
+            ~/bin
+          key: ${{ runner.os }}-tinytex-2025.05-${{ inputs.cache-version || '1' }}-${{ hashFiles('scripts/install_tex_deps.R') }}
           restore-keys: |
-            ${{ runner.os }}-latex-packages-${{ inputs.cache-version || '1' }}-
-            ${{ runner.os }}-latex-packages-
+            ${{ runner.os }}-tinytex-2025.05-${{ inputs.cache-version || '1' }}-
+      
+      # Ensure TinyTeX is in PATH if restored from cache
+      - name: Setup TinyTeX PATH
+        if: steps.tinytex-cache.outputs.cache-hit == 'true'
+        run: |
+          echo "$HOME/bin" >> $GITHUB_PATH
+          echo "$HOME/.TinyTeX/bin/x86_64-linux" >> $GITHUB_PATH
+      
+      - run: tlmgr --version
 
       # Setting up the lecture checking requirements:
       # 1) R packages
       - name: Install R packages
         run: make install-r
       
-      # 2) LaTeX packages - install only if cache miss or incomplete
+      # 2) LaTeX packages - install only if cache miss
       - name: Install additional LaTeX packages
+        if: steps.tinytex-cache.outputs.cache-hit != 'true'
         run: |
-          # Check if LaTeX package cache was restored by testing for key packages
-          if [ "${{ steps.latex-cache.outputs.cache-hit }}" = "true" ] && tlmgr list --only-installed beamer >/dev/null 2>&1; then
-            echo "✓ LaTeX packages cache hit - verifying installation..."
-            # Quick verification that critical packages are present
-            missing_count=0
-            for pkg in beamer pgf tikzmark tcolorbox; do
-              if ! tlmgr list --only-installed "$pkg" >/dev/null 2>&1; then
-                echo "Missing package: $pkg"
-                ((missing_count++))
-              fi
-            done
-            if [ $missing_count -eq 0 ]; then
-              echo "✓ All critical LaTeX packages verified"
-            else
-              echo "⚠ Cache incomplete, installing missing packages..."
-              make install-tex
-            fi
-          else
-            echo "⚠ LaTeX packages cache miss - installing all packages..."
-            make install-tex
-          fi
+          echo "📦 Installing LaTeX packages (no cache found)..."
+          make install-tex
           
           # Show summary of installed packages
           installed_count=$(tlmgr list --only-installed | grep -E '^i ' | wc -l)
           echo "📦 Total LaTeX packages installed: $installed_count"
+      
+      # Verify installation when using cache
+      - name: Verify LaTeX installation
+        if: steps.tinytex-cache.outputs.cache-hit == 'true'
+        run: |
+          echo "✅ Using cached TinyTeX installation"
+          # Quick verification of critical packages
+          for pkg in beamer pgf xcolor tikzmark tcolorbox; do
+            if tlmgr list --only-installed "$pkg" >/dev/null 2>&1; then
+              echo "✓ Package $pkg is installed"
+            else
+              echo "❌ Package $pkg is missing - cache may be incomplete"
+            fi
+          done
+          installed_count=$(tlmgr list --only-installed | grep -E '^i ' | wc -l)
+          echo "📦 Total LaTeX packages in cache: $installed_count"
       
       # Cache effectiveness summary
       - name: Cache effectiveness summary
         run: |
           echo "## 📊 Cache Status Summary"
           echo "- R packages cache: ${{ steps.r-pkg-cache.outputs.cache-hit == 'true' && '✅ HIT' || '❌ MISS' }}"
-          echo "- LaTeX packages cache: ${{ steps.latex-cache.outputs.cache-hit == 'true' && '✅ HIT' || '❌ MISS' }}"
+          echo "- TinyTeX cache: ${{ steps.tinytex-cache.outputs.cache-hit == 'true' && '✅ HIT' || '❌ MISS' }}"
           echo "- Cache version: ${{ inputs.cache-version || '1' }}"
-          if [ "${{ steps.latex-cache.outputs.cache-hit }}" = "true" ]; then
-            echo "- ⚡ LaTeX cache saved ~2-3 minutes of installation time"
+          if [ "${{ steps.tinytex-cache.outputs.cache-hit }}" = "true" ]; then
+            echo "- ⚡ TinyTeX cache saved ~3-4 minutes of installation time"
           fi
       # 3) Installing diff-pdf and diff-pdf-visually (only automated for ubuntu so far)
       # - name: Install diff-pdf and diff-pdf-visually
