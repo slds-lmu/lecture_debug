@@ -67,36 +67,96 @@ jobs:
           # Don't show progress bar, very verbose for large repos
           show-progress: false
 
-      # Standard R/pandoc/latex setup steps
+      # Caching Strategy:
+      # 1. R packages: Cached based on DESCRIPTION + scripts/install_r_deps.R hash for R dependency changes
+      # 2. LaTeX packages: Cached based on scripts/install_tex_deps.R hash for LaTeX dependency changes
+      # 3. Both include cache-version input for manual cache invalidation
+      # 4. Restore keys provide fallback to previous cache versions
+      
+      # Standard R/pandoc setup steps
       - uses: r-lib/actions/setup-pandoc@v2
       - uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true
-      - uses: r-lib/actions/setup-tinytex@v2
-      - run: tlmgr --version
-      # Caching the R library requires to save its path beforehand, could hard-code but meh
+      
+      # Get R library path for caching
       - name: Get R library dir for caching
         id: r-cache
         run: |
           echo "dir=$(Rscript --quiet -e 'cat(.libPaths()[[1]])')" >> $GITHUB_OUTPUT
-      - name: Restore R package cache
+      
+      # Cache R packages
+      - name: Cache R packages
+        id: r-pkg-cache
         uses: actions/cache@v4
         with:
           path: ${{ steps.r-cache.outputs.dir }}
-          key: ${{ runner.os }}-r-${{ inputs.cache-version || '1' }}-${{ hashFiles('DESCRIPTION') }}
+          key: ${{ runner.os }}-r-${{ inputs.cache-version || '1' }}-${{ hashFiles('DESCRIPTION', 'scripts/install_r_deps.R') }}
           restore-keys: |
             ${{ runner.os }}-r-${{ inputs.cache-version || '1' }}-
             ${{ runner.os }}-r-
+      
+      # Setup TinyTeX base installation (fast)
+      - uses: r-lib/actions/setup-tinytex@v2
+      - run: tlmgr --version
+      
+      # Cache LaTeX packages directory (after base TinyTeX is installed)
+      - name: Cache LaTeX packages
+        id: latex-cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.TinyTeX/texmf-dist
+            ~/.TinyTeX/tlpkg
+          key: ${{ runner.os }}-latex-packages-${{ inputs.cache-version || '1' }}-${{ hashFiles('scripts/install_tex_deps.R') }}
+          restore-keys: |
+            ${{ runner.os }}-latex-packages-${{ inputs.cache-version || '1' }}-
+            ${{ runner.os }}-latex-packages-
 
       # Setting up the lecture checking requirements:
       # 1) R packages
       - name: Install R packages
         run: make install-r
-      # 2) latex dependencies, incl output list of installed pkgs (optional)
+      
+      # 2) LaTeX packages - install only if cache miss or incomplete
       - name: Install additional LaTeX packages
         run: |
-          make install-tex
-          tlmgr list --only-installed
+          # Check if LaTeX package cache was restored by testing for key packages
+          if [ "${{ steps.latex-cache.outputs.cache-hit }}" = "true" ] && tlmgr list --only-installed beamer >/dev/null 2>&1; then
+            echo "✓ LaTeX packages cache hit - verifying installation..."
+            # Quick verification that critical packages are present
+            missing_count=0
+            for pkg in beamer pgf tikzmark tcolorbox; do
+              if ! tlmgr list --only-installed "$pkg" >/dev/null 2>&1; then
+                echo "Missing package: $pkg"
+                ((missing_count++))
+              fi
+            done
+            if [ $missing_count -eq 0 ]; then
+              echo "✓ All critical LaTeX packages verified"
+            else
+              echo "⚠ Cache incomplete, installing missing packages..."
+              make install-tex
+            fi
+          else
+            echo "⚠ LaTeX packages cache miss - installing all packages..."
+            make install-tex
+          fi
+          
+          # Show summary of installed packages
+          installed_count=$(tlmgr list --only-installed | grep -E '^i ' | wc -l)
+          echo "📦 Total LaTeX packages installed: $installed_count"
+      
+      # Cache effectiveness summary
+      - name: Cache effectiveness summary
+        run: |
+          echo "## 📊 Cache Status Summary"
+          echo "- R packages cache: ${{ steps.r-pkg-cache.outputs.cache-hit == 'true' && '✅ HIT' || '❌ MISS' }}"
+          echo "- LaTeX packages cache: ${{ steps.latex-cache.outputs.cache-hit == 'true' && '✅ HIT' || '❌ MISS' }}"
+          echo "- Cache version: ${{ inputs.cache-version || '1' }}"
+          if [ "${{ steps.latex-cache.outputs.cache-hit }}" = "true" ]; then
+            echo "- ⚡ LaTeX cache saved ~2-3 minutes of installation time"
+          fi
       # 3) Installing diff-pdf and diff-pdf-visually (only automated for ubuntu so far)
       # - name: Install diff-pdf and diff-pdf-visually
       #   run: make install-tools-ubuntu
