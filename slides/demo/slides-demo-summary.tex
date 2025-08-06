@@ -586,5 +586,26 @@ figure/compboost-illustration-2.png
 
 % ------------------------------------------------------------------------------
 
+\begin{frame}[fragile,c]{Verbatim content}
+
+\begin{itemizeL}
+  \item Verbatim does not work with framei or frame2 
+  \item But you can mix itemizeL etc and verbatim
+  \item The important thing is to use "normal" frame environment with \texttt{fragile,c}
+\end{itemizeL}
+
+\vfill
+
+\begin{verbatim}
+#include<stdio.h>
+
+int main() {
+	printf("Hello World\n");
+	return 0;
+}
+\end{verbatim}
+
+\end{frame}
+
 \endlecture
 \end{document}
