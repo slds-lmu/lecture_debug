@@ -76,7 +76,11 @@ LITERATURE_PDF := chapter-literature-$(CHAPTER_NAME).pdf
 # HELPER FUNCTIONS
 # ============================================================================
 
-# Docker availability check function
+# Docker availability check and image pull function
+# Verifies Docker is installed and daemon is running before attempting compilation
+# Only pulls the image if it's not already available locally to avoid redundant pull attempts
+# But we need to explicitly pull because otherwise it might be pulling an image (slowly) in the background
+# without the user being informed that this is happening.
 define check_docker
 	@if [ "$(DOCKER_ENABLED)" = "true" ]; then \
 		if ! command -v docker >/dev/null 2>&1; then \
@@ -89,8 +93,10 @@ define check_docker
 			echo "  b) Start the Docker daemon/service"; \
 			exit 1; \
 		fi; \
-		echo "Pulling Docker image $(DOCKER_IMAGE)..."; \
-		docker pull $(DOCKER_IMAGE); \
+		if ! docker image inspect $(DOCKER_IMAGE) >/dev/null 2>&1; then \
+			echo "Pulling Docker image $(DOCKER_IMAGE)..."; \
+			docker pull $(DOCKER_IMAGE); \
+		fi; \
 	fi
 endef
 
