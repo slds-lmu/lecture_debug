@@ -1,16 +1,3 @@
-# Slide .tex files, relative paths
-TSLIDES = $(shell find . -maxdepth 1 -iname "slides*.tex")
-# Substitute file extension tex -> pdf for output pdf filenames
-TPDFS = $(TSLIDES:%.tex=%.pdf)
-# Substitute file extension tex -> pdf for output pdf filenames
-TPAXS = $(TSLIDES:%.tex=%.pax)
-# output pdf filenames for slides without margin (old 4:3 layout)
-NOMARGINPDFS = $(TSLIDES:%.tex=%-nomargin.pdf)
-
-FLSFILES = $(TSLIDES:%.tex=%.fls)
-
-.PHONY: all most all-nomargin most-nomargin copy texclean clean help pax literature
-
 help:
 	@echo "\n --- Rendering slides"
 	@echo "all                : Renders slides to PDF and runs texclean + copy (see below)"
@@ -26,6 +13,73 @@ help:
 	@echo "\n --- Utilities"
 	@echo "pax                : Runs pdfannotextractor.pl (pax) to store hyperlinks etc. in .pax files for later use"
 	@echo "literature         : Generates chapter-literature-CHAPTERNAME.pdf from references.bib"
+
+# ============================================================================
+# VARIABLES
+# ============================================================================
+
+# TeXLive version configuration: use 2024 as default, can be overruled with TLYEAR env var
+# See also
+# - Source repo with description: https://gitlab.com/islandoftex/images/texlive
+# - Registry: https://gitlab.com/islandoftex/images/texlive/container_registry/573747
+TLYEAR ?= 2024
+
+# Get current working directory name and lecture root path
+CWD := $(notdir $(CURDIR))
+LECTURE := $(shell cd ../.. && pwd)
+
+# Configure latexmk command based on DOCKER environment variable
+ifeq ($(DOCKER),true)
+LATEXMK = docker run -i --rm --user $$(id -u) --name latex \
+  -v "$(LECTURE)":/usr/src/app:z \
+  -w "/usr/src/app/slides/$(CWD)" \
+  registry.gitlab.com/islandoftex/images/texlive:TL$(TLYEAR)-historic \
+  latexmk
+else
+LATEXMK = latexmk
+endif
+
+# Slide .tex files, relative paths
+TSLIDES = $(shell find . -maxdepth 1 -iname "slides*.tex")
+# Substitute file extension tex -> pdf for output pdf filenames
+TPDFS = $(TSLIDES:%.tex=%.pdf)
+# Substitute file extension tex -> pdf for output pdf filenames
+TPAXS = $(TSLIDES:%.tex=%.pax)
+# output pdf filenames for slides without margin (old 4:3 layout)
+NOMARGINPDFS = $(TSLIDES:%.tex=%-nomargin.pdf)
+
+# fls files contain the full filesystem paths of all included files, used for unused figure detection script
+FLSFILES = $(TSLIDES:%.tex=%.fls)
+
+# Generate literature list from references.bib, appending the current chapter name to the file name
+CHAPTER_NAME := $(notdir $(CURDIR))
+LITERATURE_PDF := chapter-literature-$(CHAPTER_NAME).pdf
+
+.PHONY: all most all-nomargin most-nomargin copy texclean clean help pax literature
+
+# ============================================================================
+# HELPER FUNCTIONS
+# ============================================================================
+
+# Docker availability check function
+define check_docker
+	@if [ "$(DOCKER)" = "true" ]; then \
+		if ! command -v docker >/dev/null 2>&1; then \
+			echo "Error: Docker is not installed. Please install Docker to use DOCKER=true mode."; \
+			exit 1; \
+		fi; \
+		if ! docker info >/dev/null 2>&1; then \
+			echo "Error: Docker daemon is not running. Please:"; \
+			echo "  a) Check if Docker is installed"; \
+			echo "  b) Start the Docker daemon/service"; \
+			exit 1; \
+		fi; \
+	fi
+endef
+
+# ============================================================================
+# TARGETS
+# ============================================================================
 
 # Default action compiles without margin and copies to slides-pdf!
 all: $(TPDFS)
@@ -61,17 +115,20 @@ slides-pdf:
 # Conditionally remove or create empty nospeakermargin.tex file to decide which layout to use
 # See /style/lmu-lecture.sty -- it's a whole thing but does the job.
 $(TPDFS): %.pdf: %.tex
+	$(call check_docker)
 	-rm nospeakermargin.tex
 	@echo render $<;
-	latexmk -halt-on-error -pdf $<
+	$(LATEXMK) -halt-on-error -pdf $<
 
 $(NOMARGINPDFS): %-nomargin.pdf: %.tex
+	$(call check_docker)
 	touch nospeakermargin.tex
-	latexmk -halt-on-error -pdf -jobname=%A-nomargin $<
+	$(LATEXMK) -halt-on-error -pdf -jobname=%A-nomargin $<
 
 $(FLSFILES): %.fls: %.tex
+	$(call check_docker)
 	-rm nospeakermargin.tex
-	latexmk -halt-on-error -pdf -g $<
+	$(LATEXMK) -halt-on-error -pdf -g $<
 
 copy:
 	@echo "Copying PDFs and PAX files to slides-pdf/..."
@@ -126,15 +183,12 @@ texclean:
 clean: texclean
 	-rm $(TPDFS) $(NOMARGINPDFS) $(TPAXS) $(LITERATURE_PDF) 2>/dev/null
 
-# Generate literature list from references.bib, appending the current chapter name to the file name
-CHAPTER_NAME := $(notdir $(CURDIR))
-LITERATURE_PDF := chapter-literature-$(CHAPTER_NAME).pdf
-
 literature: $(LITERATURE_PDF)
 
 $(LITERATURE_PDF): references.bib
+	$(call check_docker)
 	@echo "Compiling literature list for chapter $(CHAPTER_NAME)..."
-	latexmk -pdf -halt-on-error -jobname=chapter-literature-$(CHAPTER_NAME) ../../style/chapter-literature-template.tex
+	$(LATEXMK) -pdf -halt-on-error -jobname=chapter-literature-$(CHAPTER_NAME) ../../style/chapter-literature-template.tex
 	@echo "Literature list generated: $(LITERATURE_PDF)"
 	@echo "Cleaning up detritus..."
-	latexmk -c -jobname=chapter-literature-$(CHAPTER_NAME) ../../style/chapter-literature-template.tex 2>/dev/null
+	$(LATEXMK) -c -jobname=chapter-literature-$(CHAPTER_NAME) ../../style/chapter-literature-template.tex 2>/dev/null
