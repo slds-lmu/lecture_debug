@@ -26,15 +26,32 @@ TLYEAR ?= 2024
 CWD := $(notdir $(CURDIR))
 LECTURE := $(shell cd ../.. && pwd)
 
-# Configure latexmk command based on DOCKER environment variable
-ifeq ($(DOCKER),true)
+# Normalize Docker environment variable (accept true, TRUE, 1, or docker/DOCKER env vars)
+DOCKER_ENABLED := $(shell \
+	if [ "$(DOCKER)" = "true" ] || [ "$(DOCKER)" = "TRUE" ] || [ "$(DOCKER)" = "1" ] || \
+	   [ "$(docker)" = "true" ] || [ "$(docker)" = "TRUE" ] || [ "$(docker)" = "1" ]; then \
+		echo "true"; \
+	else \
+		echo "false"; \
+	fi)
+
+# Set Docker image tag
+ifeq ($(TLYEAR),latest)
+DOCKER_TAG := latest
+else
+DOCKER_TAG := TL$(TLYEAR)-historic
+endif
+
+# Configure latexmk command based on normalized Docker setting
+ifeq ($(DOCKER_ENABLED),true)
+DOCKER_IMAGE := registry.gitlab.com/islandoftex/images/texlive:$(DOCKER_TAG)
 LATEXMK = docker run -i --rm --user $$(id -u) --name latex \
   -v "$(LECTURE)":/usr/src/app:z \
   -w "/usr/src/app/slides/$(CWD)" \
-  registry.gitlab.com/islandoftex/images/texlive:TL$(TLYEAR)-historic \
-  latexmk
+  $(DOCKER_IMAGE) \
+  latexmk -halt-on-error -pdf
 else
-LATEXMK = latexmk
+LATEXMK = latexmk -halt-on-error -pdf
 endif
 
 # Slide .tex files, relative paths
@@ -61,7 +78,7 @@ LITERATURE_PDF := chapter-literature-$(CHAPTER_NAME).pdf
 
 # Docker availability check function
 define check_docker
-	@if [ "$(DOCKER)" = "true" ]; then \
+	@if [ "$(DOCKER_ENABLED)" = "true" ]; then \
 		if ! command -v docker >/dev/null 2>&1; then \
 			echo "Error: Docker is not installed. Please install Docker to use DOCKER=true mode."; \
 			exit 1; \
@@ -72,6 +89,8 @@ define check_docker
 			echo "  b) Start the Docker daemon/service"; \
 			exit 1; \
 		fi; \
+		echo "Pulling Docker image $(DOCKER_IMAGE)..."; \
+		docker pull $(DOCKER_IMAGE); \
 	fi
 endef
 
@@ -83,12 +102,32 @@ define check_latex_math
 	fi
 endef
 
+# Check LaTeX log file for common errors and display relevant messages
+define check_latex_log
+if [ -f "$(1).log" ]; then \
+	errors=$$(grep -n -B1 -A2 -E "(^! Undefined control sequence|^LaTeX Warning: File.*not found|^! Missing \\$$|Runaway argument|^! Extra \\}, or forgotten \\$$|! TeX capacity exceeded|! Incomplete|^! LaTeX Error:)" "$(1).log" 2>/dev/null || true); \
+	if [ -n "$$errors" ]; then \
+		echo "LaTeX compilation errors found in $(1).log:"; \
+		printf '%s\n' "$$errors"; \
+		echo ""; \
+		echo "Full log available at: $(1).log"; \
+		exit 1; \
+	fi; \
+fi
+endef
+
+# Clean LaTeX build artifacts silently
+define clean_latex_artifacts
+	@echo "Cleaning LaTeX build artifacts (.log, .aux, .nav, .synctex, etc.)..."
+	@rm -f *.out *.dvi *.log *.aux *.bbl *.bbl-SAVE-ERROR *.blg *.ind *.idx *.ilg *.lof *.lot *.toc *.nav *.snm *.vrb *.fls *.pax *.bcf-SAVE-ERROR *.bcf *.run.xml *.fdb_latexmk *.synctex.gz *-concordance.tex nospeakermargin.tex
+endef
+
 # ============================================================================
 # TARGETS
 # ============================================================================
 
 # Basic slide compilation
-slides: $(SLIDE_FLS_FILES)
+slides: $(SLIDE_PDF_FILES)
 slides-nomargin: $(SLIDE_NOMARGIN_PDFS)
 
 release:
@@ -102,21 +141,35 @@ release:
 
 # Conditionally remove or create empty nospeakermargin.tex file to decide which layout to use
 # See /style/lmu-lecture.sty -- it's a whole thing but does the job.
+# The -g flag forces latexmk to always run and generates .fls files for dependency tracking
 $(SLIDE_PDF_FILES): %.pdf: %.tex
 	$(call check_docker)
-	-rm nospeakermargin.tex
-	@echo render $<;
-	$(LATEXMK) -halt-on-error -pdf $<
+	@rm -f nospeakermargin.tex
+ifeq ($(DOCKER_ENABLED),true)
+	@echo "Compiling $< to $@ using Docker ($(DOCKER_TAG))..."
+else
+	@echo "Compiling $< to $@ using local LaTeX..."
+endif
+	@start_time=$$(date +%s); \
+	$(LATEXMK) -g $< > /dev/null 2>&1 || ($(call check_latex_log,$*); exit 1); \
+	end_time=$$(date +%s); \
+	duration=$$((end_time - start_time)); \
+	echo "✓ Successfully compiled $@ (took $${duration}s)"
 
 $(SLIDE_NOMARGIN_PDFS): %-nomargin.pdf: %.tex
 	$(call check_docker)
-	touch nospeakermargin.tex
-	$(LATEXMK) -halt-on-error -pdf -jobname=%A-nomargin $<
+	@touch nospeakermargin.tex
+ifeq ($(DOCKER_ENABLED),true)
+	@echo "Compiling $< to $@ (no margin) using Docker ($(DOCKER_TAG))..."
+else
+	@echo "Compiling $< to $@ (no margin) using local LaTeX..."
+endif
+	@start_time=$$(date +%s); \
+	$(LATEXMK) -jobname=$*-nomargin $< > /dev/null 2>&1 || ($(call check_latex_log,$*-nomargin); exit 1); \
+	end_time=$$(date +%s); \
+	duration=$$((end_time - start_time)); \
+	echo "✓ Successfully compiled $@ (took $${duration}s)"
 
-$(SLIDE_FLS_FILES): %.fls: %.tex
-	$(call check_docker)
-	-rm nospeakermargin.tex
-	$(LATEXMK) -halt-on-error -pdf -g $<
 
 copy:
 	@echo "Copying PDFs and PAX files to slides-pdf/..."
@@ -141,32 +194,7 @@ pax:
 	fi
 
 texclean:
-	-rm -rf *.out
-	-rm -rf *.dvi
-	-rm -rf *.log
-	-rm -rf *.aux
-	-rm -rf *.bbl
-	-rm -rf *.bbl-SAVE-ERROR
-	-rm -rf *.blg
-	-rm -rf *.ind
-	-rm -rf *.idx
-	-rm -rf *.ilg
-	-rm -rf *.lof
-	-rm -rf *.lot
-	-rm -rf *.toc
-	-rm -rf *.nav
-	-rm -rf *.snm
-	-rm -rf *.vrb
-	-rm -rf *.fls
-	-rm -rf *.pax
-	-rm -rf *.bbl
-	-rm -rf *.bcf-SAVE-ERROR
-	-rm -rf *.bcf
-	-rm -rf *.run.xml
-	-rm -rf *.fdb_latexmk
-	-rm -rf *.synctex.gz
-	-rm -rf *-concordance.tex
-	-rm -rf nospeakermargin.tex
+	$(call clean_latex_artifacts)
 
 clean: texclean
 	-rm -f $(SLIDE_PDF_FILES) $(SLIDE_NOMARGIN_PDFS) $(SLIDE_PAX_FILES) $(LITERATURE_PDF)
@@ -175,8 +203,15 @@ literature: $(LITERATURE_PDF)
 
 $(LITERATURE_PDF): references.bib
 	$(call check_docker)
-	@echo "Compiling literature list for chapter $(CHAPTER_NAME)..."
-	$(LATEXMK) -pdf -halt-on-error -jobname=chapter-literature-$(CHAPTER_NAME) ../../style/chapter-literature-template.tex
-	@echo "Literature list generated: $(LITERATURE_PDF)"
+ifeq ($(DOCKER_ENABLED),true)
+	@echo "Compiling literature list for chapter $(CHAPTER_NAME) using Docker ($(DOCKER_TAG))..."
+else
+	@echo "Compiling literature list for chapter $(CHAPTER_NAME) using local LaTeX..."
+endif
+	@start_time=$$(date +%s); \
+	$(LATEXMK) -jobname=chapter-literature-$(CHAPTER_NAME) ../../style/chapter-literature-template.tex > /dev/null 2>&1 || ($(call check_latex_log,chapter-literature-$(CHAPTER_NAME)); exit 1); \
+	end_time=$$(date +%s); \
+	duration=$$((end_time - start_time)); \
+	echo "✓ Literature list generated: $(LITERATURE_PDF) (took $${duration}s)"
 	@echo "Cleaning up detritus..."
-	$(LATEXMK) -c -jobname=chapter-literature-$(CHAPTER_NAME) ../../style/chapter-literature-template.tex 2>/dev/null
+	@$(LATEXMK) -c -jobname=chapter-literature-$(CHAPTER_NAME) ../../style/chapter-literature-template.tex > /dev/null 2>&1
