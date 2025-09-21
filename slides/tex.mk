@@ -38,16 +38,16 @@ LATEXMK = latexmk
 endif
 
 # Slide .tex files, relative paths
-TSLIDES = $(shell find . -maxdepth 1 -iname "slides*.tex")
+SLIDE_TEX_FILES = $(shell find . -maxdepth 1 -iname "slides*.tex")
 # Substitute file extension tex -> pdf for output pdf filenames
-TPDFS = $(TSLIDES:%.tex=%.pdf)
-# Substitute file extension tex -> pdf for output pdf filenames
-TPAXS = $(TSLIDES:%.tex=%.pax)
+SLIDE_PDF_FILES = $(SLIDE_TEX_FILES:%.tex=%.pdf)
+# Substitute file extension tex -> pax for annotation files
+SLIDE_PAX_FILES = $(SLIDE_TEX_FILES:%.tex=%.pax)
 # output pdf filenames for slides without margin (old 4:3 layout)
-NOMARGINPDFS = $(TSLIDES:%.tex=%-nomargin.pdf)
+SLIDE_NOMARGIN_PDFS = $(SLIDE_TEX_FILES:%.tex=%-nomargin.pdf)
 
 # fls files contain the full filesystem paths of all included files, used for unused figure detection script
-FLSFILES = $(TSLIDES:%.tex=%.fls)
+SLIDE_FLS_FILES = $(SLIDE_TEX_FILES:%.tex=%.fls)
 
 # Generate literature list from references.bib, appending the current chapter name to the file name
 CHAPTER_NAME := $(notdir $(CURDIR))
@@ -88,13 +88,13 @@ endef
 # ============================================================================
 
 # Basic slide compilation
-slides: $(FLSFILES)
-slides-nomargin: $(NOMARGINPDFS)
+slides: $(SLIDE_FLS_FILES)
+slides-nomargin: $(SLIDE_NOMARGIN_PDFS)
 
 release:
 	$(call check_latex_math)
 	$(MAKE) texclean
-	$(MAKE) $(TPDFS)
+	$(MAKE) $(SLIDE_PDF_FILES)
 	$(MAKE) pax
 	$(MAKE) literature
 	$(MAKE) copy
@@ -102,18 +102,18 @@ release:
 
 # Conditionally remove or create empty nospeakermargin.tex file to decide which layout to use
 # See /style/lmu-lecture.sty -- it's a whole thing but does the job.
-$(TPDFS): %.pdf: %.tex
+$(SLIDE_PDF_FILES): %.pdf: %.tex
 	$(call check_docker)
 	-rm nospeakermargin.tex
 	@echo render $<;
 	$(LATEXMK) -halt-on-error -pdf $<
 
-$(NOMARGINPDFS): %-nomargin.pdf: %.tex
+$(SLIDE_NOMARGIN_PDFS): %-nomargin.pdf: %.tex
 	$(call check_docker)
 	touch nospeakermargin.tex
 	$(LATEXMK) -halt-on-error -pdf -jobname=%A-nomargin $<
 
-$(FLSFILES): %.fls: %.tex
+$(SLIDE_FLS_FILES): %.fls: %.tex
 	$(call check_docker)
 	-rm nospeakermargin.tex
 	$(LATEXMK) -halt-on-error -pdf -g $<
@@ -169,7 +169,7 @@ texclean:
 	-rm -rf nospeakermargin.tex
 
 clean: texclean
-	-rm $(TPDFS) $(NOMARGINPDFS) $(TPAXS) $(LITERATURE_PDF) 2>/dev/null
+	-rm -f $(SLIDE_PDF_FILES) $(SLIDE_NOMARGIN_PDFS) $(SLIDE_PAX_FILES) $(LITERATURE_PDF)
 
 literature: $(LITERATURE_PDF)
 
