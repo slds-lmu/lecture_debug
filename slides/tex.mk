@@ -3,13 +3,13 @@ help:
 	@echo "all                : Renders slides to PDF and runs texclean + copy (see below)"
 	@echo "most               : Renders slides to PDF, does not copy or clean"
 	@echo "all-nomargin       : Same as all, but renders 4:3 slides with -nomargin.pdf suffix"
-	@echo "most-nrmargin      : Same as most, analogous to all-normagin"
+	@echo "most-nomargin      : Same as most, analogous to all-normagin"
 	@echo "\n --- Cleaning up"
-	@echo "texclean           : Deletes all LaTeX detrituts (.log, .aux, .nav, .synctex, ...)"
+	@echo "texclean           : Deletes all LaTeX build artifacts (.log, .aux, .nav, .synctex, ...)"
 	@echo "clean              : Runs texclean and deletes all rendered slides"
 	@echo "\n --- Copying to /slides-pdf/ (!! Linked from course website !!)"
+	@echo "release            : Runs texclean, renders slides and literature, copies to /slides-pdf/, and texclean again"
 	@echo "copy               : Copies PDF files to /slides-pdf/"
-	@echo "slides-pdf         : Runs texclean, renders slides, copies to /slides-pdf/, and texclean again"
 	@echo "\n --- Utilities"
 	@echo "pax                : Runs pdfannotextractor.pl (pax) to store hyperlinks etc. in .pax files for later use"
 	@echo "literature         : Generates chapter-literature-CHAPTERNAME.pdf from references.bib"
@@ -77,20 +77,25 @@ define check_docker
 	fi
 endef
 
+# Check if latex-math directory exists in the expected location
+define check_latex_math
+	@if [ ! -d "../../latex-math" ]; then \
+		echo "Cannot find 'latex-math' in root directory"; \
+		exit 1; \
+	fi
+endef
+
 # ============================================================================
 # TARGETS
 # ============================================================================
 
 # Default action compiles without margin and copies to slides-pdf!
 all: $(TPDFS)
-	@if [ -d "../../latex-math" ]; then\
-		$(MAKE) pax;\
-		$(MAKE) literature;\
-		$(MAKE) texclean;\
-		$(MAKE) copy;\
-	else\
-		echo "Cannot find 'latex-math' in root directory";\
-	fi
+	$(call check_latex_math)
+	$(MAKE) pax
+	$(MAKE) literature
+	$(MAKE) texclean
+	$(MAKE) copy
 # derivative action does the same for slides without margin (different filenames!)
 all-nomargin: $(NOMARGINPDFS)
 	$(MAKE) pax
@@ -100,17 +105,14 @@ all-nomargin: $(NOMARGINPDFS)
 most: $(FLSFILES)
 most-nomargin: $(NOMARGINPDFS)
 
-slides-pdf:
-	@if [ -d "../../latex-math" ]; then\
-		$(MAKE) texclean;\
-		$(MAKE) $(TPDFS);\
-		$(MAKE) pax;\
-		$(MAKE) literature;\
-		$(MAKE) copy;\
-		$(MAKE) texclean;\
-	else\
-		echo "Cannot find 'latex-math' in root directory";\
-	fi
+release:
+	$(call check_latex_math)
+	$(MAKE) texclean
+	$(MAKE) $(TPDFS)
+	$(MAKE) pax
+	$(MAKE) literature
+	$(MAKE) copy
+	$(MAKE) texclean
 
 # Conditionally remove or create empty nospeakermargin.tex file to decide which layout to use
 # See /style/lmu-lecture.sty -- it's a whole thing but does the job.
