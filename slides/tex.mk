@@ -122,6 +122,33 @@ define clean_latex_artifacts
 	@rm -f *.out *.dvi *.log *.aux *.bbl *.bbl-SAVE-ERROR *.blg *.ind *.idx *.ilg *.lof *.lot *.toc *.nav *.snm *.vrb *.fls *.pax *.bcf-SAVE-ERROR *.bcf *.run.xml *.fdb_latexmk *.synctex.gz *-concordance.tex nospeakermargin.tex
 endef
 
+# Print compilation message with Docker/local info
+define print_compile_message
+	@if [ "$(DOCKER_ENABLED)" = "true" ]; then \
+		echo "Compiling $(1) using Docker ($(DOCKER_TAG))..."; \
+	else \
+		echo "Compiling $(1) using local LaTeX..."; \
+	fi
+endef
+
+# Find and run pdfannotextractor
+define run_pdfannotextractor
+	@pax_cmd=""; \
+	if command -v pdfannotextractor &> /dev/null; then \
+		pax_cmd="pdfannotextractor"; \
+	elif command -v pdfannotextractor.pl &> /dev/null; then \
+		pax_cmd="pdfannotextractor.pl"; \
+	fi; \
+	if [ -n "$$pax_cmd" ]; then \
+		echo "Found $$pax_cmd - extracting annotations..."; \
+		$$pax_cmd *.pdf 2>/dev/null || echo "Warning: Some PDFs may not have been processed"; \
+	else \
+		echo "Note: pdfannotextractor not found!"; \
+		echo "Please install 'pax' package using: tlmgr install pax"; \
+		echo "This is required to preserve clickable URLs and annotations in slides-pdf/"; \
+	fi
+endef
+
 # ============================================================================
 # TARGETS
 # ============================================================================
@@ -145,11 +172,7 @@ release:
 $(SLIDE_PDF_FILES): %.pdf: %.tex
 	$(call check_docker)
 	@rm -f nospeakermargin.tex
-ifeq ($(DOCKER_ENABLED),true)
-	@echo "Compiling $< to $@ using Docker ($(DOCKER_TAG))..."
-else
-	@echo "Compiling $< to $@ using local LaTeX..."
-endif
+	$(call print_compile_message,$< to $@)
 	@start_time=$$(date +%s); \
 	$(LATEXMK) -g $< > /dev/null 2>&1 || ($(call check_latex_log,$*); exit 1); \
 	end_time=$$(date +%s); \
@@ -159,11 +182,7 @@ endif
 $(SLIDE_NOMARGIN_PDFS): %-nomargin.pdf: %.tex
 	$(call check_docker)
 	@touch nospeakermargin.tex
-ifeq ($(DOCKER_ENABLED),true)
-	@echo "Compiling $< to $@ (no margin) using Docker ($(DOCKER_TAG))..."
-else
-	@echo "Compiling $< to $@ (no margin) using local LaTeX..."
-endif
+	$(call print_compile_message,$< to $@ (no margin))
 	@start_time=$$(date +%s); \
 	$(LATEXMK) -jobname=$*-nomargin $< > /dev/null 2>&1 || ($(call check_latex_log,$*-nomargin); exit 1); \
 	end_time=$$(date +%s); \
@@ -179,19 +198,8 @@ copy:
 # Extract pdf annotations, i.e. hyperlinks, for later reinsertion
 # When combining multiple PDFs into one (for slides/all/)
 # https://ctan.org/tex-archive/macros/latex/contrib/pax?lang=en
-# Depending on installation linked script in PATH does not have file extension
 pax:
-	@if command -v pdfannotextractor.pl &> /dev/null; then\
-		echo "Found pdfannotextractor.pl - extracting annotations...";\
-		pdfannotextractor.pl *.pdf 2>/dev/null || echo "Warning: Some PDFs may not have been processed";\
-	elif command -v pdfannotextractor &> /dev/null; then\
-		echo "Found pdfannotextractor - extracting annotations...";\
-		pdfannotextractor *.pdf 2>/dev/null || echo "Warning: Some PDFs may not have been processed";\
-	else\
-		echo "Note: pdfannotextractor not found!";\
-		echo "Please install 'pax' package using: tlmgr install pax";\
-		echo "This is required to preserve clickable URLs and annotations in slides-pdf/"
-	fi
+	$(call run_pdfannotextractor)
 
 texclean:
 	$(call clean_latex_artifacts)
@@ -203,11 +211,7 @@ literature: $(LITERATURE_PDF)
 
 $(LITERATURE_PDF): references.bib
 	$(call check_docker)
-ifeq ($(DOCKER_ENABLED),true)
-	@echo "Compiling literature list for chapter $(CHAPTER_NAME) using Docker ($(DOCKER_TAG))..."
-else
-	@echo "Compiling literature list for chapter $(CHAPTER_NAME) using local LaTeX..."
-endif
+	$(call print_compile_message,literature list for chapter $(CHAPTER_NAME))
 	@start_time=$$(date +%s); \
 	$(LATEXMK) -jobname=chapter-literature-$(CHAPTER_NAME) ../../style/chapter-literature-template.tex > /dev/null 2>&1 || ($(call check_latex_log,chapter-literature-$(CHAPTER_NAME)); exit 1); \
 	end_time=$$(date +%s); \
