@@ -1,9 +1,7 @@
 help:
 	@echo "\n --- Rendering slides"
-	@echo "all                : Renders slides to PDF and runs texclean + copy (see below)"
-	@echo "most               : Renders slides to PDF, does not copy or clean"
-	@echo "all-nomargin       : Same as all, but renders 4:3 slides with -nomargin.pdf suffix"
-	@echo "most-nomargin      : Same as most, analogous to all-normagin"
+	@echo "slides             : Renders slides to PDF (basic compilation)"
+	@echo "slides-nomargin    : Renders 4:3 slides with -nomargin.pdf suffix"
 	@echo "\n --- Cleaning up"
 	@echo "texclean           : Deletes all LaTeX build artifacts (.log, .aux, .nav, .synctex, ...)"
 	@echo "clean              : Runs texclean and deletes all rendered slides"
@@ -55,7 +53,7 @@ FLSFILES = $(TSLIDES:%.tex=%.fls)
 CHAPTER_NAME := $(notdir $(CURDIR))
 LITERATURE_PDF := chapter-literature-$(CHAPTER_NAME).pdf
 
-.PHONY: all most all-nomargin most-nomargin copy texclean clean help pax literature
+.PHONY: slides slides-nomargin release copy texclean clean help pax literature
 
 # ============================================================================
 # HELPER FUNCTIONS
@@ -89,21 +87,9 @@ endef
 # TARGETS
 # ============================================================================
 
-# Default action compiles without margin and copies to slides-pdf!
-all: $(TPDFS)
-	$(call check_latex_math)
-	$(MAKE) pax
-	$(MAKE) literature
-	$(MAKE) texclean
-	$(MAKE) copy
-# derivative action does the same for slides without margin (different filenames!)
-all-nomargin: $(NOMARGINPDFS)
-	$(MAKE) pax
-	$(MAKE) copy
-
-# Analogously the same but without copying (arguably should be the default actions)
-most: $(FLSFILES)
-most-nomargin: $(NOMARGINPDFS)
+# Basic slide compilation
+slides: $(FLSFILES)
+slides-nomargin: $(NOMARGINPDFS)
 
 release:
 	$(call check_latex_math)
