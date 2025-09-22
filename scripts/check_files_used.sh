@@ -1,8 +1,8 @@
 #!/bin/bash
 set -eo pipefail
 # This script checks which files are present in a given folder that were not used by a given set of tex-files.
-# It does this by relying on *.fls-files, that are generated when tex is run with the 'record' option.
-# The Makefile should do this when 'make most' is run.
+# It does this by relying on *.fls-files, that are generated when tex is run with the 'record' option (latexmk -g).
+# The Makefile should do this when 'make slides' is run.
 #
 # When a tex-file imports another file (e.g. a figure), the generated fls-file contains a line 'IMPORT <filename>'.
 # This script compares the files listed in the given fls-files with the files that are present in a given folder.
@@ -57,7 +57,7 @@ shift 2
 
 # check if the fls-file for each given tex-file is present.
 flsfiles=()
-for f in $@ ; do
+for f in "$@" ; do
   ff="${f%.tex}.fls"
   if [ ! -f "$ff" ] ; then
     echo "fls-file $ff not found. Maybe you need to run 'make slides'?" >&2
@@ -84,7 +84,7 @@ done
 # FIRST LIST: Files actually present in the specified folder
 # SECOND LIST: File references extracted from LaTeX .fls files, with these steps:
 #   1. Extract all INPUT lines from .fls files and remove the "INPUT " prefix
-#   2. Filter out TeXLive system files (e.g., /usr/local/texlive/.../package.sty)
+#   2. Filter out TeXLive system files (e.g., /usr/local/texlive/.../package.sty) by excluding texmf-dist / texmf-var directories
 #   3. Convert absolute paths to relative paths (suppress error messages)
 #   4. Sort and remove duplicates to match format expected by 'comm'
 
