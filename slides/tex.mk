@@ -20,8 +20,8 @@ help:
 	@echo "╔═════════════════════════════════════╗"
 	@echo "║       Utilities                     ║"
 	@echo "╚═════════════════════════════════════╝"
-	@echo "texclean           : Deletes all LaTeX build artifacts (.log, .aux, .nav, .synctex, ...)"
-	@echo "clean              : Runs texclean and deletes all rendered slides"
+	@echo "texclean           : Deletes all LaTeX build artifacts (.log, .aux, .nav, .synctex, ...) but keeps PDFs"
+	@echo "clean              : Runs texclean and *also* deletes all compiled PDFs"
 	@echo "pax                : Runs pdfannotextractor.pl (pax) to store hyperlinks etc. in .pax files for later use"
 	@echo "literature         : Generates chapter-literature-CHAPTERNAME.pdf from references.bib"
 
