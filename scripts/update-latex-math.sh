@@ -26,6 +26,7 @@ then
 fi
 
 # Ensure cleanup on exit
+# trap runs the cleanup function when the script exits (normally or via Ctrl+C)
 cleanup() {
     if [ -n "${TEMPDIR:-}" ] && [ -d "$TEMPDIR" ]; then
         rm -rf "$TEMPDIR"
