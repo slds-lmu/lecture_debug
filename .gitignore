@@ -3,7 +3,6 @@
 # This file is included in slds-lmu/lecture_service  #
 #----------------------------------------------------#
 
-file_counts.html
 
 #--------------------------------------------#
 #  Things that need to exist but not in git  #
@@ -102,5 +101,3 @@ code-demos/code_demo_limo.R
 #  OS-specific temp/preview files   #
 #-----------------------------------#
 *.DS_Store
-
-/.quarto/
