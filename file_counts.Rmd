@@ -20,12 +20,19 @@ library(ggplot2)
 
 knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
-lecture_dir <- here::here("")
+lecture_dir <- here::here()
 ```
 
 ## File Enumeration
 
-This document enumerates all files in the lecture_debug repository with their sizes and extensions.
+This document enumerates all files in this lecture repository with their sizes and extensions.  
+
+
+- Certain hidden directories like `.git` and `.Rproj.user` are ignored automatically, but false-positives for "irrelevant" files are possible.  
+- If you see too many LaTeX compilation leftovers, run `make clean` before rendering this document.
+- File extensions are normalized to lower case to avoid spurious duplicates
+- Dotfiles (files starting with `.` are given counted as `(dotfile)` extensions)
+- Files without extension (like `Makefile`) are counted as `(no extension)`
 
 ```{r enumerate-files}
 enumerate_files <- function(lecture_path) {
@@ -35,12 +42,30 @@ enumerate_files <- function(lecture_path) {
   files_rel <- fs::path_rel(files, start = lecture_path)
 
   # Filter out .git
-  files_rel <- fs::path_filter(files_rel, glob = ".git/*", invert = TRUE)
+  files_rel <- fs::path_filter(files_rel, glob = "**.git/*", invert = TRUE)
+  files_rel <- fs::path_filter(
+    files_rel,
+    glob = "**.Rproj.user*",
+    invert = TRUE
+  )
+  files_rel <- fs::path_filter(
+    files_rel,
+    glob = "file_counts_files**",
+    invert = TRUE,
+  )
+
+  extension <- tolower(fs::path_ext(files_rel))
+  is_dotfile <- stringr::str_detect(
+    fs::path_file(files_rel),
+    pattern = "^\\.[\\w\\d]*"
+  )
+  extension[is_dotfile] <- "(dotfile)"
+  extension[extension == ""] <- "(no extension)"
 
   data.table(
     file = fs::path_file(files_rel),
     parent_dir = fs::path_dir(files_rel),
-    extension = tolower(fs::path_ext(files_rel)),
+    extension = extension,
     size = fs::file_size(files),
     size_kb = as.numeric(fs::file_size(files)) / 1024,
     size_mb = as.numeric(fs::file_size(files)) / 1024 / 1024
@@ -56,10 +81,10 @@ file_dt[, depth := lengths(fs::path_split(parent_dir))]
 ```{r summary}
 total_files <- nrow(file_dt)
 total_size_mb <- sum(file_dt$size_mb)
-
-cli::cli_alert_info("Total files: {total_files}")
-cli::cli_alert_info("Total size: {round(total_size_mb, 2)} MB")
 ```
+
+- Total files: **`r total_files`**
+- Total size: **`r round(total_size_mb, 2)`MB**
 
 ### File Count by Extension
 
@@ -122,9 +147,10 @@ dir_counts |>
 ```{r largest-files}
 file_dt[order(-size_mb)][1:30] |>
   mutate(full_path = file.path(parent_dir, file)) |>
-  select(full_path, size_mb, extension) |>
+  select(depth, full_path, size_mb, extension) |>
   reactable(
     columns = list(
+      depth = colDef(name = "Depth"),
       full_path = colDef(name = "File Path", minWidth = 400),
       size_mb = colDef(name = "Size (MB)", format = colFormat(digits = 3)),
       extension = colDef(name = "Extension")
@@ -135,7 +161,7 @@ file_dt[order(-size_mb)][1:30] |>
   )
 ```
 
-### Extension Distribution by Directory Depth
+### Extensions by Directory Depth
 
 ```{r depth-extension}
 depth_ext <- file_dt[,
@@ -161,10 +187,10 @@ depth_ext |>
   )
 ```
 
-### Size Distribution
+## Distributions
 
 ```{r size-distribution}
-ggplot(file_dt[size_kb > 0 & size_kb < 1000], aes(x = size_kb)) +
+ggplot(file_dt[size_kb > 0], aes(x = size_kb)) +
   geom_histogram(bins = 50, fill = "steelblue", alpha = 0.7) +
   scale_x_log10(labels = scales::comma) +
   labs(
@@ -172,5 +198,21 @@ ggplot(file_dt[size_kb > 0 & size_kb < 1000], aes(x = size_kb)) +
     x = "File Size (KB, log scale)",
     y = "Count"
   ) +
-  theme_minimal(base_size = 14)
+  theme_minimal(base_size = 14) +
+  theme(plot.title.position = "plot")
+```
+
+
+```{r extension-chart}
+#| fig-height: 7
+file_dt[, .N, by = extension] |>
+  ggplot(aes(y = reorder(extension, N), x = N)) +
+  geom_col() +
+  labs(
+    title = "File Extension Distribution",
+    x = "No. of files",
+    y = "Extension"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(plot.title.position = "plot")
 ```
