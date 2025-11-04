@@ -173,18 +173,18 @@
   >=stealth',
   %Define style for boxes
   punkt/.style={
-    rectangle,
-    rounded corners,
-    draw=black, very thick,
-    text width=6.5em,
-    minimum height=2em,
-    text centered},
+      rectangle,
+      rounded corners,
+      draw=black, very thick,
+      text width=6.5em,
+      minimum height=2em,
+      text centered},
   % Define arrow style
   pil/.style={
-    ->,
-    thick,
-    shorten <=2pt,
-    shorten >=2pt,}
+      ->,
+      thick,
+      shorten <=2pt,
+      shorten >=2pt,}
 }
 
 
@@ -210,10 +210,10 @@
 \usepackage{../../style/lmu-lecture}
 % Custom itemize wrappers, itemizeS, itemizeL, etc
 \usepackage{../../style/customitemize}
-% Custom framei environment, uses custom itemize!
+% Custom framei and vframe environment, uses custom itemize!
+% allows specifying font size for all content
 \usepackage{../../style/framei}
-% Custom frame2 environment, allows specifying font size for all content
-\usepackage{../../style/frame2}
+\usepackage{../../style/framev}
 % Column layout macros
 \usepackage{../../style/splitV}
 % \image and derivatives

@@ -7,169 +7,169 @@
 \begin{document}
 
 \titlemeta{% Chunk title (example: CART, Forests, Boosting, ...), can be empty
-Demo Lecture
+  Demo Lecture
 }{% Lecture title  
-Layout Macro Testing With Cannibalized Content
+  Layout Macro Testing With Cannibalized Content
 }{% Relative path to title page image: Can be empty but must not start with slides/
-figure/compboost-illustration-2.png
+  figure/compboost-illustration-2.png
 }{
-\item Test layout
-\item Fix stuff
-\item Go home
+  \item Test layout
+  \item Fix stuff
+  \item Go home
 }
 % ------------------------------------------------------------------------------
 
 \begin{frame}[c]{Demo Slides}
   This is a demo lecture chunk.
-  
+
   It is recommended to view these slides as PDF and LaTeX code side by side
-  
+
   Refer to the \code{slds-lmu/lecture\_debug} repository for the source and PDF:
   \begin{itemizeS}
     \item \href{https://slds-lmu.github.io/lecture_debug/lecture_debug/slides/demo/slides-demo-summary.pdf}{\beamergotobutton{Compiled PDF}}
     \item \href{https://github.com/slds-lmu/lecture_debug/blob/main/slides/demo/slides-demo-summary.tex}{\beamergotobutton{LaTeX source}}
   \end{itemizeS}
-  
+
 \end{frame}
 
 \begin{frame}{\textbackslash splitV(TCB)(TCB)}
-  
+
   \begin{itemize}
     \item \code{\textbackslash splitVCC} creates two centered columns
-    \item \code{\textbackslash splitVTT} creates two top-aligned columns 
+    \item \code{\textbackslash splitVTT} creates two top-aligned columns
     \item \code{\textbackslash splitVBB} for bottom-aligned columns
   \end{itemize}
-  
+
   \vfill
-  
+
   \splitVTT{
-  \textbf{Left column} these two columns should both be top-aligned with their unequal content lengths
+    \textbf{Left column} these two columns should both be top-aligned with their unequal content lengths
   }{
-  \textbf{Right column} Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    \textbf{Right column} Lorem ipsum dolor sit amet, consectetur adipiscing elit
   }
-  
+
   \vfill
-  
+
   \splitVCC{
-  \begin{itemize}
-    \item Example itemize content for centered columns
-    \item Second itemize item
-  \end{itemize}
+    \begin{itemize}
+      \item Example itemize content for centered columns
+      \item Second itemize item
+    \end{itemize}
   }{
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit
   }
-  
+
 \end{frame}
 
 % ------------------------------------------------------------------------------
 
 \begin{frame}{\textbackslash splitV with unequal sizes}
-  
+
   You only need to specify the width of the first column:
-  
+
   \vfill
-  
+
   \code{\textbackslash splitVTT[0.75]\{left content\}\{right content\}} creates a column with 75\% width and the
   second column will fill the remaining space:
-  
+
   \vfill
-  
+
   \splitVTT[0.75]{First column with 75\% of the text width on the slide}{Second column with rest}
-  
+
   \vfill
-  
+
   \splitVTT[0.2]{Tiny column}{Second column with a lot of room for activities}
-  
+
 \end{frame}
 
 % ------------------------------------------------------------------------------
 
 \begin{frame}{Two columns, minimal adjustments}
-  
+
   Compact version if you do not want to use the full slide width:
-  
+
   \code{\textbackslash splitVCompact\{0.2\}\{0.2\}} only takes up 20\% of the slide width in each column for a total of 40\% with a minimal horizontal spacer:
-  
+
   \vfill
-  
+
   \splitVCompact{0.20}{0.20}{First column with 20\%}{Second column with 20\%}
-  
-  
+
+
 \end{frame}
 
 % ------------------------------------------------------------------------------
 
 \begin{frame}{3 columns}
-  
+
   Using \code{\textbackslash splitVThree\{Left\}\{Middle\}\{Right\}} for 3 equally sized columns:
-  
+
   \vfill
-  
+
   \splitVThree{
-  First column content is here
+    First column content is here
   }{
-  Second column content is here as well
+    Second column content is here as well
   }{
-  And also a third column is here just in case
+    And also a third column is here just in case
   }
-  
+
   \vfill
-  
+
   Then there is \code{\textbackslash splitVThreeCustom} for three columns of
   arbitrary widths, where the width of the third column can also be inferred from the first two
   \vfill
-  
+
   \splitVThreeCustom[0.2]{0.2}{0}{
-  first column with 20\% width
+    first column with 20\% width
   }{
-  second column with 20\% width
+    second column with 20\% width
   }{
-  third column with remaining width
+    third column with remaining width
   }
-  
+
 \end{frame}
 
 % ------------------------------------------------------------------------------
 
 \begin{frame}{twobytwo 2$\times$2 layout / quadrants}
-  
+
   Use \code{\textbackslash twobytwo\{top left\}\{top  right\}\{bottom left\}\{bottom right\}} for horizontally aligned quadrants
-  
+
   \vfill
-  
+
   \twobytwo{%
-  \begin{itemize}
-    \item Example top left...
-    \item ...quadrant content
-    \item Next to a figure
-  \end{itemize}
+    \begin{itemize}
+      \item Example top left...
+      \item ...quadrant content
+      \item Next to a figure
+    \end{itemize}
   }{%
-  \includegraphics[width=0.8\textwidth]{figure/boosting-cwb-blpool1.png}
+    \includegraphics[width=0.8\textwidth]{figure/boosting-cwb-blpool1.png}
   }{%
-  \begin{itemize}
-    \item Bottom left...
-    \item ...quadrant content
-  \end{itemize}
+    \begin{itemize}
+      \item Bottom left...
+      \item ...quadrant content
+    \end{itemize}
   }{%
-  \includegraphics[width=0.8\textwidth]{figure/boosting-cwb-blpool2.png}
+    \includegraphics[width=0.8\textwidth]{figure/boosting-cwb-blpool2.png}
   }
-  
+
 \end{frame}
 
 % ------------------------------------------------------------------------------
 
 \begin{frame}{2$\times$2 layout: All images}
-  
+
   \vfill
-  
+
   \twobytwo{%
-  \includegraphics[width=\textwidth]{figure/boosting-cwb-blpool1.png}
+    \includegraphics[width=\textwidth]{figure/boosting-cwb-blpool1.png}
   }{%
-  \includegraphics[width=\textwidth]{figure/boosting-cwb-blpool2.png}
+    \includegraphics[width=\textwidth]{figure/boosting-cwb-blpool2.png}
   }{%
-  \includegraphics[width=\textwidth]{figure/boosting-cwb-blpool3.png}
+    \includegraphics[width=\textwidth]{figure/boosting-cwb-blpool3.png}
   }{%
-  \includegraphics[width=\textwidth]{figure/boosting-cwb-blpool4.png}
+    \includegraphics[width=\textwidth]{figure/boosting-cwb-blpool4.png}
   }
 \end{frame}
 
@@ -179,62 +179,62 @@ figure/compboost-illustration-2.png
 % ------------------------------------------------------------------------------
 
 \begin{frame}{itemize wrappers}
-  
+
   Presets fro \code{itemize} with different vertical spacings (\code{itemsep}). The default value for \code{itemsep} is apparently \code{2pt}. Use \code{\textbackslash the \textbackslash itemsep} to find out the current value.
-  
-  
+
+
   \vfill
-  
+
   \splitVTT{
-  \begin{itemize}
-    \item \textbf{Default itemize}
-    \item itemsep is unmodified
-    \item Another thing
-    \item Words
-    \item A fourth thing to show
-    \item Just filling space here
-    \item Hello there
-  \end{itemize}
+    \begin{itemize}
+      \item \textbf{Default itemize}
+      \item itemsep is unmodified
+      \item Another thing
+      \item Words
+      \item A fourth thing to show
+      \item Just filling space here
+      \item Hello there
+    \end{itemize}
   }{
-  \begin{itemizeS}
-    \item \textbf{Uses environment} \code{itemizeS}
-    \item itemsep is: \the\itemsep
-    \item Another thing
-    \item Words
-    \item A fourth thing to show
-    \item Just filling space here
-    \item Hello there
-  \end{itemizeS}
+    \begin{itemizeS}
+      \item \textbf{Uses environment} \code{itemizeS}
+      \item itemsep is: \the\itemsep
+      \item Another thing
+      \item Words
+      \item A fourth thing to show
+      \item Just filling space here
+      \item Hello there
+    \end{itemizeS}
   }
-  
+
 \end{frame}
 
 % ------------------------------------------------------------------------------
 
 \begin{frame}{itemizeM and itemizeL}
-  
+
   \splitVTT{
-  \begin{itemizeM}
-    \item \textbf{Default itemize} with  \code{itemizeM}
-    \item itemsep is unmodified
-    \item Another thing
-    \item Words
-    \item A fourth thing to show
-    \item Just filling space here
-    \item Hello there
-  \end{itemizeM}
+    \begin{itemizeM}
+      \item \textbf{Default itemize} with  \code{itemizeM}
+      \item itemsep is unmodified
+      \item Another thing
+      \item Words
+      \item A fourth thing to show
+      \item Just filling space here
+      \item Hello there
+    \end{itemizeM}
   }{
-  \begin{itemizeL}
-    \item \textbf{Uses environment} \code{itemizeL}
-    \item itemsep is: \the\itemsep
-    \item Another thing
-    \item Words
-    \item A fourth thing to show
-    \item Just filling space here
-    \item Hello there
-  \end{itemizeL}
+    \begin{itemizeL}
+      \item \textbf{Uses environment} \code{itemizeL}
+      \item itemsep is: \the\itemsep
+      \item Another thing
+      \item Words
+      \item A fourth thing to show
+      \item Just filling space here
+      \item Hello there
+    \end{itemizeL}
   }
-  
+
 \end{frame}
 
 % ------------------------------------------------------------------------------
@@ -251,7 +251,7 @@ figure/compboost-illustration-2.png
 % ------------------------------------------------------------------------------
 
 \begin{frame}{itemize Spacing and Font Size control}
-  
+
   \begin{columns}[T]
     \begin{column}{0.48\textwidth}
       \textbf{itemizeS with small text}
@@ -261,7 +261,7 @@ figure/compboost-illustration-2.png
         \item When every line matters
       \end{itemizeS}
     \end{column}
-    
+
     \begin{column}{0.48\textwidth}
       \textbf{itemizeL with large text:}
       \begin{itemizeL}[large]
@@ -271,23 +271,23 @@ figure/compboost-illustration-2.png
       \end{itemizeL}
     \end{column}
   \end{columns}
-  
+
   \vfill
-  
+
   \textbf{itemizeM with default text:}
   \begin{itemizeM}
     \item Default sizing and spacing works best for most content
     \item Provides good readability and balanced slide appearance
   \end{itemizeM}
-  
+
   \vfill
-  
+
   \textbf{itemizeM with footnotesize text:}
   \begin{itemizeM}[footnotesize]
     \item Default sizing and spacing works best for most content
     \item Provides good readability and balanced slide appearance
   \end{itemizeM}
-  
+
 \end{frame}
 
 % ------------------------------------------------------------------------------
@@ -295,35 +295,35 @@ figure/compboost-illustration-2.png
 % ------------------------------------------------------------------------------
 
 \begin{frame}{Reference Buttons \furtherreading{CITEKEY}}
-  
+
   \begin{itemize}
     \item Use \texttt{\textbackslash furtherreading} with citation key:
-    \begin{itemize}
-      \item Example: \furtherreading{CITEKEY}
-      \item Basically same as old citelink / citebutton
-    \end{itemize}
-    
+          \begin{itemize}
+            \item Example: \furtherreading{CITEKEY}
+            \item Basically same as old citelink / citebutton
+          \end{itemize}
+
     \item Use \texttt{\textbackslash sourceref} with URL:
-    \begin{itemize}
-      \item Direct URL: \sourceref{https://www.slds.stat.uni-muenchen.de/}
-      \item URL with www: \sourceref{www.slds.stat.uni-muenchen.de/}
-    \end{itemize}
-    
+          \begin{itemize}
+            \item Direct URL: \sourceref{https://www.slds.stat.uni-muenchen.de/}
+            \item URL with www: \sourceref{www.slds.stat.uni-muenchen.de/}
+          \end{itemize}
+
     \item Or use \texttt{\textbackslash sourceref} with citation key:
-    \begin{itemize}
-      \item Example: \sourceref{CITEKEY}
-      \item Another example: \sourceref{KITTEN}
-      \item Uses the url field in bib file for link:
-    \end{itemize}
+          \begin{itemize}
+            \item Example: \sourceref{CITEKEY}
+            \item Another example: \sourceref{KITTEN}
+            \item Uses the url field in bib file for link:
+          \end{itemize}
   \end{itemize}
-  
+
   \vspace{1em}
   The buttons have different background colors:
   \begin{itemize}
     \item Light blue background for further reading
     \item Light orange/peach background for source references
   \end{itemize}
-  
+
 \end{frame}
 
 
@@ -353,21 +353,55 @@ figure/compboost-illustration-2.png
 % ------------------------------------------------------------------------------
 
 \begin{frame}[c]{Images attribution can be URL or citekey}
-  
+
   \splitVCC{
-  \imageC[0.5][KITTEN]{figure_man/neo3_3.png}
+    \imageC[0.5][KITTEN]{figure_man/neo3_3.png}
   }{
-  \imageC[0.5][https://placecats.com/neo_2/600/300]{figure_man/neo3_3.png}
+    \imageC[0.5][https://placecats.com/neo_2/600/300]{figure_man/neo3_3.png}
   }
-  
+
 \end{frame}
 
 \begin{frame}{Images with alignment and attribution}
-  
+
   \imageL[0.4][CITEKEY]{figure/gbm_sine.png}
   \imageC[0.4][CITEKEY]{figure/gbm_sine.png}
   \imageR[0.4][CITEKEY]{figure/gbm_sine.png}
-  
+
+\end{frame}
+
+% ------------------------------------------------------------------------------
+
+\begin{frame}{imageFixed: Absolute positioning}
+
+  Use \code{\textbackslash imageFixed\{x\}\{y\}[width][attribution]\{file\}} for absolute positioning:
+
+  \begin{itemizeS}
+    \item \texttt{x} and \texttt{y} are absolute coordinates from top-left
+    \item Coordinates can be lengths like \texttt{2cm} or relative like \texttt{0.1\textbackslash paperwidth}
+    \item Width is optional (default 1.0 relative to \texttt{\textbackslash textwidth})
+    \item Attribution works the same as other image macros
+    \item Useful for overlaying images at precise positions
+  \end{itemizeS}
+
+  \imageFixed{8cm}{7cm}[0.4]{figure_man/neo3_2.png}
+
+\end{frame}
+
+% ------------------------------------------------------------------------------
+
+\begin{frame}{imageFixed examples}
+
+  Top-left corner:
+  \imageFixed{1cm}{2cm}[0.2]{figure/boosting-cwb-blpool1.png}
+
+  Center-right using paper dimensions:
+  \imageFixed{0.7\paperwidth}{0.4\paperheight}[0.25]{figure/boosting-cwb-blpool2.png}
+
+  Bottom-left with attribution:
+
+  \imageFixed{2cm}{7cm}[0.2][KITTEN]{figure_man/neo3_3.png}
+
 \end{frame}
 
 
@@ -375,54 +409,54 @@ figure/compboost-illustration-2.png
 % ------------------------------------------------------------------------------
 
 \begin{frame}{Images within itemize}
-  
+
   \begin{itemize}
     \item Foo bar
     \item Plubber
-    \imageC[0.5]{figure/boosting-cwb-blpool1.png}
+          \imageC[0.5]{figure/boosting-cwb-blpool1.png}
     \item jfowiehfgnsdlkjnfg
   \end{itemize}
-  
+
 \end{frame}
 
 % ------------------------------------------------------------------------------
 
 \begin{frame}{Images within splitV}
-  
+
   \splitVTT[0.4]{
-  \image{figure/boosting-cwb-blpool1.png}
+    \image{figure/boosting-cwb-blpool1.png}
   }{
-  \image{figure/boosting-cwb-blpool1.png}
+    \image{figure/boosting-cwb-blpool1.png}
   }
-  
+
   \vfill
-  
+
   \splitVCC[0.4]{
-  \image{figure/boosting-cwb-blpool1.png}
+    \image{figure/boosting-cwb-blpool1.png}
   }{
-  \image{figure/boosting-cwb-blpool1.png}
+    \image{figure/boosting-cwb-blpool1.png}
   }
-  
+
 \end{frame}
 
 % ------------------------------------------------------------------------------
 
 \begin{frame}{Images within splitVCC}
-  
+
   \splitVCC{
-  \image[0.5]{figure_man/neo3_2.png}
+    \image[0.5]{figure_man/neo3_2.png}
   }{
-  \image[0.7]{figure_man/neo3_2.png}
+    \image[0.7]{figure_man/neo3_2.png}
   }
-  
+
   \vfill
-  
+
   \splitVCC[0.4]{
-  \imageC[1][KITTEN]{figure_man/neo3_2.png}
+    \imageC[1][KITTEN]{figure_man/neo3_2.png}
   }{
-  \image{figure_man/neo3_2.png}
+    \image{figure_man/neo3_2.png}
   }
-  
+
 \end{frame}
 
 % ------------------------------------------------------------------------------
@@ -432,32 +466,32 @@ figure/compboost-illustration-2.png
 \begin{framei}{framei environment}
   \item This is a frame consisting only of an itemize environment
   \item Nothing else here, just itemize.
-  \item No extra options yet for alignment or sizing in this case
+  \item Default center alignment
   \imageC[0.6]{figure_man/neo3_2.png}
   \item Look, an image
 \end{framei}
 
 \begin{framei}{framei environment}
   \item This is a frame consisting only of an itemize environment
-  
+
   \splitV{
-  \item nested items
+    \item nested items
   }{
-  \imageC[0.6]{figure_man/neo3_2.png}
+    \imageC[0.6]{figure_man/neo3_2.png}
   }
-  
+
   \item Look, an image
 \end{framei}
 
 \begin{framei}{framei environment}
   \item This is a frame consisting only of an itemize environment
-  
+
   \splitV{
-  \imageC[0.6]{figure_man/neo3_2.png}
+    \imageC[0.6]{figure_man/neo3_2.png}
   }{
-  \item nested items
+    \item nested items
   }
-  
+
   \item Look, an image
 \end{framei}
 
@@ -493,19 +527,47 @@ figure/compboost-illustration-2.png
 
 % ------------------------------------------------------------------------------
 
+\begin{framei}[align=top]{framei with Top Alignment}
+  \item The \texttt{align=top} option aligns content to the top of the frame
+  \item Useful for consistency when not filling the entire frame
+  \item Pairs well with \texttt{fs} and \texttt{sep} options
+  \item Example: \texttt{framei[align=top]}
+\end{framei}
+
+% ------------------------------------------------------------------------------
+
+\begin{framei}[align=bottom]{framei with Bottom Alignment}
+  \item Bottom alignment with \texttt{align=bottom}
+  \item Positions content at the bottom of the frame
+  \item Can be combined with other options
+\end{framei}
+
+% ------------------------------------------------------------------------------
+
+\begin{framei}[fs=small,sep=S,align=top]{framei: Combined Options}
+  \item This demonstrates combining multiple options
+  \item Using \texttt{[fs=small,sep=S,align=top]}
+  \item Small font size for more content
+  \item Compact spacing (S)
+  \item Top-aligned positioning
+  \item Perfect for comprehensive slides
+\end{framei}
+
+% ------------------------------------------------------------------------------
+
 \begin{framei}[fs=footnotesize,sep=M]{Integration with framei Environment}
   \item The framei environment creates an itemize list
   \item We can nest splitV inside list items
-  
+
   \item Using splitVTT within a list item:
   \splitVCC{
-  \item This continues the itemize list
-  \item No need for a nested itemize
-  \item The items appear properly beside the image
+    \item This continues the itemize list
+    \item No need for a nested itemize
+    \item The items appear properly beside the image
   }{
-  \imageC[1][KITTEN]{figure_man/neo3_3.png}
+    \imageC[1][KITTEN]{figure_man/neo3_3.png}
   }
-  
+
   \item Back to the main list
   \item With proper spacing between elements
 \end{framei}
@@ -533,35 +595,35 @@ figure/compboost-illustration-2.png
 \begin{frame}{SplitV Inside Regular Itemize}
   \begin{itemize}
     \item First regular bullet point
-    
+
     \item Some more text in an item
-    \splitVCC[0.6]{
+          \splitVCC[0.6]{
     \item This appears beside the image
     \item No need for a nested itemize environment
-    }{
-    \image[0.6]{figure_man/neo3_3.png}
-    }
-    
+          }{
+          \image[0.6]{figure_man/neo3_3.png}
+          }
+
     \item Assume data is separable
     \item We can continue the list afterward
-    
+
     \item Another example with top alignment:
-    \splitVTT[0.7]{
+          \splitVTT[0.7]{
     \item Top-aligned content
     \item In a normal itemize environment
-    }{
-    \image[0.8]{figure_man/neo3_1.png}
-    }
-    
+          }{
+          \image[0.8]{figure_man/neo3_1.png}
+          }
+
     \item Final regular bullet point
   \end{itemize}
 \end{frame}
 
 % ------------------------------------------------------------------------------
 
-\begin{frame2}[small]{frame2 like frame but with font size parameter}
+\begin{framev}[fs=small]{framev like frame but with font size parameter}
   This entire frame uses the small font size.
-  
+
   \begin{itemize}
     \item this regular itemize list uses the small font size
     \item you can nest things in here as needed
@@ -570,33 +632,71 @@ figure/compboost-illustration-2.png
     \item this itemizeM list overrides the font size
     \item if you use itemizeM etc. they just inehrit the font size as well
   \end{itemizeM}
-\end{frame2}
+\end{framev}
 
 % ------------------------------------------------------------------------------
 
-\begin{frame2}[tiny]{frame2 with nested regular itemizes}
+\begin{framev}[fs=tiny]{framev with nested regular itemizes}
   \begin{itemize}
     \item Item A
-    \begin{itemize}
-      \item Subitem 1
-    \end{itemize}
+          \begin{itemize}
+            \item Subitem 1
+          \end{itemize}
     \item Item B
   \end{itemize}
-\end{frame2}
+\end{framev}
+
+% ------------------------------------------------------------------------------
+
+\begin{framev}[align=top]{framev with Top Alignment}
+  This framev uses \texttt{[align=top]} to position content at the top of the frame.
+
+  Unlike framei, framev does not automatically wrap content in an itemize environment.
+
+  \begin{itemize}
+    \item You can add itemize lists manually
+    \item Top alignment applies to the entire frame content
+    \item Combine with font size: \texttt{[fs=small,align=top]}
+  \end{itemize}
+\end{framev}
+
+% ------------------------------------------------------------------------------
+
+\begin{framev}[align=bottom]{framev with Bottom Alignment}
+  Content positioned at the bottom using \texttt{[align=bottom]}.
+
+  This is useful for emphasis or visual variety in presentations.
+\end{framev}
+
+% ------------------------------------------------------------------------------
+
+\begin{framev}[fs=small,align=top]{framev: Small Font + Top Alignment}
+  This demonstrates combining font size and alignment options: \texttt{[fs=small,align=top]}
+
+  \begin{itemize}
+    \item Small font size makes room for more content
+    \item Top alignment keeps content consistently positioned
+    \item framev provides flexibility without automatic itemize wrapper
+  \end{itemize}
+
+  You can also use shorthand: \texttt{[align=t]} instead of \texttt{[align=top]}
+
+  Similarly: \texttt{align=c} for center, \texttt{align=b} for bottom
+\end{framev}
 
 % ------------------------------------------------------------------------------
 
 \begin{frame}[fragile,c]{Verbatim content}
 
-\begin{itemizeL}
-  \item Verbatim does not work with framei or frame2 
-  \item But you can mix itemizeL etc and verbatim
-  \item The important thing is to use "normal" frame environment with \texttt{fragile,c}
-\end{itemizeL}
+  \begin{itemizeL}
+    \item Verbatim does not work with framei or framev
+    \item But you can mix itemizeL etc and verbatim
+    \item The important thing is to use "normal" frame environment with \texttt{fragile,c}
+  \end{itemizeL}
 
-\vfill
+  \vfill
 
-\begin{verbatim}
+  \begin{verbatim}
 #include<stdio.h>
 
 int main() {

@@ -1,0 +1,96 @@
+\documentclass[11pt,compress,t,notes=noshow, xcolor=table]{beamer}
+\input{../../style/preamble}
+
+\title{framei and framev Alignment Testing}
+
+\begin{document}
+
+\titlemeta{%
+  Debug Lecture
+}{%
+  Testing framei and framev with alignment options
+}{
+  figure_man/neo3_2.png
+}{
+  \item Test framei and framev alignment
+  \item Test font size options
+  \item Verify option combinations
+}
+
+% =============================================================================
+% framei tests (with automatic itemize wrapper)
+% =============================================================================
+
+\begin{framei}{framei: Default (no options)}
+  \item Default framei with no options
+  \item Center alignment (default)
+  \item Normal font size (default)
+  \item Medium spacing (default)
+\end{framei}
+
+\begin{framei}[align=top]{framei: Top alignment}
+  \item Uses \texttt{[align=top]}
+  \item Content at top of frame
+  \item Automatic itemize wrapper
+\end{framei}
+
+\begin{framei}[align=bottom]{framei: Bottom alignment}
+  \item Uses \texttt{[align=bottom]}
+  \item Content at bottom of frame
+\end{framei}
+
+\begin{framei}[fs=small,align=top]{framei: Small font + top}
+  \item Combines \texttt{[fs=small,align=top]}
+  \item Small font size
+  \item Top alignment
+\end{framei}
+
+\begin{framei}[fs=tiny,sep=S,align=bottom]{framei: All options}
+  \item Uses \texttt{[fs=tiny,sep=S,align=bottom]}
+  \item Tiny font
+  \item Small spacing
+  \item Bottom alignment
+\end{framei}
+
+% =============================================================================
+% framev tests (without automatic itemize wrapper)
+% =============================================================================
+
+\begin{framev}{framev: Default (no options)}
+  This is framev with no options.
+
+  Content is centered (default) with normal font size.
+
+  No automatic itemize wrapper.
+\end{framev}
+
+\begin{framev}[align=top]{framev: Top alignment}
+  This uses \texttt{[align=top]}.
+
+  Content should be at top of frame.
+\end{framev}
+
+\begin{framev}[align=bottom]{framev: Bottom alignment}
+  Content at bottom with \texttt{[align=bottom]}.
+\end{framev}
+
+\begin{framev}[fs=small,align=top]{framev: Small font + top}
+  This combines \texttt{[fs=small,align=top]}.
+
+  Small font size at top of frame.
+\end{framev}
+
+\begin{framev}[fs=tiny,align=bottom]{framev: Tiny font + bottom}
+  Uses \texttt{[fs=tiny,align=bottom]}.
+
+  Tiny font at bottom of frame.
+\end{framev}
+
+\begin{framev}[align=t]{framev: Shorthand alignment}
+  Uses shorthand \texttt{[align=t]} (same as \texttt{align=top}).
+
+  Also supports \texttt{c} for center and \texttt{b} for bottom.
+\end{framev}
+
+\endlecture
+\end{document}
