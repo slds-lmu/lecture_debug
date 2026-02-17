@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="runner" />
+
+
+<title>Lecture Slide Status Overview</title>
+
+<script src="slide_status_files/header-attrs-2.30/header-attrs.js"></script>
+<script src="slide_status_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="slide_status_files/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="slide_status_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="slide_status_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="slide_status_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="slide_status_files/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="slide_status_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="slide_status_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="slide_status_files/navigation-1.1/tabsets.js"></script>
+<link href="slide_status_files/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="slide_status_files/highlightjs-9.12.0/highlight.js"></script>
+<script src="slide_status_files/kePrint-0.0.1/kePrint.js"></script>
+<link href="slide_status_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Lecture Slide Status Overview</h1>
+<h4 class="author">runner</h4>
+<h4 class="date">2026-02-17 19:43:29 CET</h4>
+
+</div>
+
+
+<style type="text/css">
+/*
+Apply some custom CSS to add breathing room between sub-tables
+and we don't bother creating a separate .css file for just this bit
+*/
+h3 {
+  /*text-align: center;*/
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+</style>
+<p>This document tabulates the state of the slides in
+<code>lecture_*/slides/&lt;chapter&gt;/</code> based on</p>
+<ol style="list-style-type: lower-alpha">
+<li>compilation checks (does it compile,and if not, is there a salient
+error message?) and</li>
+<li>(optionally and rarely) comparison with presumably “known good”
+versions of the slides located in
+<code>lecture_*/slides-pdf/</code></li>
+</ol>
+<div id="latest-commits" class="section level1">
+<h1>Latest Commits</h1>
+<p>Displaying the latest commits of the lecture service repository and
+each of the currently included lectures (for debugging and race
+condition mitigation (kind of)).</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+Status of the lecture_service repo (time in UTC)
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Branch
+</th>
+<th style="text-align:left;">
+Last Commit
+</th>
+<th style="text-align:left;">
+By
+</th>
+<th style="text-align:left;">
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://github.com/slds-lmu/lecture_service/tree/main">main</a>
+</td>
+<td style="text-align:left;">
+2026-02-17 18:39:42
+</td>
+<td style="text-align:left;">
+Lukas Burk
+</td>
+<td style="text-align:left;">
+Add missing gitignore
+</td>
+</tr>
+</tbody>
+</table>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+Latest commits per lecture (times in UTC)
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Lecture
+</th>
+<th style="text-align:left;">
+Branch
+</th>
+<th style="text-align:left;">
+Last Commit
+</th>
+<th style="text-align:left;">
+By
+</th>
+<th style="text-align:left;">
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="https://slds-lmu.github.io/lecture_debug">lecture_debug</a>
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/slds-lmu/lecture_debug/tree/main">main</a>
+</td>
+<td style="text-align:left;">
+2026-02-17 18:41:10
+</td>
+<td style="text-align:left;">
+Lukas Burk
+</td>
+<td style="text-align:left;width: 40%; ">
+Update service
+</td>
+</tr>
+</tbody>
+</table>
+<p>If you’re missing a lecture here after rendering this site
+interactively, you might have to add them to the
+<code>included_lectures</code> files or ensure they are downloaded
+correctly.</p>
+</div>
+<div id="slide-status" class="section level1">
+<h1>Slide status</h1>
+<p><img src="slide_status_files/figure-html/slide-status-plot-1.png" alt="" width="100%" /></p>
+<details>
+<summary>
+Click to expand explanation of table columns
+</summary>
+<pre><code>lecture_advml/slides/gaussian-processes/slides-gp-bayes-lm.tex
+\___________/        \________________/ \________________/
+   lecture                 chapter            &lt;slide-name&gt;
+
+lecture_advml/slides-pdf/slides-gp-bayes-lm.pdf
+                        \___________________/
+                       pdf_static / &quot;Reference PDF&quot;</code></pre>
+<p>Tables are organized by lecture (first level) and lecture chapters
+corresponding to folders in <code>slides/&lt;chapter&gt;</code> (second
+level), with a table per chapter. chapters ignore certain folders like
+<code>attic</code> and <code>all</code>.</p>
+<ul>
+<li><strong>Slide</strong>: The <code>&lt;slide-name&gt;</code> with a
+link to the compiled .tex file (if it compiles).</li>
+<li><strong>Compiles?</strong>: Whether the .tex file compiles without
+error using <code>latexmk -pdf</code>. This can depend on the
+availability of specific LaTeX dependencies, but assuming they are not
+the issue, this usually indicates syntax issues or things like
+<code>\includegraphics</code> calls using relative paths that work on
+Overleaf but not locally.</li>
+<li><strong>Comparison</strong>: Checking the compiled
+<code>&lt;slide-name&gt;.tex</code> against
+<code>slides-pdf/&lt;slide-name&gt;.pdf</code> using
+<code>diff-pdf-visually</code>:
+<ul>
+<li>❌: The check failed surely, either due to differing page counts or
+because there is no reference PDF.</li>
+<li>❓: The check indicates differences on at least one slide, but they
+may be minor and need manual checking.</li>
+<li>✅: The check seems to be fine, the PDF files match.</li>
+</ul></li>
+<li><strong>Note</strong>: A comment on the previous column listing the
+specific reason for a failing check. Also enumerates the slide pages
+where differences are found, and links to a PDF containing a diff of the
+two files generated with <code>diff-pdf</code> (at a lower resolution
+than the originals).</li>
+</ul>
+</details>
+<div id="lecture_debug" class="section level2">
+<h2>lecture_debug</h2>
+<p>2 chapters with a total of 7 slides</p>
+<div id="debug" class="section level3">
+<h3>debug</h3>
+<table class="table table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Slide
+</th>
+<th style="text-align:center;position: sticky; top:0; background-color: #FFFFFF;">
+Compiles?
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Note
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 40%; ">
+<a href="lecture_debug/slides/debug/slides-debug-frames.pdf">slides-debug-frames</a>
+</td>
+<td style="text-align:center;width: 10%; ">
+✅
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 40%; ">
+<a href="lecture_debug/slides/debug/slides-debug-minimal.pdf">slides-debug-minimal</a>
+</td>
+<td style="text-align:center;width: 10%; ">
+✅
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 40%; ">
+<a href="lecture_debug/slides/debug/slides-test-itemize.pdf">slides-test-itemize</a>
+</td>
+<td style="text-align:center;width: 10%; ">
+✅
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 40%; ">
+<a href="lecture_debug/slides/debug/slides-test-ref-buttons.pdf">slides-test-ref-buttons</a>
+</td>
+<td style="text-align:center;width: 10%; ">
+✅
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 40%; ">
+<a href="lecture_debug/slides/debug/slides-test-splitv.pdf">slides-test-splitv</a>
+</td>
+<td style="text-align:center;width: 10%; ">
+✅
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="demo" class="section level3">
+<h3>demo</h3>
+<table class="table table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Slide
+</th>
+<th style="text-align:center;position: sticky; top:0; background-color: #FFFFFF;">
+Compiles?
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Note
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 40%; ">
+<a href="lecture_debug/slides/demo/slides-demo-splitv.pdf">slides-demo-splitv</a>
+</td>
+<td style="text-align:center;width: 10%; ">
+✅
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 40%; ">
+<a href="lecture_debug/slides/demo/slides-demo-summary.pdf">slides-demo-summary</a>
+</td>
+<td style="text-align:center;width: 10%; ">
+✅
+</td>
+<td style="text-align:left;width: 40%; ">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="figure-audit" class="section level1">
+<h1>Figure Audit</h1>
+<p>After compilation, <code>.fls</code> recorder files capture every
+file the TeX engine opened. This allows robust detection of which
+figures each slide actually uses, including dynamically constructed
+paths (e.g. <code>\foreach</code> loops) that regex-based parsing
+misses.</p>
+<p>Figures in <code>figure/</code> or <code>figure_man/</code> that are
+not referenced by any slide are <strong>orphaned</strong>. Figures
+referenced by slides but missing from disk are
+<strong>missing</strong>.</p>
+<table class="table table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+Figure audit summary
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Lecture
+</th>
+<th style="text-align:left;">
+Chapter
+</th>
+<th style="text-align:right;">
+Figures
+</th>
+<th style="text-align:right;">
+Orphaned
+</th>
+<th style="text-align:right;">
+Attic
+</th>
+<th style="text-align:right;">
+Missing
+</th>
+<th style="text-align:right;">
+Figs (man)
+</th>
+<th style="text-align:right;">
+Orphaned (man)
+</th>
+<th style="text-align:right;">
+Missing (man)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+lecture_debug
+</td>
+<td style="text-align:left;">
+debug
+</td>
+<td style="text-align:right;">
+139
+</td>
+<td style="text-align:right;">
+138
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+lecture_debug
+</td>
+<td style="text-align:left;">
+demo
+</td>
+<td style="text-align:right;">
+139
+</td>
+<td style="text-align:right;">
+133
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+<div id="chapters-with-issues" class="section level2">
+<h2>Chapters with issues</h2>
+<div id="lecture_debug-debug" class="section level3">
+<h3>lecture_debug / debug</h3>
+<p><strong>138 orphaned figure(s)</strong> in <code>figure/</code>:</p>
+<ul>
+<li><code>adaboost_viz_mlr3_1.png</code></li>
+<li><code>adaboost_viz_mlr3_2.png</code></li>
+<li><code>boosting_classif_1.png</code></li>
+<li><code>boosting_classif_10.png</code></li>
+<li><code>boosting_classif_100.png</code></li>
+<li><code>boosting_classif_2.png</code></li>
+<li><code>boosting_classif_5.png</code></li>
+<li><code>boosting_classif_error_1.png</code></li>
+<li><code>boosting_classif_error_10.png</code></li>
+<li><code>boosting_classif_error_100.png</code></li>
+<li><code>boosting_classif_error_2.png</code></li>
+<li><code>boosting_classif_error_5.png</code></li>
+<li><code>boosting_classif_example.png</code></li>
+<li><code>boosting_interaction_example_gam.png</code></li>
+<li><code>boosting_interaction_example_ID2.png</code></li>
+<li><code>boosting_multiclass_1.png</code></li>
+<li><code>boosting_multiclass_10.png</code></li>
+<li><code>boosting_multiclass_100.png</code></li>
+<li><code>boosting_multiclass_2.png</code></li>
+<li><code>boosting_multiclass_5.png</code></li>
+<li><code>boosting-cwb-bl-add1.pdf</code></li>
+<li><code>boosting-cwb-bl-add1.pdf.png</code></li>
+<li><code>boosting-cwb-bl-add2.pdf</code></li>
+<li><code>boosting-cwb-bl-add2.pdf.png</code></li>
+<li><code>boosting-cwb-bl-add3.pdf</code></li>
+<li><code>boosting-cwb-bl-add3.pdf.png</code></li>
+<li><code>boosting-cwb-bl1-points.png</code></li>
+<li><code>boosting-cwb-bl1.png</code></li>
+<li><code>boosting-cwb-bl2-points.png</code></li>
+<li><code>boosting-cwb-bl2.png</code></li>
+<li><code>boosting-cwb-bl3-points.png</code></li>
+<li><code>boosting-cwb-bl3.png</code></li>
+<li><code>boosting-cwb-bl4.png</code></li>
+<li><code>boosting-cwb-blpool1.png</code></li>
+<li><code>boosting-cwb-blpool2.png</code></li>
+<li><code>boosting-cwb-blpool3.png</code></li>
+<li><code>boosting-cwb-blpool4.png</code></li>
+<li><code>bspline-basis.png</code></li>
+<li><code>compboost-base-learner-linear.png</code></li>
+<li><code>compboost-base-learner-ridge.png</code></li>
+<li><code>compboost-base-learner-spline.png</code></li>
+<li><code>compboost-base-learner-tensor.png</code></li>
+<li><code>compboost-illustration-1.png</code></li>
+<li><code>compboost-illustration-3.png</code></li>
+<li><code>compboost-intercept-handling.png</code></li>
+<li><code>compboost-to-glm-iter1000.png</code></li>
+<li><code>compboost-to-glm-iter10000.png</code></li>
+<li><code>compboost-to-glm-iter250.png</code></li>
+<li><code>compboost-to-glm-iter500.png</code></li>
+<li><code>compboost-to-glm-iter5000.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0001.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0002.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0005.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0010.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0015.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0017.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0018.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0020.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0023.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0024.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0030.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0050.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0070.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0088.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0089.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0090.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0110.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0130.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0150.png</code></li>
+<li><code>cwb-anim/fig-iter-0001.png</code></li>
+<li><code>cwb-anim/fig-iter-0002.png</code></li>
+<li><code>cwb-anim/fig-iter-0005.png</code></li>
+<li><code>cwb-anim/fig-iter-0010.png</code></li>
+<li><code>cwb-anim/fig-iter-0015.png</code></li>
+<li><code>cwb-anim/fig-iter-0016.png</code></li>
+<li><code>cwb-anim/fig-iter-0020.png</code></li>
+<li><code>cwb-anim/fig-iter-0030.png</code></li>
+<li><code>cwb-anim/fig-iter-0037.png</code></li>
+<li><code>cwb-anim/fig-iter-0038.png</code></li>
+<li><code>cwb-anim/fig-iter-0050.png</code></li>
+<li><code>cwb-anim/fig-iter-0070.png</code></li>
+<li><code>cwb-anim/fig-iter-0090.png</code></li>
+<li><code>cwb-anim/fig-iter-0110.png</code></li>
+<li><code>cwb-anim/fig-iter-0116.png</code></li>
+<li><code>cwb-anim/fig-iter-0117.png</code></li>
+<li><code>cwb-anim/fig-iter-0140.png</code></li>
+<li><code>cwb-anim/fig-iter-0150.png</code></li>
+<li><code>fig-decomp1.png</code></li>
+<li><code>fig-decomp2.png</code></li>
+<li><code>fig-gb-concept-1.png</code></li>
+<li><code>fig-gb-concept-2.png</code></li>
+<li><code>fig-gb-concept-idea-1.png</code></li>
+<li><code>fig-gb-concept-idea-2.png</code></li>
+<li><code>fig-gb-concept-idea-3.png</code></li>
+<li><code>fig-gb-concept-idea.png</code></li>
+<li><code>fig-gb-concept-pseudo-resi-1.png</code></li>
+<li><code>fig-gb-concept-pseudo-resi-2.png</code></li>
+<li><code>fig-loss-huber-delta.png</code></li>
+<li><code>gbm_anim_02.png</code></li>
+<li><code>gbm_anim_03.png</code></li>
+<li><code>gbm_anim_51.png</code></li>
+<li><code>gbm_anim_data.png</code></li>
+<li><code>gbm_anim_init.png</code></li>
+<li><code>gbm_regu_oversmoothing_overfitting.png</code></li>
+<li><code>gbm_sine_title.png</code></li>
+<li><code>gbm_sine.png</code></li>
+<li><code>gbm_spam.png</code></li>
+<li><code>illustration_data_normal.png</code></li>
+<li><code>illustration_gaussian_huber_02_10.png</code></li>
+<li><code>illustration_gaussian_huber_2_10.png</code></li>
+<li><code>illustration_gaussian_L1_1.png</code></li>
+<li><code>illustration_gaussian_L1_10.png</code></li>
+<li><code>illustration_gaussian_L1_100.png</code></li>
+<li><code>illustration_gaussian_L1_2.png</code></li>
+<li><code>illustration_gaussian_L1_3.png</code></li>
+<li><code>illustration_gaussian_L1_lin_1.png</code></li>
+<li><code>illustration_gaussian_L1_lin_10.png</code></li>
+<li><code>illustration_gaussian_L1_lin_100.png</code></li>
+<li><code>illustration_gaussian_L2_1.png</code></li>
+<li><code>illustration_gaussian_L2_10.png</code></li>
+<li><code>illustration_gaussian_L2_100.png</code></li>
+<li><code>illustration_gaussian_L2_2.png</code></li>
+<li><code>illustration_gaussian_L2_3.png</code></li>
+<li><code>illustration_gaussian_L2_lin_1.png</code></li>
+<li><code>illustration_gaussian_L2_lin_10.png</code></li>
+<li><code>illustration_gaussian_L2_lin_100.png</code></li>
+<li><code>illustration_tdist_L1_10.png</code></li>
+<li><code>illustration_tdist_L1_100.png</code></li>
+<li><code>illustration_tdist_L2_10.png</code></li>
+<li><code>illustration_tdist_L2_100.png</code></li>
+<li><code>illustration_title.png</code></li>
+<li><code>interaction_td1_d3.png</code></li>
+<li><code>interaction_td2_d3.png</code></li>
+<li><code>pseudo_residual_1.png</code></li>
+<li><code>split_finding_1.png</code></li>
+<li><code>split_finding_2.png</code></li>
+<li><code>stump_plots_noisy.png</code></li>
+<li><code>stump_plots.png</code></li>
+</ul>
+<p><strong>13 orphaned figure(s)</strong> in
+<code>figure_man/</code>:</p>
+<ul>
+<li><code>adaboost_example_adjusted.png</code></li>
+<li><code>bagging_vs_boosting.png</code></li>
+<li><code>boosting_classif_title.PNG</code></li>
+<li><code>boosting_interact_expl1.PNG</code></li>
+<li><code>boosting_interact_expl2.PNG</code></li>
+<li><code>boosting_interaction_depth1fit3D_x1.png</code></li>
+<li><code>boosting_interaction_depth1fit3D_x2.png</code></li>
+<li><code>boosting_interaction_targetfunction3D.png</code></li>
+<li><code>neo1_3.png</code></li>
+<li><code>neo2_3.png</code></li>
+<li><code>neo3_4.png</code></li>
+<li><code>neo3_6.png</code></li>
+<li><code>neo6_3.png</code></li>
+</ul>
+</div>
+<div id="lecture_debug-demo" class="section level3">
+<h3>lecture_debug / demo</h3>
+<p><strong>133 orphaned figure(s)</strong> in <code>figure/</code>:</p>
+<ul>
+<li><code>adaboost_viz_mlr3_1.png</code></li>
+<li><code>adaboost_viz_mlr3_2.png</code></li>
+<li><code>boosting_classif_1.png</code></li>
+<li><code>boosting_classif_10.png</code></li>
+<li><code>boosting_classif_100.png</code></li>
+<li><code>boosting_classif_2.png</code></li>
+<li><code>boosting_classif_5.png</code></li>
+<li><code>boosting_classif_error_1.png</code></li>
+<li><code>boosting_classif_error_10.png</code></li>
+<li><code>boosting_classif_error_100.png</code></li>
+<li><code>boosting_classif_error_2.png</code></li>
+<li><code>boosting_classif_error_5.png</code></li>
+<li><code>boosting_classif_example.png</code></li>
+<li><code>boosting_interaction_example_gam.png</code></li>
+<li><code>boosting_interaction_example_ID2.png</code></li>
+<li><code>boosting_multiclass_1.png</code></li>
+<li><code>boosting_multiclass_10.png</code></li>
+<li><code>boosting_multiclass_100.png</code></li>
+<li><code>boosting_multiclass_2.png</code></li>
+<li><code>boosting_multiclass_5.png</code></li>
+<li><code>boosting-cwb-bl-add1.pdf</code></li>
+<li><code>boosting-cwb-bl-add1.pdf.png</code></li>
+<li><code>boosting-cwb-bl-add2.pdf</code></li>
+<li><code>boosting-cwb-bl-add2.pdf.png</code></li>
+<li><code>boosting-cwb-bl-add3.pdf</code></li>
+<li><code>boosting-cwb-bl-add3.pdf.png</code></li>
+<li><code>boosting-cwb-bl1-points.png</code></li>
+<li><code>boosting-cwb-bl1.png</code></li>
+<li><code>boosting-cwb-bl2-points.png</code></li>
+<li><code>boosting-cwb-bl2.png</code></li>
+<li><code>boosting-cwb-bl3-points.png</code></li>
+<li><code>boosting-cwb-bl3.png</code></li>
+<li><code>boosting-cwb-bl4.png</code></li>
+<li><code>bspline-basis.png</code></li>
+<li><code>compboost-base-learner-linear.png</code></li>
+<li><code>compboost-base-learner-ridge.png</code></li>
+<li><code>compboost-base-learner-spline.png</code></li>
+<li><code>compboost-base-learner-tensor.png</code></li>
+<li><code>compboost-illustration-1.png</code></li>
+<li><code>compboost-illustration-3.png</code></li>
+<li><code>compboost-intercept-handling.png</code></li>
+<li><code>compboost-to-glm-iter1000.png</code></li>
+<li><code>compboost-to-glm-iter10000.png</code></li>
+<li><code>compboost-to-glm-iter250.png</code></li>
+<li><code>compboost-to-glm-iter500.png</code></li>
+<li><code>compboost-to-glm-iter5000.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0001.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0002.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0005.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0010.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0015.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0017.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0018.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0020.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0023.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0024.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0030.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0050.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0070.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0088.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0089.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0090.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0110.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0130.png</code></li>
+<li><code>cwb-anim-nl/fig-iter-0150.png</code></li>
+<li><code>cwb-anim/fig-iter-0001.png</code></li>
+<li><code>cwb-anim/fig-iter-0002.png</code></li>
+<li><code>cwb-anim/fig-iter-0005.png</code></li>
+<li><code>cwb-anim/fig-iter-0010.png</code></li>
+<li><code>cwb-anim/fig-iter-0015.png</code></li>
+<li><code>cwb-anim/fig-iter-0016.png</code></li>
+<li><code>cwb-anim/fig-iter-0020.png</code></li>
+<li><code>cwb-anim/fig-iter-0030.png</code></li>
+<li><code>cwb-anim/fig-iter-0037.png</code></li>
+<li><code>cwb-anim/fig-iter-0038.png</code></li>
+<li><code>cwb-anim/fig-iter-0050.png</code></li>
+<li><code>cwb-anim/fig-iter-0070.png</code></li>
+<li><code>cwb-anim/fig-iter-0090.png</code></li>
+<li><code>cwb-anim/fig-iter-0110.png</code></li>
+<li><code>cwb-anim/fig-iter-0116.png</code></li>
+<li><code>cwb-anim/fig-iter-0117.png</code></li>
+<li><code>cwb-anim/fig-iter-0140.png</code></li>
+<li><code>cwb-anim/fig-iter-0150.png</code></li>
+<li><code>fig-decomp1.png</code></li>
+<li><code>fig-decomp2.png</code></li>
+<li><code>fig-gb-concept-1.png</code></li>
+<li><code>fig-gb-concept-2.png</code></li>
+<li><code>fig-gb-concept-idea-1.png</code></li>
+<li><code>fig-gb-concept-idea-2.png</code></li>
+<li><code>fig-gb-concept-idea-3.png</code></li>
+<li><code>fig-gb-concept-idea.png</code></li>
+<li><code>fig-gb-concept-pseudo-resi-1.png</code></li>
+<li><code>fig-gb-concept-pseudo-resi-2.png</code></li>
+<li><code>fig-loss-huber-delta.png</code></li>
+<li><code>gbm_anim_02.png</code></li>
+<li><code>gbm_anim_03.png</code></li>
+<li><code>gbm_anim_51.png</code></li>
+<li><code>gbm_anim_data.png</code></li>
+<li><code>gbm_anim_init.png</code></li>
+<li><code>gbm_regu_oversmoothing_overfitting.png</code></li>
+<li><code>gbm_sine_title.png</code></li>
+<li><code>gbm_spam.png</code></li>
+<li><code>illustration_data_normal.png</code></li>
+<li><code>illustration_gaussian_huber_02_10.png</code></li>
+<li><code>illustration_gaussian_huber_2_10.png</code></li>
+<li><code>illustration_gaussian_L1_1.png</code></li>
+<li><code>illustration_gaussian_L1_10.png</code></li>
+<li><code>illustration_gaussian_L1_100.png</code></li>
+<li><code>illustration_gaussian_L1_2.png</code></li>
+<li><code>illustration_gaussian_L1_3.png</code></li>
+<li><code>illustration_gaussian_L1_lin_1.png</code></li>
+<li><code>illustration_gaussian_L1_lin_10.png</code></li>
+<li><code>illustration_gaussian_L1_lin_100.png</code></li>
+<li><code>illustration_gaussian_L2_1.png</code></li>
+<li><code>illustration_gaussian_L2_10.png</code></li>
+<li><code>illustration_gaussian_L2_100.png</code></li>
+<li><code>illustration_gaussian_L2_2.png</code></li>
+<li><code>illustration_gaussian_L2_3.png</code></li>
+<li><code>illustration_gaussian_L2_lin_1.png</code></li>
+<li><code>illustration_gaussian_L2_lin_10.png</code></li>
+<li><code>illustration_gaussian_L2_lin_100.png</code></li>
+<li><code>illustration_tdist_L1_10.png</code></li>
+<li><code>illustration_tdist_L1_100.png</code></li>
+<li><code>illustration_tdist_L2_10.png</code></li>
+<li><code>illustration_tdist_L2_100.png</code></li>
+<li><code>illustration_title.png</code></li>
+<li><code>interaction_td1_d3.png</code></li>
+<li><code>interaction_td2_d3.png</code></li>
+<li><code>pseudo_residual_1.png</code></li>
+<li><code>split_finding_1.png</code></li>
+<li><code>split_finding_2.png</code></li>
+<li><code>stump_plots_noisy.png</code></li>
+<li><code>stump_plots.png</code></li>
+</ul>
+<p><strong>13 orphaned figure(s)</strong> in
+<code>figure_man/</code>:</p>
+<ul>
+<li><code>adaboost_example_adjusted.png</code></li>
+<li><code>bagging_vs_boosting.png</code></li>
+<li><code>boosting_classif_title.PNG</code></li>
+<li><code>boosting_interact_expl1.PNG</code></li>
+<li><code>boosting_interact_expl2.PNG</code></li>
+<li><code>boosting_interaction_depth1fit3D_x1.png</code></li>
+<li><code>boosting_interaction_depth1fit3D_x2.png</code></li>
+<li><code>boosting_interaction_targetfunction3D.png</code></li>
+<li><code>neo1_3.png</code></li>
+<li><code>neo2_3.png</code></li>
+<li><code>neo3_4.png</code></li>
+<li><code>neo3_6.png</code></li>
+<li><code>neo6_3.png</code></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+
+</body>
+</html>
